@@ -1,0 +1,32 @@
+version: '3.3'
+services:
+  db-dev:
+    image: "mysql:8.0.2"
+    volumes:
+      - /var/lib/mysql/weblabs-dev:/var/lib/mysql
+    ports:
+      - "3308:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=weblabs_app
+      - MYSQL_PASSWORD=secret
+      - MYSQL_DATABASE=weblabs_app
+    network_mode: bridge
+
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: weblabs-app-dev
+    volumes:
+      - .:/app
+      - /app/vendor
+    working_dir: /app
+    command: php artisan serve --host=0.0.0.0
+    ports:
+      - "1004:8000"
+    env_file:
+      - .env.dev
+    network_mode: bridge
+    links:
+      - db-dev
