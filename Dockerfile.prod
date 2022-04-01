@@ -20,6 +20,11 @@ WORKDIR /app
 # Copy project files to container
 RUN echo "Copying project files ..."
 ADD . ./
+
+# Update from remote repo
+RUN git checkout master && git config pull.ff only
+
+# Make artisan executable
 RUN chmod +x artisan
 
 # Install required tools and dependencies
