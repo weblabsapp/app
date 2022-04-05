@@ -3,7 +3,7 @@ services:
   db-dev:
     image: "mysql:8.0.2"
     volumes:
-      - /var/lib/mysql/weblabs-dev:/var/lib/mysql
+      - ./database/mysql:/var/lib/mysql
     ports:
       - "3308:3306"
     environment:
