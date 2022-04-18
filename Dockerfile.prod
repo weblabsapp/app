@@ -19,6 +19,7 @@ WORKDIR /app
 
 # Add deploy keys
 ADD ./.ssh/ /root/.ssh/
+RUN eval "$(ssh-agent -s)" && ssh-add /root/.ssh/git.priv
 
 # Clone project from remote git repository (master) branch
 RUN echo "Getting project files ..."
