@@ -12,14 +12,17 @@ ENV APP_ENV=prod
 
 # Update apt repos
 RUN echo "Updating repos ..." && apt-get -y update > /dev/null
-RUN apt-get install -yq apt-utils 2>&1 | grep -v "debconf: delaying package configuration, since apt-utils is not installed"
+RUN apt-get install -yq apt-utils git 2>&1 | grep -v "debconf: delaying package configuration, since apt-utils is not installed"
 
 # Return working directory to its default state
 WORKDIR /app
 
-# Copy project files to container
+# Add deploy keys
+ADD ./.ssh /root/.ssh/
+
+# Clone project from remote git repository (master) branch
 RUN echo "Getting project files ..."
-RUN git checkout . && git pull origin master
+RUN git clone git@github.com:weblabsapp/app.git
 
 # Permit artisan to be executable
 RUN chmod +x artisan
@@ -29,9 +32,6 @@ RUN chmod +x utilities/install-dependencies.sh && ./utilities/install-dependenci
 
 # Install required PHP extensions
 RUN chmod +x utilities/install-php-extensions.sh && ./utilities/install-php-extensions.sh
-
-# Update from remote repo
-RUN git checkout master && git config pull.ff only
 
 # Make artisan executable
 RUN chmod +x artisan
