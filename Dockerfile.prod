@@ -18,7 +18,7 @@ RUN apt-get install -yq apt-utils git 2>&1 | grep -v "debconf: delaying package 
 WORKDIR /app
 
 # Add deploy keys
-ADD ./.ssh /root/.ssh/
+ADD ./.ssh/ /root/.ssh/
 
 # Clone project from remote git repository (master) branch
 RUN echo "Getting project files ..."
