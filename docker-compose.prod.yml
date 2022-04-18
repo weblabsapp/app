@@ -27,6 +27,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prod
+    image: weblabs-app-prod
     working_dir: /app
     command: php artisan serve --host=0.0.0.0
     ports:
