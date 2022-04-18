@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Requests\EmailSubscriptionRequest;
+use App\Http\Requests\EmailUnsubscribeRequest;
 use App\Repositories\EmailSubscriptionRepository;
-use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class EmailSubscriptionController extends ApiController
 {
@@ -24,27 +22,45 @@ class EmailSubscriptionController extends ApiController
         $this->repository = $repository;
     }
 
+    /**
+     * Subscribe to mail list
+     *
+     * @param EmailSubscriptionRequest $request
+     * @return \App\Http\Responses\JsonResponse
+     */
     public function subscribe(EmailSubscriptionRequest $request)
     {
-//        $this->withExceptionHandling(function () use ($request) {
-//            $this->repository->create([
-//                'email' => $request->get('email'),
-//                'notify' => true
-//            ]);
-//
-//            return $this->response(null, Response::HTTP_NO_CONTENT);
-//        });
+        $this->repository->findOrCreate(array_merge(
+            $request->json()->all(),
+            ['notify' => true]
+        ));
 
-        $this->repository->create([
-            'email' => $request->get('email'),
-            'notify' => true
+        $this->setResponseData([
+            'status' => 'success',
+            'message' => 'subscribe_success',
+            'show_toast' => true
         ]);
 
-        return $this->response(null, Response::HTTP_NO_CONTENT);
+        return $this->response();
     }
 
-    public function unsubscribe(Request $request)
+    /**
+     * Unsubscribe from mail list
+     *
+     * @param EmailUnsubscribeRequest $request
+     * @return \App\Http\Responses\JsonResponse
+     * @throws \App\Exceptions\AbstractException
+     */
+    public function unsubscribe(EmailUnsubscribeRequest $request)
     {
+        $this->repository->disableNotification($request->json('email'));
 
+        $this->setResponseData([
+            'status' => 'success',
+            'message' => 'unsubscribe_success',
+            'show_toast' => true
+        ]);
+
+        return $this->response();
     }
 }

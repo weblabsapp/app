@@ -3,10 +3,12 @@
 namespace App\Exceptions;
 
 
+use App\Http\Responses\HtmlResponse;
 use App\Http\Responses\JsonResponse;
-use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class Handler extends ExceptionHandler
 {
@@ -29,15 +31,6 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    private function getJsonResponseData(\Throwable $exception, $request): array
-    {
-        if ($exception->getCode() == "23000") { // Duplicate entry
-            return [__($request->getError()), Response::HTTP_BAD_REQUEST];
-        }
-
-        return [];
-    }
-
     /**
      * Register the exception handling callbacks for the application.
      *
@@ -45,8 +38,24 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->renderable(function (QueryException $exception, $request) {
-            return new JsonResponse(...$this->getJsonResponseData($exception, $request));
+        $this->renderable(function (\Throwable $exception, Request $request) {
+            Log::alert($exception->getMessage(), array_merge($request->all(), $request->json()->all()));
+            if ($exception instanceof \Illuminate\Validation\ValidationException) {
+                $description = $exception->getMessage();
+                foreach ($exception->errors() as $field => $errorMessages) {
+                    $errors[$field] = implode("\n", $errorMessages);
+                }
+            }
+            if ($request->isJson()) {
+                return new JsonResponse([
+                    'main' => 'something went wrong',
+                    'description' => __(
+                        strtolower($description ?? 'something went wrong'),
+                        $errors ?? []
+                    )], Response::HTTP_UNPROCESSABLE_ENTITY);
+            } else {
+                return new HtmlResponse(__('something went wrong'), Response::HTTP_UNPROCESSABLE_ENTITY, HtmlResponse::ALERT_TYPE_DANGER);
+            }
         });
     }
 }

@@ -5,21 +5,17 @@ html {
 
 body {
     height:100%;
-    overflow: auto;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
 }
 
-html{
+#cspio-page{
     height:100%;
-    background: #ffffff url(../images/comingsoon-wallpaper.png) no-repeat center bottom fixed;
+    background: rgba(0,0,0,0) url(../images/comingsoon-wallpaper.png) no-repeat center bottom fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-}
-
-#cspio-page{
-    background-color: rgba(0,0,0,0);
 }
 
 .flexbox #cspio-page{
@@ -185,12 +181,6 @@ html{
 .cspio input:focus {
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-}
-
-#cspio-page{
-    background: -moz-radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%,rgba(0, 0, 0, 0.2) 37%,rgba(0,0,0,0) 68%,rgba(0,0,0,0) 100%);
-    background: -webkit-radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%,rgba(0, 0, 0, 0.2) 37%,rgba(0,0,0,0) 68%,rgba(0,0,0,0) 100%);
-    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%,rgba(0, 0, 0, 0.2) 37%,rgba(0,0,0,0) 68%,rgba(0,0,0,0) 100%);
 }
 
 .cspio body{

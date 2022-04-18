@@ -8,7 +8,7 @@ LABEL maintainer="Wajdi Jurry <github.com/wajdijurry>"
 
 # Important! To prevent this warning "debconf: unable to initialize frontend"
 ARG DEBIAN_FRONTEND=noninteractive
-ENV env=dev
+ENV APP_ENV=dev
 
 # Update apt repos
 RUN echo "Updating repos ..." && apt-get -y update > /dev/null

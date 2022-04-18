@@ -16,8 +16,7 @@ trait Uuid
         parent::boot();
 
         $creationCallback = function ($model) {
-            if (empty($model->{$model->getKeyName()}))
-            {
+            if (empty($model->{$model->getKeyName()})) {
                 $model->{$model->getKeyName()} = Str::uuid()->toString();
             }
         };
@@ -32,7 +31,7 @@ trait Uuid
      *
      * @return bool
      */
-    public function getIncrementing() : bool
+    public function getIncrementing(): bool
     {
         return false;
     }
@@ -43,7 +42,7 @@ trait Uuid
      *
      * @return string
      */
-    public function getKeyType() : string
+    public function getKeyType(): string
     {
         return 'string';
     }

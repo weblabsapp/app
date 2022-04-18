@@ -3,7 +3,9 @@
 namespace App\Http\Requests;
 
 
-class EmailSubscriptionRequest extends AbstractFormRequest
+use Illuminate\Http\Request;
+
+class EmailSubscriptionRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

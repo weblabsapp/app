@@ -5,26 +5,31 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Responses\JsonResponse;
+use Illuminate\Http\Response;
 
 abstract class ApiController extends Controller
 {
     /**
-     * @param null $content
+     * @var array
+     */
+    private $responseData = [];
+
+    /**
      * @param int $status
      * @param array $headers
      * @return JsonResponse
      */
-    public function response($content = null, int $status = 200, array $headers = [])
+    public function response(int $status = Response::HTTP_OK, array $headers = [])
     {
-        return new JsonResponse($content, $status, $headers);
+        return new JsonResponse($this->responseData, $status, $headers);
     }
 
-    protected function withExceptionHandling(\Closure $closure)
+    /**
+     * @param array $data
+     * @return void
+     */
+    protected function setResponseData(array $data)
     {
-        try {
-            return call_user_func($closure);
-        } catch (\Throwable $exception) {
-            return response()->withException($exception);
-        }
+        $this->responseData = $data;
     }
 }

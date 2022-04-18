@@ -13,6 +13,16 @@ services:
       - MYSQL_DATABASE=weblabs_app
     network_mode: bridge
 
+  redis-prod:
+    image: "redis:6"
+    command: >
+      --requirepass Kg&k2Ce/u^
+    volumes:
+      - ./database/redis:/data
+    ports:
+      - "6378:6379"
+    network_mode: bridge
+
   app-prod:
     build:
       context: .
@@ -26,3 +36,4 @@ services:
     network_mode: bridge
     links:
       - db-prod
+      - redis-prod

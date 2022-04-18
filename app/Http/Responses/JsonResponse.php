@@ -3,7 +3,10 @@
 namespace App\Http\Responses;
 
 
-class JsonResponse extends \Illuminate\Http\JsonResponse
+use Illuminate\Http\JsonResponse as BaseJsonResponse;
+use Illuminate\Support\Str;
+
+class JsonResponse extends BaseJsonResponse
 {
     /**
      * @var string
@@ -17,13 +20,9 @@ class JsonResponse extends \Illuminate\Http\JsonResponse
      */
     public function __construct($content, int $status = 200, array $headers = [])
     {
-        $statusMessage = 'success';
-        if (strpos($status, '2') === false) {
-            $statusMessage = 'error';
-        }
-        $this->setStatusMessage($statusMessage);
+        $this->setStatusMessage(Str::startsWith($status, 2) ? 'success' : 'error');
 
-        parent::__construct($content, $status, $headers, JSON_PRETTY_PRINT, true);
+        parent::__construct($this->toJson($content), $status, $headers);
     }
 
     /**
@@ -35,13 +34,14 @@ class JsonResponse extends \Illuminate\Http\JsonResponse
     }
 
     /**
-     * @param $content
+     * @param $json
+     * @return array
      */
-    public function setContent($content)
+    public function toJson($json)
     {
-        $this->content = json_encode([
+        return [
             'status' => $this->statusMessage,
-            'content' => $this->data
-        ], JSON_PRETTY_PRINT);
+            'content' => $json
+        ];
     }
 }

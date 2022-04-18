@@ -15,8 +15,8 @@ class ResponseMacroServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        ResponseFactory::macro('withException', function ($exception) {
-            throw $exception;
-        });
+//        ResponseFactory::macro('withException', function ($exception) {
+//            throw $exception;
+//        });
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\EmailSubscriptionController;
+use App\Http\Controllers\Api\TranslationsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/subscribe', [EmailSubscriptionController::class, 'subscribe']);
-Route::get('/unsubscribe', [EmailSubscriptionController::class, 'unsubscribe']);
+Route::get('/translations/{locale}', [TranslationsController::class, 'get'])->name('getTranslation');
+
+Route::post('/newsletter/subscribe', [EmailSubscriptionController::class, 'subscribe'])->name('subscribe');
+Route::delete('/newsletter/unsubscribe', [EmailSubscriptionController::class, 'unsubscribe'])->name('unsubscribe');
