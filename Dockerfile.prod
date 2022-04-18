@@ -18,8 +18,11 @@ RUN apt-get install -yq apt-utils 2>&1 | grep -v "debconf: delaying package conf
 WORKDIR /app
 
 # Copy project files to container
-RUN echo "Copying project files ..."
-ADD . ./
+RUN echo "Getting project files ..."
+RUN git checkout . && git pull origin master
+
+# Permit artisan to be executable
+RUN chmod +x artisan
 
 # Install required tools and dependencies
 RUN chmod +x utilities/install-dependencies.sh && ./utilities/install-dependencies.sh
