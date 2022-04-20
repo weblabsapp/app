@@ -37,7 +37,8 @@ class TranslationsController extends ApiController
 
         $this->setResponseData([
             'translations' => $translation,
-            'hash' => $hash
+            'hash' => $hash,
+            'locale' => $locale
         ]);
 
         return $this->response();

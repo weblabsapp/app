@@ -6,5 +6,6 @@
     "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "The given :attribute has appeared in a data leak. Please choose a different :attribute.",
     "email already subscribed": "You are already subscribed!",
     "invalid request": "Invalid request",
-    "please provide a valid email address": "Please provide a valid email address"
+    "please provide a valid email address": "Please provide a valid email address",
+    "page or api not found": "The page you requested is not found"
 }

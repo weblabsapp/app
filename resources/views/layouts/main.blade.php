@@ -13,6 +13,7 @@
     <meta property="og:title" content="Weblabs Coming Soon"/>
     <meta property="og:description" content="Weblabs - Interactive development learning"/>
     <meta property="og:image" content="{{ asset('images/code_64.png') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Bootstrap and default Style -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">

@@ -58,6 +58,9 @@ abstract class AbstractException extends \Exception
      */
     public function render($request)
     {
+        // Save request session before killing the app
+        $request->session()->save();
+
         if ($request->isJson()) {
             return $this->renderJson($request);
         } elseif (method_exists($this, 'renderHtml')) {
@@ -87,13 +90,16 @@ abstract class AbstractException extends \Exception
 
     /**
      * @return array
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     protected function getJsonData()
     {
         return [
             'main' => $this->message,
             'description' => __($this->description, $this->replacements),
-            'show_toast' => static::SHOW_TOAST
+            'show_toast' => static::SHOW_TOAST,
+            'is_recaptcha_required' => request()->get('recaptcha_required')
         ];
     }
 }

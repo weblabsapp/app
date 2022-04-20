@@ -1,4 +1,5 @@
 {
+    "api rate limit exceeded": "Rate limit exceeded. Please try again after 1 minute.",
     "The :attribute must contain at least one letter.": "The :attribute must contain at least one letter.",
     "The :attribute must contain at least one number.": "The :attribute must contain at least one number.",
     "The :attribute must contain at least one symbol.": "The :attribute must contain at least one symbol.",
@@ -13,5 +14,7 @@
     "unsubscribe success": "You have successfully unsubscribed!",
     "you are not subscribed": "You are not subscribed!",
     "something went wrong": "Could not resolve your request",
-    "the given data was invalid.": "Please check your inputs.<br>:errors"
+    "the given data was invalid.": "Please check your inputs.",
+    "invalid email address": "Please provide a valid email address",
+    "invalid recaptcha": "Invalid recaptcha"
 }

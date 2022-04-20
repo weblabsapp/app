@@ -3,10 +3,13 @@
 namespace App\Http\Requests;
 
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Traits\RecaptchaRule;
+use Illuminate\Foundation\Http\FormRequest;
 
-class EmailSubscriptionRequest extends Request
+class EmailSubscriptionRequest extends FormRequest
 {
+    use RecaptchaRule;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,8 +27,21 @@ class EmailSubscriptionRequest extends Request
      */
     public function rules()
     {
-        return [
+        $rules = [
             'email' => ['required', 'email']
+        ];
+
+        return array_merge($rules, $this->addRecaptchaRule());
+    }
+
+    /**
+     * @return string[]
+     */
+    public function messages()
+    {
+        return [
+            'email.required' => 'invalid_email_address',
+            'email.email' => 'invalid_email_address',
         ];
     }
 }

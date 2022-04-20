@@ -21,6 +21,7 @@ WORKDIR /app
 ADD ./.ssh/ /home/root/.ssh
 RUN chown -R root:root /home/root/.ssh
 RUN chmod -R 600 /home/root/.ssh/
+RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /home/user/.ssh/config
 RUN eval "$(ssh-agent -s)" && ssh-add /home/root/.ssh/git.priv
 
 # Clone project from remote git repository (master) branch

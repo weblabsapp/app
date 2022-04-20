@@ -1,6 +1,6 @@
 <script type="text/javascript">
     window.locale = window.locale ?? 'en';
-    let url = "{{ route('api.getTranslation', ['locale' => ':locale']) }}/";
+    let url = "{{ get_route('api.getTranslation', ['locale' => ':locale']) }}/";
     url = url.replace(':locale', window.locale);
     let translationHash = localStorage.getItem('translation_hash');
     $(function () {
@@ -22,6 +22,9 @@
                     }
                     if ('hash' in response.content) {
                         localStorage.setItem('translation_hash', response.content.hash);
+                    }
+                    if ('locale' in response.content) {
+                        localStorage.setItem('translation_locale', response.content.locale);
                     }
                 }
 

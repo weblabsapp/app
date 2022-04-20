@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
         Czim\Repository\RepositoryServiceProvider::class,
+        TimeHunter\LaravelGoogleReCaptchaV2\Providers\GoogleReCaptchaV2ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -229,7 +230,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'GoogleReCaptchaV2'=> TimeHunter\LaravelGoogleReCaptchaV2\Facades\GoogleReCaptchaV2::class
     ],
 
 ];

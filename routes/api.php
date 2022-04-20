@@ -16,11 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::get('/translations/{locale}', [TranslationsController::class, 'get'])->name('getTranslation');
 
-Route::post('/newsletter/subscribe', [EmailSubscriptionController::class, 'subscribe'])->name('subscribe');
-Route::delete('/newsletter/unsubscribe', [EmailSubscriptionController::class, 'unsubscribe'])->name('unsubscribe');
+Route::post('/newsletter/subscribe', [EmailSubscriptionController::class, 'subscribe'])
+    ->middleware('throttle:3,1') // three times per 1 minute
+    ->middleware('recaptcha')
+    ->name('subscribe');
+Route::delete('/newsletter/unsubscribe', [EmailSubscriptionController::class, 'unsubscribe'])
+    ->middleware('throttle:3,1') // three times per 1 minute
+    ->name('unsubscribe');

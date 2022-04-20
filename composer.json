@@ -17,7 +17,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.0",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "timehunter/laravel-google-recaptcha-v2": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
@@ -41,7 +42,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": ["helpers/route.php"]
     },
     "autoload-dev": {
         "psr-4": {

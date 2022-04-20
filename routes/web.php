@@ -16,3 +16,10 @@ use App\Http\Controllers\HomeController;
 
 
 Route::get('/', [HomeController::class, 'index']);
+
+Route::fallback(function () {
+    return response(
+        view('errors.404'),
+        \Illuminate\Http\Response::HTTP_NOT_FOUND
+    );
+});

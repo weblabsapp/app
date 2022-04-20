@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 
 use App\Exceptions\InvalidTokenException;
-use App\Rules\ValidateUnsubscribeToken;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Crypt;

@@ -3,7 +3,7 @@
     $(function () {
         $('#subscribe-unsubscribe-form').submit(function (e) {
             e.preventDefault();
-            let form = $(this), toast = {status: 'info', message: ''};
+            let form = $(this);
             $.ajax({
                 type: 'POST',
                 url: form.attr('action'),
@@ -20,7 +20,7 @@
                 },
                 error: function (xhr) {
                     return {
-                        message: translate(getErrorFromResponse(xhr)),
+                        message: translate(...getErrorFromResponse(xhr)),
                         status: TOAST_STATUS.DANGER
                     }
                 }
@@ -30,12 +30,10 @@
         $(document).on('click', '.unsubscribe', function (e) {
             e.preventDefault();
             let token = $(this).data('token');
-            console.log(token);
             if (typeof token == "undefined" || !token) {
                 showToast({message: translate('invalid_token'), status: TOAST_STATUS.DANGER})
                 return false;
             }
-            let toast = {};
             $.ajax({
                 type: "DELETE",
                 url: $(this).attr("href"),
@@ -55,7 +53,7 @@
                 },
                 error: function (xhr) {
                     return {
-                        message: translate(getErrorFromResponse(xhr)),
+                        message: translate(...getErrorFromResponse(xhr)),
                         status: TOAST_STATUS.DANGER
                     }
                 }

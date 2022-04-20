@@ -12,6 +12,8 @@ window.translate = (key, replacements = {}) => {
             mapObj(replacements, (searchFor, replacement) => {
                 if (translations[key].includes(':'+searchFor)) {
                     translations[key] = translations[key].replace(':'+searchFor, replacement);
+                } else {
+                    translations[key] = translations[key] + `<br><span class="invalid-feedback d-inline">${translations[replacement]}</span>`;
                 }
             });
             return translations[key];
@@ -30,8 +32,19 @@ window.jsonizeForm = (form) => {
 }
 
 window.getErrorFromResponse = (xhr) => {
-    if ('responseJSON' in xhr && 'content' in xhr.responseJSON && 'description' in xhr.responseJSON.content) {
-        return xhr.responseJSON.content.description;
+    let description = null, errors = {};
+    if ('responseJSON' in xhr && 'content' in xhr.responseJSON) {
+        if ('description' in xhr.responseJSON.content) {
+            description = xhr.responseJSON.content.description.replace("\n", "<br>");
+        }
+        if ('errors' in xhr.responseJSON.content) {
+            errors = xhr.responseJSON.content.errors;
+            mapObj(errors, (field, error) => {
+                return error.replace("\n", "<br>");
+            });
+        }
+
+        return [description, errors];
     } else {
         return 'something_went_wrong';
     }
@@ -39,7 +52,8 @@ window.getErrorFromResponse = (xhr) => {
 
 window.isToast = (xhr) => {
     return !!(
-        'content' in xhr.responseJSON
+        'responseJSON' in xhr
+        && 'content' in xhr.responseJSON
         && 'show_toast' in xhr.responseJSON.content
         && xhr.responseJSON.content.show_toast
     );
@@ -57,6 +71,13 @@ window.showToast = (toast) => {
     }
 }
 
+window.showRecaptchaIfRequired = (xhr) => {
+    document.getElementById('recaptcha').style.display = !!('responseJSON' in xhr
+    && 'content' in xhr.responseJSON
+    && 'is_recaptcha_required' in xhr.responseJSON.content
+    && xhr.responseJSON.content.is_recaptcha_required) ? 'inline-block' : 'none';
+}
+
 
 if (!window.jQuery) {
     console.log('jQuery is not loaded!');
@@ -70,6 +91,15 @@ if ($ === jQuery) {
 
     window.activeRequests = [];
     window.queuedToasts = [];
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        xhrFields: {
+            withCredentials: true
+        }
+    });
 
     $(document).ajaxSend(function(e, jqxhr, settings) {
         let i = activeRequests.indexOf(settings.url)
@@ -87,13 +117,14 @@ if ($ === jQuery) {
     });
 
     $(document).ajaxError(function(e, jqxhr, settings) {
-        if (jqxhr.statusText === "abort") {
-            return;
+        let errorCallbackResult;
+        if (typeof settings.error !== "undefined") {
+            errorCallbackResult = settings.error(jqxhr);
         }
-        let errorCallbackResult = settings.error(jqxhr);
         if (typeof errorCallbackResult !== "undefined" && isToast(jqxhr)) {
             queuedToasts.push(errorCallbackResult);
         }
+        showRecaptchaIfRequired(jqxhr);
     });
 
     $(document).ajaxComplete(function(e, jqxhr, settings) {
