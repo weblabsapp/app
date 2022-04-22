@@ -1,43 +1,29 @@
 version: '3.3'
 services:
-  db-dev:
+  db:
     image: "mysql:8.0.2"
     volumes:
-      - ./database/mysql:/var/lib/mysql
-    ports:
-      - "3308:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_USER=weblabs_app
-      - MYSQL_PASSWORD=secret
-      - MYSQL_DATABASE=weblabs_app
+      - ${DB_PATH_MAPPING}:/var/lib/mysql
     network_mode: bridge
 
-  redis-dev:
+  redis:
     image: "redis:6"
     command: >
-      --requirepass secret
+      --requirepass ${REDIS_PASSWORD}
     volumes:
-      - ./database/redis:/data
-    ports:
-      - "6377:6379"
+      - ${REDIS_PATH_MAPPING}:/data
     network_mode: bridge
 
-  app-dev:
+  app:
     build:
       context: .
-      dockerfile: Dockerfile.dev
-    image: weblabs-app-dev
-    volumes:
-      - .:/app
-      - /app/vendor
     working_dir: /app
+    image: weblabs-app
     command: php artisan serve --host=0.0.0.0
-    ports:
-      - "1004:8000"
     env_file:
       - .env.dev
     network_mode: bridge
-    links:
-      - db-dev
-      - redis-dev
+    depends_on:
+      - db
+      - redis
+

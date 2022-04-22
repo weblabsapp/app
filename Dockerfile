@@ -1,5 +1,5 @@
 #
-# Shop vendors service Dockerfile
+# Weblabs Dockerfile
 # Copyrights to Wajdi Jurry <github.com/wajdijurry>
 #
 FROM php:7.4-cli
@@ -8,8 +8,6 @@ LABEL maintainer="Wajdi Jurry <github.com/wajdijurry>"
 
 # Important! To prevent this warning "debconf: unable to initialize frontend"
 ARG DEBIAN_FRONTEND=noninteractive
-ARG SSH_PRIVATE_KEY=./ssh
-ENV APP_ENV=prod
 
 # Update apt repos
 RUN echo "Updating repos ..." && apt-get -y update > /dev/null
@@ -20,7 +18,7 @@ WORKDIR /app
 
 # Add deploy keys
 RUN mkdir /root/.ssh/
-COPY ./.ssh /root/.ssh/
+COPY .ssh /root/.ssh/
 RUN chmod -R 600 /root/.ssh
 
 # make sure your domain is accepted
@@ -31,23 +29,17 @@ RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 RUN echo "Getting project files ..."
 RUN git clone git@github.com:weblabsapp/app.git .
 
-# Copy required PHP extensions
-COPY ./php_extensions /usr/local/etc/php/conf.d/
-
 # Permit artisan to be executable
 RUN chmod +x artisan
 
 # Install required tools and dependencies
 RUN chmod +x utilities/install-dependencies.sh && ./utilities/install-dependencies.sh
 
+# Copy required PHP extensions
+RUN cp -r ./php_extensions/*.ini /usr/local/etc/php/conf.d/
+
 # Install required PHP extensions
 RUN chmod +x utilities/install-php-extensions.sh && ./utilities/install-php-extensions.sh
-
-# Make artisan executable
-RUN chmod +x artisan
-
-# Checkout master branch
-#RUN git checkout master
 
 # Install composer & dependencies
 RUN echo "Installing Composer" && rm -rf vendor composer.lock && \
