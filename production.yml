@@ -2,12 +2,18 @@ version: '3.3'
 services:
   db:
     container_name: weblabs-prod-db
+    volumes:
+      - ${DB_PATH_MAPPING}:/var/lib/mysql
     ports:
       - "3307:3306"
     restart: always
 
   redis:
     container_name: weblabs-prod-redis
+    command: >
+      --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - ${REDIS_PATH_MAPPING}:/data
     ports:
       - "6377:6379"
     restart: always

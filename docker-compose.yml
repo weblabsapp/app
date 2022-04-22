@@ -2,16 +2,10 @@ version: '3.3'
 services:
   db:
     image: "mysql:8.0.2"
-    volumes:
-      - ${DB_PATH_MAPPING}:/var/lib/mysql
     network_mode: bridge
 
   redis:
     image: "redis:6"
-    command: >
-      --requirepass ${REDIS_PASSWORD}
-    volumes:
-      - ${REDIS_PATH_MAPPING}:/data
     network_mode: bridge
 
   app:
