@@ -1,12 +1,18 @@
-version: '3.3'
 services:
   db:
     image: "mysql:8.0.2"
     container_name: weblabs-dev-db
     volumes:
-      - ${DB_PATH_MAPPING}:/var/lib/mysql
+      - mysql-dev:/var/lib/mysql
     ports:
       - "3308:3306"
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      TZ: ${APP_TIMEZONE}
     network_mode: bridge
 
   redis:
@@ -15,7 +21,7 @@ services:
     command: >
       --requirepass ${REDIS_PASSWORD}
     volumes:
-      - ${REDIS_PATH_MAPPING}:/data
+      - redis-dev:/data
     ports:
       - "6378:6379"
     network_mode: bridge
@@ -33,9 +39,14 @@ services:
       - .:/app
       - /app/vendor
     env_file:
-      - .env.dev
+      - .env
     network_mode: bridge
     depends_on:
       - db
       - redis
 
+volumes:
+  mysql-dev:
+    driver: local
+  redis-dev:
+    driver: local

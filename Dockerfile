@@ -16,18 +16,8 @@ RUN apt-get install -yq apt-utils git 2>&1 | grep -v "debconf: delaying package 
 # Return working directory to its default state
 WORKDIR /app
 
-# Add deploy keys
-RUN mkdir /root/.ssh/
-COPY .ssh /root/.ssh/
-RUN chmod -R 600 /root/.ssh
-
-# make sure your domain is accepted
-RUN touch /root/.ssh/known_hosts
-RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
-
-# Clone project from remote git repository (master) branch
-RUN echo "Getting project files ..."
-RUN git clone git@github.com:weblabsapp/app.git .
+# Copy project files
+ADD . ./
 
 # Permit artisan to be executable
 RUN chmod +x artisan
