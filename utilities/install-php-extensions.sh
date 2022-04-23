@@ -30,6 +30,7 @@ i=0
 draw_progress_bar $i ${pecl_extensions_count} "extensions"
 for ext in ${pecl_extensions[*]}; do
   echo '' | pecl install ${ext} > /dev/null
+  echo "extension=${ext}.so" > "/usr/local/etc/php/conf.d/${ext}.ini"
   i=$((i+1))
   draw_progress_bar $i ${pecl_extensions_count} "extensions"
 done

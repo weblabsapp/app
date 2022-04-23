@@ -2,10 +2,22 @@ version: '3.3'
 services:
   db:
     image: "mysql:8.0.2"
+    container_name: weblabs-dev-db
+    volumes:
+      - ${DB_PATH_MAPPING}:/var/lib/mysql
+    ports:
+      - "3308:3306"
     network_mode: bridge
 
   redis:
     image: "redis:6"
+    container_name: weblabs-dev-redis
+    command: >
+      --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - ${REDIS_PATH_MAPPING}:/data
+    ports:
+      - "6378:6379"
     network_mode: bridge
 
   app:
@@ -14,6 +26,12 @@ services:
     working_dir: /app
     image: weblabs-app
     command: php artisan serve --host=0.0.0.0
+    container_name: weblabs-dev-app
+    ports:
+      - "1004:8000"
+    volumes:
+      - .:/app
+      - /app/vendor
     env_file:
       - .env.dev
     network_mode: bridge

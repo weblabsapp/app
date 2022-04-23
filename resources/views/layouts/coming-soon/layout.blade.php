@@ -9,7 +9,7 @@
           type='text/css'>
 
     <!-- Animate CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
+    <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}"/>
 
     <!-- Calculated Styles -->
     <link rel="stylesheet" href="{{ asset('css/style.min.css') }}"/>
