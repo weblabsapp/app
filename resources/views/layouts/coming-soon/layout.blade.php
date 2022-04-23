@@ -20,7 +20,7 @@
 
     <!-- JS -->
     <!-- Time Ago -->
-    <script type="text/javascript" src="{{ asset('js/jquery.timeago.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.timeago.min.js') }}" defer></script>
 
     <!-- Toaster -->
     <script type="text/javascript" src="{{ asset('js/bootstrap-toaster.min.js') }}" defer></script>
