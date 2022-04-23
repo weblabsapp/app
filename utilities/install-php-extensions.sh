@@ -29,6 +29,9 @@ pecl_extensions_count=${#pecl_extensions[@]}
 i=0
 draw_progress_bar $i ${pecl_extensions_count} "extensions"
 for ext in ${pecl_extensions[*]}; do
+  if [ "$ext" == "xdebug" ] && [ "$APP_ENV" == "prod" ]; then
+    continue
+  fi
   echo '' | pecl install ${ext} > /dev/null
   echo "extension=${ext}.so" > "/usr/local/etc/php/conf.d/${ext}.ini"
   i=$((i+1))

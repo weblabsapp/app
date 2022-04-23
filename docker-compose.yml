@@ -24,7 +24,7 @@ services:
     build:
       context: .
     working_dir: /app
-    image: weblabs-app
+    image: weblabs-app:dev
     command: php artisan serve --host=0.0.0.0
     container_name: weblabs-dev-app
     ports:
