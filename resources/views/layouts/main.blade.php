@@ -39,6 +39,7 @@
 <script type="text/javascript" src="{{ asset('js/bundle.min.js') }}"></script>
 
 @include('partials.get-translations')
+@include('partials.google-analytics')
 @stack('scripts')
 </body>
 </html>
