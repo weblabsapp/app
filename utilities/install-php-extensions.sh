@@ -4,7 +4,12 @@ source ./utilities/progressbar.sh || exit 1
 
 # Define array of php & pecl extensions
 php_extensions=(intl gettext gd bcmath zip pdo_mysql opcache sockets)
-pecl_extensions=(redis mongodb xdebug)
+pecl_extensions=(redis mongodb)
+
+# Install xdebug extension if in dev mode
+if [ "$APP_ENV" == "dev" ]; then
+  pecl_extensions+=(xdebug)
+fi
 
 
 ### DO NOT EDIT AREA ###
@@ -29,11 +34,12 @@ pecl_extensions_count=${#pecl_extensions[@]}
 i=0
 draw_progress_bar $i ${pecl_extensions_count} "extensions"
 for ext in ${pecl_extensions[*]}; do
-  if [ "$ext" == "xdebug" ] && [ "$APP_ENV" == "prod" ]; then
-    continue
-  fi
   echo '' | pecl install ${ext} > /dev/null
-  echo "extension=${ext}.so" > "/usr/local/etc/php/conf.d/${ext}.ini"
+  if [ "$ext" == "xdebug" ]; then
+    echo "zend_extension=${ext}.so" > "/usr/local/etc/php/conf.d/${ext}.ini"
+  else
+    echo "extension=${ext}.so" > "/usr/local/etc/php/conf.d/${ext}.ini"
+  fi
   i=$((i+1))
   draw_progress_bar $i ${pecl_extensions_count} "extensions"
 done
