@@ -1,12 +1,14 @@
 version: '3.3'
 services:
   db:
+    container_name: weblabs-dev-db
     volumes:
       - ${DB_PATH_MAPPING}:/var/lib/mysql
     ports:
       - "3308:3306"
 
   redis:
+    container_name: weblabs-dev-redis
     command: >
       --requirepass ${REDIS_PASSWORD}
     volumes:
@@ -15,6 +17,7 @@ services:
       - "6378:6379"
 
   app:
+    container_name: weblabs-dev-app
     ports:
       - "1004:8000"
     volumes:
