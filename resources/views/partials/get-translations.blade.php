@@ -9,8 +9,6 @@
             url: url,
             dataType: "json",
             data: "hash="+translationHash,
-            context: this,
-            async: false,
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
