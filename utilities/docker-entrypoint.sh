@@ -4,7 +4,7 @@
 cp -a php_extensions/. /usr/local/etc/php/conf.d/.
 
 # Flush all cache
-php artisan cache:clear && php artisan config:cache && php artisan view:cache
+php artisan optimize:clear
 
 # Execute migrations
 php artisan migrate --no-interaction
