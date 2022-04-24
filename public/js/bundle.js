@@ -232,7 +232,7 @@ window.addEventListener("load", (e) => {
 });
 
 
-let mapObj = (obj, func) => {
+window.mapObj = (obj, func) => {
     return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, func(k, v)]));
 }
 
@@ -243,7 +243,7 @@ let mapObj = (obj, func) => {
  * @param replacements
  * @returns {*}
  */
-let translate = (key, replacements = {}) => {
+window.translate = (key, replacements = {}) => {
     let translations = localStorage.getItem('translations');
     if (translations) {
         translations = JSON.parse(translations);
@@ -267,7 +267,7 @@ let translate = (key, replacements = {}) => {
  * @param form
  * @returns {string}
  */
-let jsonizeForm = (form) => {
+window.jsonizeForm = (form) => {
     const array = $(form).serializeArray(); // Encodes the set of form elements as an array of names and values.
     const json = {};
     $.each(array, function () {
@@ -282,7 +282,7 @@ let jsonizeForm = (form) => {
  * @param xhr
  * @returns {string|[null,{}]}
  */
-let getErrorFromResponse = (xhr) => {
+window.getErrorFromResponse = (xhr) => {
     let description = null, errors = {};
     if ('responseJSON' in xhr && 'content' in xhr.responseJSON) {
         if ('description' in xhr.responseJSON.content) {
@@ -307,7 +307,7 @@ let getErrorFromResponse = (xhr) => {
  * @param xhr
  * @returns {boolean}
  */
-let isToast = (xhr) => {
+window.isToast = (xhr) => {
     return !!(
         'responseJSON' in xhr
         && 'content' in xhr.responseJSON
@@ -321,7 +321,7 @@ let isToast = (xhr) => {
  *
  * @param toast
  */
-let showToast = (toast) => {
+window.showToast = (toast) => {
     if (typeof Toast != "undefined") {
         Toast.setPlacement(TOAST_PLACEMENT.TOP_RIGHT);
         Toast.create({
@@ -338,12 +338,40 @@ let showToast = (toast) => {
  *
  * @param xhr
  */
-let showRecaptchaIfRequired = (xhr) => {
+window.showRecaptchaIfRequired = (xhr) => {
     document.getElementById('recaptcha').style.display = !!('responseJSON' in xhr
     && 'content' in xhr.responseJSON
     && 'is_recaptcha_required' in xhr.responseJSON.content
     && xhr.responseJSON.content.is_recaptcha_required) ? 'inline-block' : 'none';
 }
+
+/**
+ * Disable functions calls from browser's console
+ * NOTE: Define all required functions above this one
+ *
+ */
+// (function () {
+//         (function a() {
+//                 try {
+//                     (function b(i) {
+//                             if (('' + (i / i)).length !== 1 || i % 20 === 0) {
+//                                 (function () { }).constructor('debugger')()
+//                             } else {
+//                                 debugger
+//                             }
+//                             b(++i)
+//                         }
+//                     )(0)
+//                 } catch (e) {
+//                     setTimeout(a, 5000)
+//                 }
+//             }
+//         )()
+//     }
+// )();
+
+
+
 
 
 if (!window.jQuery) {
