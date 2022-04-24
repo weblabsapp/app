@@ -1,5 +1,2 @@
-*
-!.gitignore
-!bootstrap-toaster.js
-!jquery.timeago.js
-!scripts.js
+*.min.js
+*.min.js.map

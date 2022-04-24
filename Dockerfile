@@ -8,6 +8,7 @@ LABEL maintainer="Wajdi Jurry <github.com/wajdijurry>"
 
 # Important! To prevent this warning "debconf: unable to initialize frontend"
 ARG DEBIAN_FRONTEND=noninteractive
+ARG APP_ENV=local
 
 # Update apt repos
 RUN echo "Updating repos ..." && apt-get -y update > /dev/null
@@ -24,9 +25,6 @@ RUN chmod +x artisan
 
 # Install required tools and dependencies
 RUN chmod +x utilities/install-dependencies.sh && ./utilities/install-dependencies.sh
-
-# Copy required PHP extensions
-RUN cp -r ./php_extensions/*.ini /usr/local/etc/php/conf.d/
 
 # Install required PHP extensions
 RUN chmod +x utilities/install-php-extensions.sh && ./utilities/install-php-extensions.sh

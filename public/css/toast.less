@@ -1,0 +1,48 @@
+.toast-stack {
+  width: 270px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+.toast {
+  width: 100% !important;
+  position: relative;
+}
+
+.toast .toast-body {
+  background-color: white !important;
+  color: #000000 !important;
+  text-align: left;
+}
+
+.toast .toast-header {
+  color: white !important;
+}
+
+.toast {
+  &.toast-danger {
+    .toast-header {
+      background-color: rgb(179 44 44 / 85%) !important;
+    }
+  }
+
+  &.toast-success {
+    .toast-header {
+      background-color: rgb(21 126 39 / 85%) !important;
+    }
+  }
+
+  &.toast-info {
+    .toast-header {
+      background-color: rgb(23 176 201 / 85%) !important;
+    }
+  }
+
+  &.toast-warning {
+    .toast-header {
+      background-color: rgb(207 115 0 / 85%) !important;
+    }
+  }
+}

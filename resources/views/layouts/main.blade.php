@@ -33,6 +33,7 @@
     @yield('head')
 </head>
 <body>
+@include('site-disabled')
 @yield('body')
 @yield('footer')
 

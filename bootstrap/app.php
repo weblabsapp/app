@@ -43,20 +43,6 @@ $app->singleton(
 
 /*
 |--------------------------------------------------------------------------
-| Use custom .env file
-|--------------------------------------------------------------------------
-|
-| Next, we need to load the appropriate .env file
-| For development environment, we load .env.dev
-| For production environment, we load .env.prod
-|
-*/
-
-$app->useEnvironmentPath(__DIR__.'/../');
-$app->loadEnvironmentFrom(env('APP_ENV') == 'prod' ? '.env.prod' : '.env.dev');
-
-/*
-|--------------------------------------------------------------------------
 | Return The Application
 |--------------------------------------------------------------------------
 |

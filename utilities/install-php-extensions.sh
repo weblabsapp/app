@@ -7,7 +7,7 @@ php_extensions=(intl gettext gd bcmath zip pdo_mysql opcache sockets)
 pecl_extensions=(redis mongodb)
 
 # Install xdebug extension if in dev mode
-if [ "$APP_ENV" == "dev" ]; then
+if [ "$APP_ENV" == "local" ]; then
   pecl_extensions+=(xdebug)
 fi
 

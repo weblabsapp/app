@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    window.locale = window.locale ?? 'en';
+    window.locale = window.localStorage.getItem('translation_locale') ?? 'en';
     let url = "{{ get_route('api.getTranslation', ['locale' => ':locale']) }}/";
     url = url.replace(':locale', window.locale);
     let translationHash = localStorage.getItem('translation_hash');

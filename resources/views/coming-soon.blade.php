@@ -32,7 +32,6 @@
 
     </div><!-- end of #cspio-content -->
 </div>
-
 @endsection
 
 @section('footer')

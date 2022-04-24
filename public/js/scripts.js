@@ -1,9 +1,44 @@
 // Helper functions
-window.mapObj = (obj, func) => {
+const detectIncognito = require('./detectIncognito');
+
+// Detect browser private mode
+window.addEventListener("load", (e) => {
+    detectIncognito().then(function(result) {
+        if (result.isPrivate) {
+            showToast({
+                message: "Please use the platform in non-private mode",
+                status: TOAST_STATUS.WARNING
+            });
+            setInterval(function () {
+                let overlayDiv = document.getElementsByClassName('site-disabled-overlay');
+                if (!overlayDiv.length) {
+                    overlayDiv = document.createElement('div');
+                    overlayDiv.classList.add('site-disabled-overlay');
+                    document.body.prepend(overlayDiv);
+                } else {
+                    overlayDiv.item(0).classList.remove('hidden');
+                }
+            }, 1);
+            throw new Error('Run in private mode');
+        }
+    }).catch(function(error) {
+        console.log(error);
+    });
+});
+
+
+let mapObj = (obj, func) => {
     return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, func(k, v)]));
 }
 
-window.translate = (key, replacements = {}) => {
+/**
+ * Translate keys (Translations are saved in localStorage)
+ *
+ * @param key
+ * @param replacements
+ * @returns {*}
+ */
+let translate = (key, replacements = {}) => {
     let translations = localStorage.getItem('translations');
     if (translations) {
         translations = JSON.parse(translations);
@@ -21,7 +56,13 @@ window.translate = (key, replacements = {}) => {
     return key;
 }
 
-window.jsonizeForm = (form) => {
+/**
+ * Make JSON object from form data
+ *
+ * @param form
+ * @returns {string}
+ */
+let jsonizeForm = (form) => {
     const array = $(form).serializeArray(); // Encodes the set of form elements as an array of names and values.
     const json = {};
     $.each(array, function () {
@@ -30,7 +71,13 @@ window.jsonizeForm = (form) => {
     return JSON.stringify(json);
 }
 
-window.getErrorFromResponse = (xhr) => {
+/**
+ * Get error message from API response
+ *
+ * @param xhr
+ * @returns {string|[null,{}]}
+ */
+let getErrorFromResponse = (xhr) => {
     let description = null, errors = {};
     if ('responseJSON' in xhr && 'content' in xhr.responseJSON) {
         if ('description' in xhr.responseJSON.content) {
@@ -49,7 +96,13 @@ window.getErrorFromResponse = (xhr) => {
     }
 }
 
-window.isToast = (xhr) => {
+/**
+ * Detects if API response requires showing toast alert for client
+ *
+ * @param xhr
+ * @returns {boolean}
+ */
+let isToast = (xhr) => {
     return !!(
         'responseJSON' in xhr
         && 'content' in xhr.responseJSON
@@ -58,11 +111,16 @@ window.isToast = (xhr) => {
     );
 }
 
-window.showToast = (toast) => {
+/**
+ * Show toast alert depending on server side decision
+ *
+ * @param toast
+ */
+let showToast = (toast) => {
     if (typeof Toast != "undefined") {
         Toast.setPlacement(TOAST_PLACEMENT.TOP_RIGHT);
         Toast.create({
-            title: "Weblabs",
+            title: "Web Labs",
             message: toast.message,
             status: toast.status,
             animation: true
@@ -70,7 +128,12 @@ window.showToast = (toast) => {
     }
 }
 
-window.showRecaptchaIfRequired = (xhr) => {
+/**
+ * Show Recaptcha depending on server side decision
+ *
+ * @param xhr
+ */
+let showRecaptchaIfRequired = (xhr) => {
     document.getElementById('recaptcha').style.display = !!('responseJSON' in xhr
     && 'content' in xhr.responseJSON
     && 'is_recaptcha_required' in xhr.responseJSON.content

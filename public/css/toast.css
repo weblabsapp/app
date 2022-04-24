@@ -1,0 +1,31 @@
+.toast-stack {
+  width: 270px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+.toast {
+  width: 100% !important;
+  position: relative;
+}
+.toast .toast-body {
+  background-color: white !important;
+  color: #000000 !important;
+  text-align: left;
+}
+.toast .toast-header {
+  color: white !important;
+}
+.toast.toast-danger .toast-header {
+  background-color: rgba(179, 44, 44, 0.85) !important;
+}
+.toast.toast-success .toast-header {
+  background-color: rgba(21, 126, 39, 0.85) !important;
+}
+.toast.toast-info .toast-header {
+  background-color: rgba(23, 176, 201, 0.85) !important;
+}
+.toast.toast-warning .toast-header {
+  background-color: rgba(207, 115, 0, 0.85) !important;
+}
