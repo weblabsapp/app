@@ -12,6 +12,7 @@ use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -46,7 +47,7 @@ class Handler extends ExceptionHandler
         $this->renderable(function (\Throwable $exception, Request $request) {
             Log::alert($exception->getMessage(), array_merge($request->all(), $request->json()->all()));
             if ($exception instanceof \Illuminate\Validation\ValidationException) {
-                $description = str_replace(' ', '_', $exception->getMessage());
+                $description = str_replace(' ', '_', strtolower($exception->getMessage()));
                 foreach ($exception->errors() as $field => $errorMessages) {
                     $errors[$field] = implode("\n", $errorMessages);
                 }
@@ -64,6 +65,14 @@ class Handler extends ExceptionHandler
                 $httpCode = $exception->getCode();
             }
 
+            if ($exception instanceof AccessDeniedHttpException) {
+                $description = 'unauthorized_request_access';
+            }
+
+            if (env('APP_ENV') != 'prod' && empty($description)) {
+                $description = $exception->getMessage();
+            }
+
             // Save request session before killing the app
             $request->session()->save();
 
@@ -77,7 +86,7 @@ class Handler extends ExceptionHandler
                 ], $httpCode ?? Response::HTTP_UNPROCESSABLE_ENTITY);
             } else {
                 return new HtmlResponse(
-                    __($description ?? 'something went wrong'),
+                    __(str_replace('_', ' ', $description ?? 'something went wrong')),
                     $httpCode ?? Response::HTTP_UNPROCESSABLE_ENTITY,
                     HtmlResponse::ALERT_TYPE_DANGER
                 );
