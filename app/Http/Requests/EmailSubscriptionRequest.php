@@ -28,7 +28,7 @@ class EmailSubscriptionRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'email' => ['required', 'email']
+            'email' => ['required', 'email:rfc,dns']
         ];
 
         return array_merge($rules, $this->addRecaptchaRule());
