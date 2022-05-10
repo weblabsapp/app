@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +16,22 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-
+// Coming soon
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/privacy', [HomeController::class, 'privacy']);
+Route::get('/terms', [HomeController::class, 'terms']);
 
-Route::fallback(function () {
-    return response(
-        view('errors.404'),
-        \Illuminate\Http\Response::HTTP_NOT_FOUND
-    );
+Route::get('/account/login', [AuthController::class, 'login'])->name('loginPage');
+Route::get('/account/logout', [AuthController::class, 'logout'])->name('logoutPage');
+Route::get('/account/signup', [AuthController::class, 'signup'])->name('signupPage');
+Route::get('/account/forget', [AuthController::class, 'forget'])->name('forgetPasswordPage');
+Route::get('/account/verify', [AuthController::class, 'verify'])->name('verifyEmailPage');
+Route::get('/account/unsubscribe', [AuthController::class, 'unsubscribe'])->name('unsubscribePage');
+
+// Socialite (Social Login)
+Route::get('/account/login/{provider}', [AuthController::class, 'socialLogin'])->name('socialLogin');
+Route::get('/account/login/{provider}/callback', [AuthController::class, 'socialLoginCallback'])->name('socialLoginCallback');
+
+Route::group(['middleware' => 'auth:web'], function () {
+    Route::get('/account', [AuthController::class, 'myAccount'])->name('myAccountPage');
 });
