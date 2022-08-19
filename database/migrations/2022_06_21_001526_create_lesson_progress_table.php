@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateLessonProgressTable extends Migration
 {
-    const TABLE_NAME = 'lesson_progress';
+    const TABLE_NAME = 'lessons_progress';
+
     /**
      * Run the migrations.
      *
