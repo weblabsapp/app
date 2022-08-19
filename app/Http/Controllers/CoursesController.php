@@ -6,6 +6,7 @@ use App\Exceptions\NotFoundException;
 use App\Repositories\CourseRepository;
 use App\Repositories\EnrollRepository;
 use App\Repositories\LessonProgressRepository;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,9 +51,24 @@ class CoursesController extends Controller
         ]);
     }
 
+    /**
+     * Explore course topics and lessons
+     *
+     * @param $courseTag
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\View
+     * @throws \App\Exceptions\AbstractException
+     */
     public function explore($courseTag, Request $request)
     {
-        $course = $this->courseRepository->findBy('tag', $courseTag);
+        $course = $this->courseRepository->query()
+            ->with('topics', function (Relation $query) {
+                $query->with('lessons', function (Relation $query) {
+                    $query->withInactive();
+                });
+            })
+            ->where('tag', $courseTag)
+            ->first();
 
         if (!$course) {
             NotFoundException::throw();
