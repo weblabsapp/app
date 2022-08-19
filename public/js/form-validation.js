@@ -84,15 +84,16 @@ let formValidation = {
         }
     },
     resetErrors: (input) => {
-        input.closest('.form-group').classList.remove('has-error');
         if (/^form$/i.test(input.nodeName)) {
             let form = input, errorBag;
             form.querySelectorAll("input[name]:not([type='hidden']), select[name], textarea").forEach((input) => {
+                input.closest('.form-group').classList.remove('has-error');
                 (errorBag = input.parentNode.querySelector('.invalid-feedback')) ? errorBag.remove() : [];
                 formValidation.resetTooltips(input);
             });
         } else {
             let errorBag;
+            input.closest('.form-group').classList.remove('has-error');
             (errorBag = input.parentNode.querySelector('.invalid-feedback')) ? errorBag.remove() : [];
             formValidation.resetTooltips(input);
         }
