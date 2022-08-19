@@ -48,7 +48,7 @@
                     <i class="fa fa-sign-out" aria-hidden="true"></i>
                 </a>
                 @else
-                    <a class="btn btn-outline-light pl-3 pr-3 d-none d-md-block dm-sm-none" href="{{ get_route('web.loginPage') }}" title="Sign out">
+                    <a class="btn btn-outline-light pl-3 pr-3 d-none d-md-block dm-sm-none" href="{{ get_route('web.loginPage') }}" title="Sign In">
                         <i class="fa-solid fa-user"></i>
                     </a>
                 @endif
