@@ -141,7 +141,9 @@ class AuthController extends Controller
      */
     public function myAccount(Request $request)
     {
-        return view('my-account');
+        return view('my-account', [
+            'enrollments' => Auth::user()->enrollments,
+        ]);
     }
 
     public function refreshSession()

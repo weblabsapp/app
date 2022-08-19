@@ -270,19 +270,14 @@
                     </div>
                 </div>
 
-                @if(empty(\Illuminate\Support\Facades\Auth::user()->enrollments->all()))
-                    <div class="card">
-                        <div class="card-body justify-content-center">
-                            <p>You have not enrolled in any course yet!</p>
-                            <p>
-                                <a class="btn btn-primary" href="{{ get_route('web.homePage') }}">Explore Courses</a>
-                            </p>
-                        </div>
-                    </div>
-                @endif
-
                 <div class="row gutters-sm">
-                    @foreach(\Illuminate\Support\Facades\Auth::user()->enrollments as $enrollment)
+                    @php($enrolledCourses = false)
+                    @foreach($enrollments as $enrollment)
+                        @if(!$enrollment->course)
+                            @continue
+                        @else
+                            @php($enrolledCourses = true)
+                        @endif
                     <div class="col-sm-6 mb-3">
                         <div class="card h-100">
                             <div class="card-header">
@@ -342,6 +337,17 @@
                     </div>
                     @endforeach
                 </div>
+
+                @if(!$enrolledCourses)
+                <div class="card">
+                    <div class="card-body justify-content-center">
+                        <p>You have not enrolled in any course yet!</p>
+                        <p>
+                            <a class="btn btn-primary" href="{{ get_route('web.homePage') }}">Explore Courses</a>
+                        </p>
+                    </div>
+                </div>
+                @endif
 
                 @if (isset($socialProfiles))
                 <div id="social-profiles-modal" class="modal" tabindex="-1" role="dialog">
