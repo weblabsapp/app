@@ -7,12 +7,15 @@ use App\Rules\RecaptchaValidation;
 trait RecaptchaRule
 {
     /**
+     * @var bool
+     */
+    public $forceRecaptcha = false;
+
+    /**
      * @return bool
      */
     public function isRecaptchaRequired(): bool
     {
-        request()->attributes->set('recaptcha_required', false);
-
         if (request()->session()->has('request_attempts')) {
 
             $attempts = request()->session()->get('request_attempts');
@@ -20,7 +23,7 @@ trait RecaptchaRule
             return $attempts > 2;
         }
 
-        return false;
+        return $this->forceRecaptcha;
     }
 
     /**

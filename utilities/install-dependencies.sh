@@ -3,7 +3,7 @@
 source ./utilities/progressbar.sh || exit 1
 
 # Define array of dependencies
-dependencies=(wget libfreetype6-dev libpng-dev libjpeg-dev libcurl4-gnutls-dev libyaml-dev libicu-dev libzip-dev unzip git)
+dependencies=(wget libfreetype6-dev libpng-dev libjpeg-dev libcurl4-gnutls-dev libyaml-dev libicu-dev libzip-dev unzip git openssh-server rsync)
 
 
 ### DO NOT EDIT AREA ###

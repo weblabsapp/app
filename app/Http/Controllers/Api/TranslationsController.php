@@ -12,6 +12,7 @@ class TranslationsController extends ApiController
 {
     /**
      * Get translation for locale
+     *
      * @param $locale
      * @param Request $request
      * @return \App\Http\Responses\JsonResponse
@@ -21,7 +22,7 @@ class TranslationsController extends ApiController
     public function get($locale, Request $request)
     {
         $hash = hash_file(
-            'md5', sprintf(__DIR__ . '/../../../../resources/lang/%s.json', $locale)
+            'md5', base_path('resources/lang/') . sprintf('%s.json', $locale)
         );
         $this->assertHash($hash, $request->get('hash', ''));
 

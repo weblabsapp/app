@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 class NotFoundException extends AbstractException implements HtmlExceptionInterface, ApiExceptionInterface
 {
     const MESSAGE = "not found";
-    const STATUS_CODE = 404;
+    const STATUS_CODE = Response::HTTP_NOT_FOUND;
     const ALERT_TYPE = HtmlResponse::ALERT_TYPE_WARNING;
     const SHOW_TOAST = true;
 
@@ -21,7 +21,7 @@ class NotFoundException extends AbstractException implements HtmlExceptionInterf
      */
     public function renderHtml($request): Response
     {
-        return new HtmlResponse($this->getHtmlData(), $this->code, self::ALERT_TYPE);
+        return new HtmlResponse($this->getHtmlData(), self::STATUS_CODE, self::ALERT_TYPE);
     }
 
     /**
@@ -30,6 +30,6 @@ class NotFoundException extends AbstractException implements HtmlExceptionInterf
      */
     public function renderJson($request): JsonResponse
     {
-        return new JsonResponse($this->getJsonData(), $this->code);
+        return new JsonResponse($this->getJsonData(), self::STATUS_CODE);
     }
 }

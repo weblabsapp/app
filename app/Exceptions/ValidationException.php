@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 class ValidationException extends AbstractException implements HtmlExceptionInterface, ApiExceptionInterface
 {
     const MESSAGE = "validation failed";
-    const STATUS_CODE = 400;
+    const STATUS_CODE = Response::HTTP_BAD_REQUEST;
     const ALERT_TYPE = HtmlResponse::ALERT_TYPE_DANGER;
     const SHOW_TOAST = true;
 
@@ -21,7 +21,7 @@ class ValidationException extends AbstractException implements HtmlExceptionInte
      */
     public function renderHtml($request): Response
     {
-        return new HtmlResponse($this->getHtmlData(), $this->code, self::ALERT_TYPE);
+        return new HtmlResponse($this->getHtmlData(), self::STATUS_CODE, self::ALERT_TYPE);
     }
 
     /**
@@ -30,6 +30,6 @@ class ValidationException extends AbstractException implements HtmlExceptionInte
      */
     public function renderJson($request): JsonResponse
     {
-        return new JsonResponse($this->getJsonData(), $this->code);
+        return new JsonResponse($this->getJsonData(), self::STATUS_CODE);
     }
 }

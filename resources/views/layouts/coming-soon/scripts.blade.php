@@ -1,24 +1,37 @@
 @push('scripts')
 <script type="text/javascript">
+    let constraints = {
+        email: {
+            presence: {
+                message: "^"+translate('invalid_email_address')
+            },
+            email: {
+                message: "^"+translate('invalid_email_address')
+            }
+        }
+    };
     $(function () {
         $('#subscribe-unsubscribe-form').submit(function (e) {
             e.preventDefault();
+            formValidation.validate(this, constraints, "tooltip");
             let form = $(this);
             $.ajax({
                 type: 'POST',
                 url: form.attr('action'),
                 data: jsonizeForm(form.get().pop()),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                success: function (response) {
+                success: function (response, call = false) {
+                    if (call !== true) {
+                        return;
+                    }
                     return {
                         message: translate(response.content.message),
                         status: TOAST_STATUS.SUCCESS
                     }
                 },
-                error: function (xhr) {
+                error: function (xhr, call = false) {
+                    if (call !== true) {
+                        return;
+                    }
                     return {
                         message: translate(...getErrorFromResponse(xhr)),
                         status: TOAST_STATUS.DANGER
@@ -41,17 +54,19 @@
                     token: token
                 }),
                 dataType: "json",
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                success: function (response) {
+                success: function (response, call = false) {
+                    if (call !== true) {
+                        return;
+                    }
                     return {
                         message: translate(response.content.message),
                         status: TOAST_STATUS.SUCCESS
                     }
                 },
-                error: function (xhr) {
+                error: function (xhr, call = false) {
+                    if (call !== true) {
+                        return;
+                    }
                     return {
                         message: translate(...getErrorFromResponse(xhr)),
                         status: TOAST_STATUS.DANGER

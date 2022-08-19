@@ -4,15 +4,14 @@
 #
 FROM php:7.4-cli
 
-LABEL maintainer="Wajdi Jurry <github.com/wajdijurry>"
-
-# Important! To prevent this warning "debconf: unable to initialize frontend"
 ARG DEBIAN_FRONTEND=noninteractive
 ARG APP_ENV=local
 
+# Important! To prevent this warning "debconf: unable to initialize frontend"
+RUN apt-get install -yq apt-utils git 2>&1 | grep -v "debconf: delaying package configuration, since apt-utils is not installed"
+
 # Update apt repos
 RUN echo "Updating repos ..." && apt-get -y update > /dev/null
-RUN apt-get install -yq apt-utils git 2>&1 | grep -v "debconf: delaying package configuration, since apt-utils is not installed"
 
 # Return working directory to its default state
 WORKDIR /app

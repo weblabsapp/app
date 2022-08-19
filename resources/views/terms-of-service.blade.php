@@ -24,7 +24,7 @@
                             <li>remove any copyright or other proprietary notations from the materials; or</li>
                             <li>transferring the materials to another person or "mirror" the materials on any other server.</li>
                         </ul>
-                        <p>This will let Web Labs to terminate upon violations of any of these restrictions. Upon termination, your viewing right will also be terminated and you should destroy any downloaded materials in your possession whether it is printed or electronic format. These Terms of Service has been created with the help of the <a href="https://www.termsofservicegenerator.net/">Terms Of Service Generator</a>.</p>
+                        <p>This will let Web Labs to terminate upon any violations of these restrictions. Upon termination, your viewing right will also be terminated and you should destroy any downloaded materials in your possession whether it is printed or electronic format. These Terms of Service has been created with the help of the <a href="https://www.termsofservicegenerator.net/">Terms Of Service Generator</a>.</p>
                         <h4>3. Disclaimer</h4>
                         <p>All the materials on Web Labs’s Website are provided "as is". Web Labs makes no warranties, may it be expressed or implied, therefore negates all other warranties. Furthermore, Web Labs does not make any representations concerning the accuracy or reliability of the use of the materials on its Website or otherwise relating to such materials or any sites linked to this Website.</p>
                         <h4>4. Limitations</h4>
@@ -36,7 +36,7 @@
                         <h4>7. Site Terms of Use Modifications</h4>
                         <p>Web Labs may revise these Terms of Use for its Website at any time without prior notice. By using this Website, you are agreeing to be bound by the current version of these Terms and Conditions of Use.</p>
                         <h4>8. Your Privacy</h4>
-                        <p>Please read our Privacy Policy.</p>
+                        <p>Please read our <a href="{{ get_route('web.privacyPage') }}">Privacy Policy</a>.</p>
                         <h4>9. Governing Law</h4>
                         <p>Any claim related to Web Labs's Website shall be governed by the laws of Jordan without regards to its conflict of law provisions.</p>
                     </div>

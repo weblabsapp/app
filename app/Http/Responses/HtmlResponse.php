@@ -4,6 +4,7 @@ namespace App\Http\Responses;
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class HtmlResponse extends Response
 {
@@ -25,14 +26,17 @@ class HtmlResponse extends Response
      */
     public function __construct($content, int $status = 200, string $alert = self::ALERT_TYPE_INFO, array $headers = [])
     {
+        $view = $content;
         $statusMessage = 'success';
-        if (strpos($status, '2') === false) {
+        if (!Str::startsWith($status, 2)) {
             $statusMessage = 'error';
+            $view = view("errors.{$status}");
         }
         $this->setStatusMessage($statusMessage);
+        $this->setContent($content);
         $this->setAlert($alert);
 
-        parent::__construct($content, $status, $headers);
+        parent::__construct($view, $status, $headers);
     }
 
     /**

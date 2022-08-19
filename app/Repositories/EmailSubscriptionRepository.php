@@ -8,7 +8,6 @@ use App\Exceptions\NotFoundException;
 use App\Exceptions\ValidationException;
 use App\Models\EmailSubscription;
 use Czim\Repository\BaseRepository;
-use Illuminate\Database\Eloquent\Collection;
 
 class EmailSubscriptionRepository extends BaseRepository
 {
@@ -24,7 +23,8 @@ class EmailSubscriptionRepository extends BaseRepository
 
     /**
      * @param array $data
-     * @return bool|\Illuminate\Database\Eloquent\Model|null
+     * @return \Illuminate\Database\Eloquent\Model|null
+     * @throws \App\Exceptions\AbstractException
      */
     public function findOrCreate(array $data)
     {
@@ -38,12 +38,13 @@ class EmailSubscriptionRepository extends BaseRepository
         if (!empty($subscription)) {
             if ($subscription->notify) {
                 DuplicateEntityException::throw('email already subscribed', [
-                    'unsubscribe_token' => $subscription->generateToken(),
+                    'unsubscribe_token' => $subscription->unsubscribeToken(),
                     'unsubscribe_link_title' => __('unsubscribe text'),
                     'unsubscribe_link' => route('api.unsubscribe')
                 ]);
             }
-            return $subscription->update(['notify' => 1]);
+            $subscription->update(['notify' => 1]);
+            return $subscription;
         }
 
         return parent::create($data);

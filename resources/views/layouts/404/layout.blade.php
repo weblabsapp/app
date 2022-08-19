@@ -29,11 +29,6 @@
     <!-- Google Analytics Code Goes Here-->
 @endsection
 
-@section('body')
-    @yield('body')
-@endsection
-
-
-@section('footer')
-    @yield('footer')
+@section('page_title')
+Not Found!
 @endsection

@@ -14,6 +14,10 @@ class EmailSubscriptionSeeder extends Seeder
      */
     public function run()
     {
+        if (env('APP_ENV') != 'local') {
+            return;
+        }
+
         EmailSubscription::factory()->times(10)->create();
     }
 }
