@@ -46,7 +46,7 @@
 
 @yield('footer')
 
-<script type="text/javascript" src="{{ asset('js/bundle.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bundle.min.js') }}"></script>
 
 @include('partials.get-translations')
 @include('partials.session-renew')
