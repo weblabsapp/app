@@ -65,7 +65,7 @@
                                                             width="33.33%" bgcolor="transparent"><a
                                                                     target="_blank"
                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;display:block;font-family:arial, 'helvetica neue', helvetica, sans-serif;color:#333333;font-size:14px"
-                                                                    href="https://weblabs.app/courses">Courses</a>
+                                                                    href="https://weblabs.app/enrolls">Courses</a>
                                                         </td>
                                                         <td style="Margin:0;padding-left:5px;padding-right:5px;padding-top:20px;padding-bottom:0px;border:0"
                                                             id="esd-menu-id-2"
