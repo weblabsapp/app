@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateLessonProgressTable extends Migration
 {
-    const TABLE_NAME = 'lesson_progress';
+    const TABLE_NAME = 'lessons_progress';
+
     /**
      * Run the migrations.
      *
@@ -19,7 +20,7 @@ class CreateLessonProgressTable extends Migration
             $table->id();
             $table->uuid('account_id');
             $table->uuid('lesson_id');
-            $table->boolean('is_completed');
+            $table->boolean('is_completed')->default(false);
             $table->timestamps();
             $table->softDeletes();
 

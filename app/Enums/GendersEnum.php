@@ -42,7 +42,7 @@ class GendersEnum
      * @param string $gender
      * @return string|null
      */
-    public static function getGenderLabel(string $gender)
+    public static function getGenderLabel(?string $gender)
     {
         return self::getGendersWithLabels()[$gender] ?? null;
     }

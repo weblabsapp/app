@@ -17,7 +17,7 @@ if (!function_exists('get_route')) {
     {
         $route = route($name, $parameters, $absolute);
 
-        if (env('APP_ENV') == 'prod' || !$absolute) {
+        if (!$absolute) {
             return $route;
         }
 

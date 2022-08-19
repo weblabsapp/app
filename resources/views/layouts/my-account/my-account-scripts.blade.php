@@ -46,10 +46,11 @@
             let text = $('#profile-:attribute-text'.replace(':attribute', attribute));
             let editBtn = $('#profile-:attribute-edit-btn'.replace(':attribute', attribute));
             let saveBtn = $('#profile-:attribute-save-btn'.replace(':attribute', attribute));
+            let value;
             if (attribute === "email") {
-                let value = editable.find('input[type="text"]').val();
+                value = editable.find('input[type="text"]').val();
             } else {
-                let value = editable.val();
+                value = editable.val();
             }
             let requestBody = {
                 [attribute]: editable.val()
