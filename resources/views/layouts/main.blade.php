@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Web Labs</title>
+    <title>Web Labs - @yield('page_title')</title>
 
     <meta name="description" content="Weblabs - Interactive development learning">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,19 +28,29 @@
     <script src="{{ asset('js/modernizr.min.js') }}" defer></script>
 
     <!-- Bootstrap -->
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Bootstrap custom tooltips -->
+    <script src="{{ asset('js/bootstrap-tooltip-custom-class.min.js') }}" defer></script>
+
 
     @yield('head')
 </head>
 <body>
+
 @include('site-disabled')
+
+<div class="container">
 @yield('body')
+</div>
+
 @yield('footer')
 
-<script type="text/javascript" src="{{ asset('js/bundle.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bundle.js') }}"></script>
 
 @include('partials.get-translations')
-@include('partials.google-analytics')
+@include('partials.session-renew')
+@includeIf('partials.google-analytics', ['prod' => env('APP_ENV')])
 @stack('scripts')
 </body>
 </html>

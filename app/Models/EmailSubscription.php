@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Traits\Uuid;
+use App\Models\Traits\UuidPrimary;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Crypt;
@@ -17,16 +17,22 @@ use Illuminate\Support\Facades\Hash;
  */
 class EmailSubscription extends Model
 {
-    use HasFactory, Uuid;
+    use HasFactory,
+        UuidPrimary;
 
     public $fillable = [
         'id', 'email', 'notify'
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+    }
+
     /**
      * @return string
      */
-    public function generateToken()
+    public function unsubscribeToken()
     {
         return Crypt::encrypt($this->email);
     }

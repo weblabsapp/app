@@ -1,7 +1,7 @@
-@extends('layouts.main')
+{{--@extends('layouts.main')--}}
 
-@section('head')
-    <link rel="stylesheet" href="{{ asset('css/coming-soon.min.css') }}">
+{{--@section('head')--}}
+{{--    <link rel="stylesheet" href="{{ asset('css/coming-soon.min.css') }}">--}}
 
     <!-- CSS -->
     <!-- Google Fonts -->
@@ -9,7 +9,7 @@
           type='text/css'>
 
     <!-- Animate CSS -->
-    <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}"/>
+{{--    <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}"/>--}}
 
     <!-- Calculated Styles -->
     <link rel="stylesheet" href="{{ asset('css/style.min.css') }}"/>
@@ -25,15 +25,10 @@
     <!-- Toaster -->
     <script type="text/javascript" src="{{ asset('js/bootstrap-toaster.min.js') }}" defer></script>
 
-
-    <!-- Google Analytics Code Goes Here-->
+    <!-- Validate.js -->
+{{--    <script type="text/javascript" src="{{ asset('js/validate.min.js') }}" defer></script>--}}
 @endsection
 
-@section('body')
-    @yield('body')
-@endsection
-
-
-@section('footer')
-    @yield('footer')
+@section('page_title')
+Coming Soon
 @endsection

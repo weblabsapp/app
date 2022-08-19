@@ -2,10 +2,11 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+
+use Illuminate\Contracts\Validation\ImplicitRule;
 use TimeHunter\LaravelGoogleReCaptchaV2\Facades\GoogleReCaptchaV2;
 
-class RecaptchaValidation implements Rule
+class RecaptchaValidation implements ImplicitRule
 {
     /**
      * Create a new rule instance.

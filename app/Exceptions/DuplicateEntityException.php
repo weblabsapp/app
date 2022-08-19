@@ -12,7 +12,7 @@ use Illuminate\Http\Response;
 class DuplicateEntityException extends AbstractException implements HtmlExceptionInterface, ApiExceptionInterface
 {
     const MESSAGE = "duplicate entity";
-    const STATUS_CODE = 422;
+    const STATUS_CODE = Response::HTTP_BAD_REQUEST;
     const ALERT_TYPE = HtmlResponse::ALERT_TYPE_WARNING;
     const SHOW_TOAST = true;
 
@@ -22,7 +22,7 @@ class DuplicateEntityException extends AbstractException implements HtmlExceptio
      */
     public function renderHtml($request): Response
     {
-        return new HtmlResponse($this->getHtmlData(), $this->code, self::ALERT_TYPE);
+        return new HtmlResponse($this->getHtmlData(), self::STATUS_CODE, self::ALERT_TYPE);
     }
 
     /**
@@ -31,6 +31,6 @@ class DuplicateEntityException extends AbstractException implements HtmlExceptio
      */
     public function renderJson($request): JsonResponse
     {
-        return new JsonResponse($this->getJsonData(), $this->code);
+        return new JsonResponse($this->getJsonData(), self::STATUS_CODE);
     }
 }

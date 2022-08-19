@@ -14,7 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            EmailSubscriptionSeeder::class
+//            CoursesSeeder::class,
+//            PhpTopicsSeeder::class,
+            PhpLessonsSeeder::class
         ]);
     }
 }

@@ -13,8 +13,8 @@
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
-            success: function (response) {
-                if ('content' in response) {
+            success: function (response, call = false) {
+                if (call === true && 'content' in response) {
                     if ('translations' in response.content) {
                         localStorage.setItem('translations', JSON.stringify(response.content.translations));
                     }
@@ -27,8 +27,8 @@
                 }
 
             },
-            error: function (xhr) {
-                console.log(
+            error: function (xhr, call = false) {
+                call === true && console.log(
                     'Can not get translation for locale ' + window.locale,
                     'Reason: ' + xhr.responseText
                 );

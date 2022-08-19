@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\EnrollController;
+use App\Http\Controllers\LessonController;
+use App\Http\Controllers\NotificationsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use Laravel\Socialite\Facades\Socialite;
@@ -17,9 +21,10 @@ use Laravel\Socialite\Facades\Socialite;
 */
 
 // Coming soon
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/privacy', [HomeController::class, 'privacy']);
-Route::get('/terms', [HomeController::class, 'terms']);
+Route::get('/', [HomeController::class, 'home'])->name('homePage');
+Route::get('/coming-soon', [HomeController::class, 'comingSoon'])->name('comingSoonPage');
+Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacyPage');
+Route::get('/terms', [HomeController::class, 'terms'])->name('tosPage');
 
 Route::get('/account/login', [AuthController::class, 'login'])->name('loginPage');
 Route::get('/account/logout', [AuthController::class, 'logout'])->name('logoutPage');
@@ -27,11 +32,35 @@ Route::get('/account/signup', [AuthController::class, 'signup'])->name('signupPa
 Route::get('/account/forget', [AuthController::class, 'forget'])->name('forgetPasswordPage');
 Route::get('/account/verify', [AuthController::class, 'verify'])->name('verifyEmailPage');
 Route::get('/account/unsubscribe', [AuthController::class, 'unsubscribe'])->name('unsubscribePage');
+Route::get('/account/session/refresh', [AuthController::class, 'refreshSession'])->name('refreshSession');
+
+/** Explore Course */
+Route::get('/course/explore/{courseTag}', [CoursesController::class, 'explore'])->name('exploreCourse');
 
 // Socialite (Social Login)
 Route::get('/account/login/{provider}', [AuthController::class, 'socialLogin'])->name('socialLogin');
 Route::get('/account/login/{provider}/callback', [AuthController::class, 'socialLoginCallback'])->name('socialLoginCallback');
 
 Route::group(['middleware' => 'auth:web'], function () {
+    /** Account page */
     Route::get('/account', [AuthController::class, 'myAccount'])->name('myAccountPage');
+
+    /** Notifications page */
+    Route::get('/notifications', [NotificationsController::class, 'list'])->name('notificationsPage');
+
+    /** Enroll page */
+    Route::get('/enroll/{courseTag}', [EnrollController::class, 'enroll'])
+        ->middleware('resolve_entities')
+        ->name('enrollPage');
+    Route::get('/enroll/{courseTag}/{step}', [EnrollController::class, 'step'])
+        ->middleware('resolve_entities')
+        ->name('enrollStep');
+
+    /** Courses page */
+    Route::get('/enrolls', [CoursesController::class, 'listCourses'])->name('getEnrolls');
+
+    /** Lesson page */
+    Route::get('/course/{courseTag}/lesson/{lessonTag}', [LessonController::class, 'getLesson'])
+        ->middleware(['resolve_entities'])
+        ->name('getLesson');
 });

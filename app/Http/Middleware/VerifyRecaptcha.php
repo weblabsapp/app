@@ -19,7 +19,9 @@ class VerifyRecaptcha
         if ($request->session()->has('request_attempts')) {
             $attempts = $request->session()->get('request_attempts');
         }
+
         $request->session()->put('request_attempts', ($attempts ?? 0) + 1);
+        $request->session()->save();
 
         return $next($request);
     }

@@ -4,7 +4,7 @@ source ./utilities/progressbar.sh || exit 1
 
 # Define array of php & pecl extensions
 php_extensions=(intl gettext gd bcmath zip pdo_mysql opcache sockets)
-pecl_extensions=(redis mongodb)
+pecl_extensions=(redis mongodb yaml)
 
 # Install xdebug extension if in dev mode
 if [ "$APP_ENV" == "local" ]; then

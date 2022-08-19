@@ -1,0 +1,22 @@
+@extends('layouts.verify-account.layout')
+
+@section('body')
+    <div class="row text-center m-0 p-5">
+        <div class="col-md-12">
+            <img class="mb-4" src="{{ asset('images/code_64_green_tick.png') }}" alt="" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Your email has been verified!</h1>
+            <small>
+                <p>You will be redirected to your account page to complete your profile.</p>
+                <p>If you are not redirected within 5 seconds, please click here: <a href="{{ get_route('web.myAccountPage') }}">My Account</a></p>
+            </small>
+        </div>
+    </div>
+@endsection
+
+@section('footer')
+    <footer class="text-center">
+        <p class="mt-5 mb-3 text-muted">&copy; 2021-2022 - weblabs.app</p>
+    </footer>
+@endsection
+
+@include('layouts.signup.signup-scripts')

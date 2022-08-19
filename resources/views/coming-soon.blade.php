@@ -10,19 +10,26 @@
 
         <div id="cspio-description"><h6 class="text-light">Get ready! Something really cool is coming!</h6></div>
 
-        <form id="subscribe-unsubscribe-form" action="{{ get_route('api.subscribe') }}" method="post">
-            @csrf
-            <div class="input-group mb-3 col-md-12 justify-content-center">
-                <input type="email" name="email" class="form-control" placeholder="email@domain.com" required>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-light btn-outline-primary" type="submit">Subscribe</button>
+        @if(env('NEWSLETTER_SUBSCRIPTION_ENABLED', false))
+            <form id="subscribe-unsubscribe-form" action="{{ get_route('api.subscribe') }}" method="post">
+                @csrf
+                <div class="form-group">
+                    <div class="input-group mb-3 col-md-12 justify-content-center">
+                        <input type="text" name="email" class="form-control" placeholder="email@domain.com" autocomplete="off"/>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-light btn-outline-primary" type="submit">Subscribe</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div id="recaptcha" style="text-align: center; display: none;"></div>
-            {!!  GoogleReCaptchaV2::render('recaptcha') !!}
-        </form>
+                <div class="form-group">
+                    <div id="recaptcha" style="text-align: center; display: none;"></div>
+                    {!!  GoogleReCaptchaV2::render('recaptcha') !!}
+                </div>
+            </form>
+            <h6 class="text-light attribute p-3">We promise to never spam you.</h6>
+            @include('layouts.coming-soon.scripts')
+        @endif
 
-        <h6 class="text-light attribute p-3">We promise to never spam you.</h6>
 
         <div id="cspio-socialprofiles">
             <a href="https://fb.com/weblabsapp" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
@@ -34,8 +41,10 @@
 </div>
 @endsection
 
-@section('footer')
 
+@section('footer')
+    <footer class="text-center">
+        <p class="mt-5 mb-3 text-muted">&copy; 2021-2022 - weblabs.app</p>
+    </footer>
 @endsection
 
-@include('layouts.coming-soon.scripts')

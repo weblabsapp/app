@@ -38,7 +38,7 @@ abstract class AbstractException extends \Exception
      * @param string $error
      * @return void
      */
-    protected function setDescription(string $error)
+    protected function setDescription(?string $error)
     {
         $this->description = $error;
     }

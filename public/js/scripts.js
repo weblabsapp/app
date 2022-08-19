@@ -1,8 +1,12 @@
 // Helper functions
-const detectIncognito = require('./detectIncognito');
+const detectIncognito = require('./detectIncognito.min');
+window.userLocation = require('./user-location.min');
+window.formValidation = require('./form-validation.min');
+window.imgLoader = new Image();
+imgLoader.src= '/images/loader.gif';
 
-// Detect browser private mode
 window.addEventListener("load", (e) => {
+    // Detect browser private mode
     detectIncognito().then(function(result) {
         if (result.isPrivate) {
             showToast({
@@ -26,7 +30,33 @@ window.addEventListener("load", (e) => {
     });
 });
 
+Array.from(document.getElementsByTagName('form')).forEach((form) => {
+    form.addEventListener("submit", function (e) {
+        // Validate recaptcha
+        let recaptchaForm=e.target.querySelector("#recaptcha");
+        if(recaptchaForm && window.getComputedStyle(recaptchaForm).getPropertyValue('display') !== 'none'){
+            let r=recaptchaForm.querySelector("textarea");
+            if (!r || !r.value) {
+                if (!r) {
+                    formValidation.resetErrors(recaptchaForm).addError(recaptchaForm, "text", [{"recaptcha": translate("please_verify_recaptcha")}]);
+                } else if (!r.value) {
+                    formValidation.resetErrors(r).addError(r, "text", [{"recaptcha": translate("please_verify_recaptcha")}]);
+                }
+                e.preventDefault() || e.stopImmediatePropagation();
+            } else {
+                formValidation.resetErrors(r);
+            }
+        }
+    });
+});
 
+/**
+ * Map object entries against a custom callback
+ *
+ * @param obj
+ * @param func
+ * @returns {{[p: string]: undefined}}
+ */
 window.mapObj = (obj, func) => {
     return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, func(k, v)]));
 }
@@ -46,8 +76,10 @@ window.translate = (key, replacements = {}) => {
             mapObj(replacements, (searchFor, replacement) => {
                 if (translations[key].includes(':'+searchFor)) {
                     translations[key] = translations[key].replace(':'+searchFor, replacement);
-                } else {
+                } else if (replacement in translations) {
                     translations[key] = translations[key] + `<br><span class="invalid-feedback d-inline">${translations[replacement]}</span>`;
+                } else {
+                    translations[key] = translations[key] + `<br><span class="invalid-feedback d-inline">${replacement}</span>`;
                 }
             });
             return translations[key];
@@ -79,7 +111,7 @@ window.jsonizeForm = (form) => {
  */
 window.getErrorFromResponse = (xhr) => {
     let description = null, errors = {};
-    if ('responseJSON' in xhr && 'content' in xhr.responseJSON) {
+    if ('responseJSON' in xhr && typeof xhr.responseJSON !== 'undefined' && 'content' in xhr.responseJSON) {
         if ('description' in xhr.responseJSON.content) {
             description = xhr.responseJSON.content.description.replace("\n", "<br>");
         }
@@ -105,6 +137,7 @@ window.getErrorFromResponse = (xhr) => {
 window.isToast = (xhr) => {
     return !!(
         'responseJSON' in xhr
+        && typeof xhr.responseJSON !== 'undefined'
         && 'content' in xhr.responseJSON
         && 'show_toast' in xhr.responseJSON.content
         && xhr.responseJSON.content.show_toast
@@ -134,10 +167,90 @@ window.showToast = (toast) => {
  * @param xhr
  */
 window.showRecaptchaIfRequired = (xhr) => {
-    document.getElementById('recaptcha').style.display = !!('responseJSON' in xhr
+    let recaptchaForm = document.getElementById('recaptcha');
+
+    if (typeof recaptchaForm === "undefined" || !recaptchaForm) {
+        return;
+    }
+
+    if (!!('responseJSON' in xhr
     && 'content' in xhr.responseJSON
     && 'is_recaptcha_required' in xhr.responseJSON.content
-    && xhr.responseJSON.content.is_recaptcha_required) ? 'inline-block' : 'none';
+    && xhr.responseJSON.content.is_recaptcha_required)) {
+        recaptchaForm.style.display = 'inline-block';
+        if (typeof grecaptcha !== "undefined") {
+            grecaptcha.reset();
+        }
+    } else {
+        recaptchaForm.style.display = 'none';
+    }
+}
+
+/**
+ * Get redirect URI
+ *
+ * @returns {string|boolean}
+ */
+window.getRedirectUri = () => {
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+    });
+
+    let redirect_uri;
+    return (redirect_uri = decodeURI(params.redirect_uri)) !== "null" ? redirect_uri : false;
+}
+
+/**
+ * Show / Hide window loader
+ *
+ * @param action
+ * @param form
+ */
+window.loader = (action, form) => {
+    let disabalableElements = 'input, textarea, select, button';
+    if (action === "show") {
+        if (form && form.nodeName === "FORM") {
+            form.querySelectorAll(disabalableElements).forEach((element) => {
+                element.disabled = true;
+            });
+        }
+
+        if (document.body.querySelector('#form-loader')) {
+            return;
+        }
+
+        let formLoader = document.createElement('div');
+        formLoader.setAttribute('id', 'form-loader');
+        formLoader.classList.add('clearfix');
+
+        let formLoaderChildren = document.createElement('div');
+        formLoaderChildren.classList.add('float-right');
+        formLoaderChildren.setAttribute('role', 'status');
+
+        formLoaderChildren.appendChild(imgLoader);
+        formLoader.appendChild(formLoaderChildren);
+        document.body.appendChild(formLoader);
+    } else {
+        if (form && form.nodeName === "FORM") {
+            form.querySelectorAll(disabalableElements).forEach((element) => {
+                element.disabled = false;
+            });
+        }
+        let formLoader = document.body.querySelector('#form-loader');
+        if (formLoader) {
+            formLoader.remove();
+        }
+    }
+}
+
+/**
+ * Redirect user to last in progress lesson
+ *
+ * @param courseTag
+ * @param lessonTag
+ */
+window.continueLearning = (courseTag, lessonTag) => {
+    window.location.href = '/course/' + courseTag + '/lesson/' + lessonTag;
 }
 
 /**
@@ -184,7 +297,9 @@ if ($ === jQuery) {
 
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         },
         xhrFields: {
             withCredentials: true
@@ -192,6 +307,10 @@ if ($ === jQuery) {
     });
 
     $(document).ajaxSend(function(e, jqxhr, settings) {
+        if ('auth' in settings) {
+            jqxhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
+            jqxhr.setRequestHeader('X-Remember-Token', localStorage.getItem('remember_token'));
+        }
         let i = activeRequests.indexOf(settings.url)
         if (i !== -1) {
             jqxhr.abort();
@@ -200,7 +319,10 @@ if ($ === jQuery) {
     });
 
     $(document).ajaxSuccess(function(e, jqxhr, settings, data) {
-        let successCallbackResult = settings.success(data);
+        let successCallbackResult;
+        if (typeof settings.success !== "undefined") {
+            successCallbackResult = settings.success(data, true);
+        }
         if (typeof successCallbackResult !== "undefined" && isToast(jqxhr)) {
             queuedToasts.push(successCallbackResult);
         }
@@ -209,7 +331,10 @@ if ($ === jQuery) {
     $(document).ajaxError(function(e, jqxhr, settings) {
         let errorCallbackResult;
         if (typeof settings.error !== "undefined") {
-            errorCallbackResult = settings.error(jqxhr);
+            errorCallbackResult = settings.error(jqxhr, true);
+        }
+        if (typeof settings.fail !== "undefined") {
+            errorCallbackResult = settings.fail(jqxhr, true);
         }
         if (typeof errorCallbackResult !== "undefined" && isToast(jqxhr)) {
             queuedToasts.push(errorCallbackResult);

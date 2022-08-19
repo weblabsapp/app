@@ -11,7 +11,21 @@ class VerifyCsrfToken extends Middleware
      *
      * @var array
      */
-    protected $except = [
-        //
-    ];
+    protected $except = [];
+
+    /**
+     * @param $request
+     * @param \Closure $next
+     * @return mixed
+     * @throws \Illuminate\Session\TokenMismatchException
+     */
+    public function handle($request, \Closure $next)
+    {
+        // Exclude OPTIONS requests
+        if ($request->isMethod('OPTIONS') || $request->getHost() == env('REST_API_DOMAIN')) {
+            return $next($request);
+        }
+
+        return parent::handle($request, $next);
+    }
 }

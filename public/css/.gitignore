@@ -1,2 +1,11 @@
 *.min.css
 *.min.css.map
+account.page.css
+enroll.page.css
+lesson.css
+signin.css
+style.css
+alerts.css
+home.css
+toast.css
+validation.css

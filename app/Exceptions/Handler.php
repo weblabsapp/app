@@ -7,6 +7,8 @@ use App\Exceptions\Interfaces\ApiExceptionInterface;
 use App\Exceptions\Interfaces\HtmlExceptionInterface;
 use App\Http\Responses\HtmlResponse;
 use App\Http\Responses\JsonResponse;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Request;
@@ -52,10 +54,12 @@ class Handler extends ExceptionHandler
                     $errors[$field] = implode("\n", $errorMessages);
                 }
             }
+
             if ($exception instanceof ThrottleRequestsException) {
                 $httpCode = Response::HTTP_TOO_MANY_REQUESTS;
                 $description = 'api_rate_limit_exceeded';
             }
+
             if ($exception instanceof NotFoundHttpException || $exception instanceof MethodNotAllowedHttpException) {
                 $httpCode = Response::HTTP_NOT_FOUND;
                 $description = 'page_or_api_not_found';
@@ -67,6 +71,17 @@ class Handler extends ExceptionHandler
 
             if ($exception instanceof AccessDeniedHttpException) {
                 $description = 'unauthorized_request_access';
+                $httpCode = Response::HTTP_UNAUTHORIZED;
+            }
+
+            if ($exception instanceof DecryptException) {
+                $httpCode = Response::HTTP_BAD_REQUEST;
+                $description = 'invalid_token';
+            }
+
+            if ($exception instanceof AuthenticationException) {
+                $httpCode = Response::HTTP_UNAUTHORIZED;
+                $description = $exception->getMessage();
             }
 
             if (env('APP_ENV') != 'prod' && empty($description)) {

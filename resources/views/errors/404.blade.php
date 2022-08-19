@@ -22,9 +22,10 @@
 
         </div><!-- end of #cspio-content -->
     </div>
-
 @endsection
 
 @section('footer')
-
+    <footer class="fixed-bottom text-center">
+        <p class="mt-5 mb-3 text-muted">&copy; 2021-2022</p>
+    </footer>
 @endsection
