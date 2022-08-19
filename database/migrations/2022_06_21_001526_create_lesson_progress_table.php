@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateLessonProgressTable extends Migration
 {
+    const TABLE_NAME = 'lesson_progress';
     /**
      * Run the migrations.
      *
@@ -14,7 +15,7 @@ class CreateLessonProgressTable extends Migration
      */
     public function up()
     {
-        Schema::create('lesson_progress', function (Blueprint $table) {
+        Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->id();
             $table->uuid('account_id');
             $table->uuid('lesson_id');
@@ -25,12 +26,9 @@ class CreateLessonProgressTable extends Migration
             // Proper indexes
             $table->index(['account_id']);
             $table->index(['lesson_id']);
-            $table->index(['account_id', 'lesson_id', 'is_completed', 'deleted_at']);
+            $table->index(['account_id', 'lesson_id', 'is_completed', 'deleted_at'], 'filter_ndx');
+            $table->index(['account_id', 'created_at'], 'lesson_progress_ndx');
         });
-
-        // Create index for lessons progress search
-        DB::statement('ALTER TABLE lessons_progress ADD INDEX lesson_progress_ndx 
-                (account_id asc, created_at desc);');
     }
 
     /**
@@ -40,6 +38,6 @@ class CreateLessonProgressTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lesson_progress');
+        Schema::dropIfExists(self::TABLE_NAME);
     }
 }

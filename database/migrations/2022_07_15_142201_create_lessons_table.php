@@ -30,12 +30,9 @@ class CreateLessonsTable extends Migration
 
             // Proper indexes
             $table->index(['course_id', 'is_active']);
+            $table->index(['created_at', 'is_active', 'deleted_at'], 'sort_ndx');
             $table->unique(['course_id', 'tag', 'deleted_at']);
         });
-
-        // Create index for lessons progress search
-        DB::statement('ALTER TABLE lessons ADD INDEX sort_ndx 
-                (created_at desc, is_active desc, deleted_at asc);');
     }
 
     /**

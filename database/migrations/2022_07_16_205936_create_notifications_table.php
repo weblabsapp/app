@@ -25,12 +25,9 @@ class CreateNotificationsTable extends Migration
             $table->boolean('is_viewed')->default(false);
             $table->softDeletes();
             $table->timestamps();
-        });
 
-        // Proper indexes
-        // Create index for lessons progress search
-        DB::statement('ALTER TABLE notifications ADD INDEX notifications_ndx 
-                (receiver_id asc, created_at desc, deleted_at desc);');
+            $table->index(['receiver_id', 'created_at', 'deleted_at'], 'notifications_ndx');
+        });
     }
 
     /**
