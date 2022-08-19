@@ -18,7 +18,7 @@ class CreateEnrollsTable extends Migration
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->id();
             $table->uuid('account_id');
-            $table->string('course_id', 20);
+            $table->uuid('course_id');
             $table->timestamps();
             $table->softDeletes();
 
