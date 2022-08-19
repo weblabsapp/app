@@ -26,6 +26,6 @@
 
 @section('footer')
     <footer class="fixed-bottom text-center">
-        <p class="mt-5 mb-3 text-muted">&copy; 2021-2022</p>
+        <p class="mt-5 mb-3 text-muted">&copy; 2022-2023 - weblabs.app</p>
     </footer>
 @endsection

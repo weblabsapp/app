@@ -445,7 +445,7 @@
 
 @section('footer')
     <footer class="text-center">
-        <p class="mb-3 text-muted">&copy; 2021-2022 - weblabs.app</p>
+        <p class="mb-3 text-muted">&copy; 2022-2023 - weblabs.app</p>
     </footer>
 @endsection
 
