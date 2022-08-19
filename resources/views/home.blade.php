@@ -45,7 +45,7 @@
                 <div class="card-footer">
                     @if($course->is_active)
                         <a class="btn btn-primary btn-sm" href="{{ get_route('web.enrollPage', ['courseTag' => $course->tag], true, false, true) }}">Enroll in {{ $course->title }}</a>
-                        <a class="btn btn-primary btn-sm" href="{{ get_route('web.exploreCourse', ['courseTag' => $course->tag], true, false, true) }}">Topics</a>
+                        <a class="btn btn-primary btn-sm" href="{{ get_route('web.exploreCourse', ['courseTag' => $course->tag]) }}">Topics</a>
                     @else
                         <a class="btn btn-primary btn-sm disabled" href="javascript:;">Soon</a>
                     @endif
