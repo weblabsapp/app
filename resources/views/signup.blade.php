@@ -16,7 +16,7 @@
     <div id="main-page" class="row w-100 h-100 m-0">
         <div class="col-md-6 border-right m-auto">
             <div id="signup-info" class="text-center">
-                <img class="mb-4" src="https://cdn.weblabs.local/images/code_64.png" alt="" width="72" height="72">
+                <img class="mb-4" src="{{ asset('images/code_64.png') }}" alt="" width="72" height="72">
                 <h1 class="h3 mb-3 font-weight-normal">Create new account</h1>
                 <div class="form-group">
                     <p>By sigining up, you agree with our <a href="{{ get_route('web.tosPage') }}" target="_blank">TOS <i class="fa-solid fa-arrow-up-right-from-square"></i></a>.</p>
