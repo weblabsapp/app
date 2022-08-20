@@ -58,6 +58,18 @@
                 },
             });
         });
+
+        $(".reveal-password").on('click', function () {
+            $(this).find('svg').remove();
+            let $pwd = $("input.reveal");
+            if ($pwd.attr('type') === 'password') {
+                $pwd.attr('type', 'text');
+                $(this).append('<i class="fa fa-eye-slash"></i>');
+            } else {
+                $pwd.attr('type', 'password');
+                $(this).append('<i class="fa fa-eye"></i>');
+            }
+        });
     });
 </script>
 @endpush

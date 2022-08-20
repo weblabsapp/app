@@ -2,7 +2,7 @@
     width: 100%;
     max-width: 330px;
     padding: 15px;
-    margin: 0 auto;
+    //margin: 0 auto;
 
     .checkbox {
         font-weight: 400;
@@ -37,6 +37,62 @@
             //    margin-bottom: 10px !important;
             //    border-radius: 0 0 0.5rem 0.5rem !important;
             //}
+        }
+    }
+}
+
+.quote-author-image {
+    object-fit: fill;
+    object-position: center;
+    max-height: 80px;
+    max-width: 80px;
+    margin-bottom: 1rem;
+    background-image: var(--bg-image);
+    background-size:cover;
+    background-position: center;
+    height: 80px;
+    width: 120px;
+}
+
+@media screen and (min-width: 576px) {
+    #login-info {
+        float: right;
+        margin-right: 3rem !important;
+        width: 75% !important;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .auth-form {
+        max-width: 100%;
+    }
+
+    #main-page {
+        display: block;
+        flex-direction: column;
+        height: auto !important;
+
+        .col-md-6:first-child {
+            margin-bottom: 1rem !important;
+            margin-top: 0 !important;
+            padding: 0 !important;
+            border-right: 0 !important;
+            display: table;
+        }
+
+        .col-md-6:last-child {
+            margin-top: 0 !important;
+        }
+    }
+
+    #login-info {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
+
+    #recaptcha {
+        div:first-child {
+            width: 100% !important;
         }
     }
 }

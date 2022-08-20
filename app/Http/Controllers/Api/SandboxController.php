@@ -35,7 +35,7 @@ class SandboxController extends ApiController
     public function create($courseTag, CreateSandboxRequest $request)
     {
         Chain::start()
-            ->invoke([Sandbox::getFactory(), 'make'], [strtolower($courseTag)])
+            ->invoke([Sandbox::factory(), 'make'], [strtolower($courseTag)])
             ->invoke([$this->repository, 'createOrUpdate'], [
                 array_combine(['sandbox_id', 'volume_id'], Chain::getResultOf(0))
             ])
@@ -75,7 +75,7 @@ class SandboxController extends ApiController
 
         Chain::start()
             ->invoke([$this->repository, 'findBy'], ['sandbox_id', $sandboxId])
-            ->invoke([Sandbox::getFactory(), 'executeCommand'], [$sandboxId, $courseTag, $code, $options]);
+            ->invoke([Sandbox::factory(), 'executeCommand'], [$sandboxId, $courseTag, $code, $options]);
 
         $this->setResponseData([
             'output' => Chain::getResultOf(1)
@@ -94,7 +94,7 @@ class SandboxController extends ApiController
     public function getId()
     {
         $this->setResponseData([
-            'sandbox_id' => Sandbox::getFactory()->getPodName()
+            'sandbox_id' => Sandbox::factory()->getPodName()
         ]);
 
         return $this->response();

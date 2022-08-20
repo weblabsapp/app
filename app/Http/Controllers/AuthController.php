@@ -90,7 +90,9 @@ class AuthController extends Controller
      */
     public function signup(Request $request)
     {
-        return view('signup');
+        return view('signup', [
+            'isLoggedIn' => Auth::check()
+        ]);
     }
 
     /**
@@ -119,7 +121,7 @@ class AuthController extends Controller
 
         Auth::login($chain::getResultOf(2), true);
 
-        return view('account-verification');
+        return view('account.account-verification');
     }
 
     /**

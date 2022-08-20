@@ -46,7 +46,7 @@ class LessonController extends Controller
         $this->enrollRepository->enroll(Auth::id(), $request->attributes->get('course')->id);
 
         if ($viewPath && view()->exists($viewPath)) {
-            if (!Sandbox::getFactory()->isContainerReady($courseTag)) {
+            if (!Sandbox::factory()->isContainerReady($courseTag)) {
                 return redirect()->route('web.enrollPage', ['courseTag' => $courseTag])
                     ->with('messages', ['warning' => 'You still have not created a sandbox. Start by click on "Create Sandbox".']);
             }
