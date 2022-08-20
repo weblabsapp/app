@@ -69,6 +69,7 @@ let formValidation = {
             case "text":
                 let block = document.createElement("div");
                 block.classList.add("invalid-feedback");
+                block.classList.add("mb-2");
                 block.style.display = 'block';
                 errors.forEach(function (error) {
                     let p = document.createElement('p');

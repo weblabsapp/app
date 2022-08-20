@@ -20,9 +20,6 @@
     <!-- Toaster -->
     <script type="text/javascript" src="{{ asset('js/bootstrap-toaster.min.js') }}" defer></script>
 
-    <!-- Validate.js -->
-{{--    <script type="text/javascript" src="{{ asset('js/validate.min.js') }}" defer></script>--}}
-
     <!-- Google Analytics Code Goes Here-->
 @endsection
 

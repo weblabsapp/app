@@ -6,6 +6,7 @@ namespace App\Factories\Sandbox;
 use App\Console\Traits\SshTunnel;
 use App\Enums\CommandsEnum;
 use App\Enums\CoursesTagsEnum;
+use App\Factories\AbstractFactory;
 use App\Utils\TempFile;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,7 @@ use RenokiCo\PhpK8s\Kinds\K8sResource;
 use RenokiCo\PhpK8s\KubernetesCluster;
 use Symfony\Component\Process\Process;
 
-class Sandbox
+class Sandbox extends AbstractFactory
 {
     use SshTunnel;
 
@@ -32,14 +33,6 @@ class Sandbox
     private string $podName;
 
     private string $volumeName;
-
-    /**
-     * @return Sandbox
-     */
-    public static function getFactory()
-    {
-        return new self;
-    }
 
     /**
      * @return KubernetesCluster

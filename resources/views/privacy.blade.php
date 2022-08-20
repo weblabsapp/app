@@ -5,7 +5,7 @@
         <div class=" col-md-12 m-auto">
             <img class="mb-4" src="{{ asset('images/code_64.png') }}" alt="" width="72" height="72">
         </div>
-        <div class="col-md-12 p-5">
+        <div class="col-md-12 pr-5 pl-5">
             <div class="card">
                 <div class="card-header">
                     Privacy policy
@@ -65,6 +65,9 @@
                         <p>Subject: Inquiry about {Your inquiry subject}</p>
                     </div>
                 </div>
+            </div>
+            <div class="mt-3">
+                <a class="btn btn-secondary" href="{{ get_route('web.homePage') }}">Go Home</a>
             </div>
         </div>
     </div>

@@ -5,7 +5,7 @@
         <div class=" col-md-12 m-auto">
             <img class="mb-4" src="{{ asset('images/code_64.png') }}" alt="" width="72" height="72">
         </div>
-        <div class="col-md-12 p-5">
+        <div class="col-md-12 pr-5 pl-5">
             <div class="card">
                 <div class="card-header">
                     Terms of Service
@@ -24,7 +24,7 @@
                             <li>remove any copyright or other proprietary notations from the materials; or</li>
                             <li>transferring the materials to another person or "mirror" the materials on any other server.</li>
                         </ul>
-                        <p>This will let Web Labs to terminate upon any violations of these restrictions. Upon termination, your viewing right will also be terminated and you should destroy any downloaded materials in your possession whether it is printed or electronic format. These Terms of Service has been created with the help of the <a href="https://www.termsofservicegenerator.net/">Terms Of Service Generator</a>.</p>
+                        <p>This will let Web Labs to terminate upon any violations of these restrictions. Upon termination, your viewing right will also be terminated and you should destroy any downloaded materials in your possession whether it is printed or electronic format.</p>
                         <h4>3. Disclaimer</h4>
                         <p>All the materials on Web Labs’s Website are provided "as is". Web Labs makes no warranties, may it be expressed or implied, therefore negates all other warranties. Furthermore, Web Labs does not make any representations concerning the accuracy or reliability of the use of the materials on its Website or otherwise relating to such materials or any sites linked to this Website.</p>
                         <h4>4. Limitations</h4>
@@ -41,6 +41,9 @@
                         <p>Any claim related to Web Labs's Website shall be governed by the laws of Jordan without regards to its conflict of law provisions.</p>
                     </div>
                 </div>
+            </div>
+            <div class="mt-3">
+                <a class="btn btn-secondary" href="{{ get_route('web.homePage') }}">Go Home</a>
             </div>
         </div>
     </div>

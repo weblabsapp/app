@@ -50,7 +50,7 @@
 
 @include('partials.get-translations')
 @include('partials.session-renew')
-@includeIf('partials.google-analytics', ['prod' => env('APP_ENV')])
+@includeWhen('prod' == env('APP_ENV'), 'partials.google-analytics')
 @stack('scripts')
 </body>
 </html>

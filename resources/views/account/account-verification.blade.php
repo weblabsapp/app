@@ -1,4 +1,4 @@
-@extends('layouts.verify-account.layout')
+@extends('layouts.account.verification-layout')
 
 @section('body')
     <div class="row text-center m-0 p-5">
@@ -7,7 +7,8 @@
             <h1 class="h3 mb-3 font-weight-normal">Your email has been verified!</h1>
             <small>
                 <p>You will be redirected to your account page to complete your profile.</p>
-                <p>If you are not redirected within 5 seconds, please click here: <a href="{{ get_route('web.myAccountPage') }}">My Account</a></p>
+                <p>If you are not redirected within 5 seconds, please click here: <a
+                            href="{{ get_route('web.myAccountPage') }}">My Account</a></p>
             </small>
         </div>
     </div>
@@ -18,5 +19,3 @@
         <p class="mt-5 mb-3 text-muted">&copy; 2022-2023 - weblabs.app</p>
     </footer>
 @endsection
-
-@include('layouts.signup.signup-scripts')

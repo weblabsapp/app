@@ -26,7 +26,7 @@
                 </li>
                 @if(\Illuminate\Support\Facades\Auth::user())
                 <li class="nav-item d-block d-sm-block d-md-none">
-                    <a href="#" class="nav-link">Sign out</a>
+                    <a href="{{ get_route('web.logoutPage') }}" class="nav-link">Sign out</a>
                 </li>
                 @else
                     <li class="nav-item d-block d-sm-block d-md-none">

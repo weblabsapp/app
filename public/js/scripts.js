@@ -10,7 +10,7 @@ window.addEventListener("load", (e) => {
     detectIncognito().then(function(result) {
         if (result.isPrivate) {
             showToast({
-                message: "Please use the platform in non-private mode",
+                message: "To have a better experience, please use the platform in non-private mode.",
                 status: TOAST_STATUS.WARNING
             });
             setInterval(function () {
@@ -177,12 +177,12 @@ window.showRecaptchaIfRequired = (xhr) => {
     && 'content' in xhr.responseJSON
     && 'is_recaptcha_required' in xhr.responseJSON.content
     && xhr.responseJSON.content.is_recaptcha_required)) {
-        recaptchaForm.style.display = 'inline-block';
+        recaptchaForm.classList.remove('hidden');
         if (typeof grecaptcha !== "undefined") {
             grecaptcha.reset();
         }
     } else {
-        recaptchaForm.style.display = 'none';
+        recaptchaForm.classList.add('hidden');
     }
 }
 
