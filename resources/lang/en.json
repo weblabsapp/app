@@ -41,7 +41,7 @@
     "page or api not found": "The page you are looking for does not exist.",
     "sandbox created successfully": "Sandbox created successfully!",
     "cannot create sandbox volume": "Could not create sandbox volume: :error",
-    "cannot write script file": "We are facing some issues right now. Kindly come back later.",
+    "cannot write script file": "We are facing some issues right now. The issue has been reported, kindly come back later.",
     "failed to save file": "We are unable to save your file. Please try again later",
     "file saved successfully": "File is saved successfully!",
     "file deleted successfully": "File deleted successfully!",

@@ -28,6 +28,7 @@ class SandboxRepository extends BaseRepository
 
         $sandbox = parent::query()
             ->where('account_id', $accountId)
+            ->where('sandbox_id', $data['sandbox_id'])
             ->withoutTrashed()
             ->first();
 

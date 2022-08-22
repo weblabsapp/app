@@ -32,7 +32,6 @@
                     }
                     form.parent().html('<p>Your isolated environment is ready and waiting for you to start. Click "Next" to continue.</p>');
                     localStorage.setItem('sandbox_id', response.content.sandbox_id);
-                    loader('hide', form.get(0));
                     return {
                         message: translate(response.content.message),
                         status: TOAST_STATUS.SUCCESS
@@ -42,12 +41,14 @@
                     if (call !== true) {
                         return;
                     }
-                    loader('hide', form.get(0));
                     return {
                         message: translate(...getErrorFromResponse(xhr)),
                         status: TOAST_STATUS.DANGER
                     }
                 },
+                complete: function () {
+                    loader('hide', form.get(0));
+                }
             });
         });
     });
