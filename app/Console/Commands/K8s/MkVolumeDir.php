@@ -5,13 +5,13 @@ namespace App\Console\Commands\K8s;
 use App\Console\Traits\SshTunnel;
 use Illuminate\Console\Command;
 
-class Mkdir extends Command
+class MkVolumeDir extends Command
 {
     use SshTunnel;
 
-    protected $signature = 'k8s:mkdir {dir_name}';
+    protected $signature = 'k8s:mk-volume-dir {volume_name}';
 
-    protected $name = 'k8s:mkdir';
+    protected $name = 'k8s:mk-volume-dir';
 
     protected $description = 'Create directory into K8s host';
 
@@ -26,7 +26,7 @@ class Mkdir extends Command
      */
     public function handle()
     {
-        $dirName = $this->argument('dir_name');
+        $dirName = $this->argument('volume_name');
 
         if ($this->isExist($dirName)) {
             return 0;
@@ -58,6 +58,6 @@ class Mkdir extends Command
      */
     private function getFullPath($dirName)
     {
-        return $this->baseDir . DIRECTORY_SEPARATOR . $dirName;
+        return env('KUBE_VOLUMES_ROOT_PATH') . DIRECTORY_SEPARATOR . $dirName;
     }
 }

@@ -26,8 +26,6 @@ class Sandbox extends AbstractFactory
 
     const K8S_PATH = 'k8s';
 
-    const BASE_K8S_VOLUME_PATH = '/home/k8s/volumes';
-
     private string $courseTag;
 
     private string $podName;
@@ -44,13 +42,24 @@ class Sandbox extends AbstractFactory
     }
 
     /**
+     * Get pod name for a course
+     * Note: Each course has its own pod, to manage them individually
+     *
      * @return string
      */
-    public function getPodName()
+    public function getPodName(string $courseTag)
     {
         return $this->podName ?? $this->podName = uuid_make(
-            md5(sprintf('user-sandbox-%s', Auth::id()))
+            md5(sprintf('user-sandbox-%s-%s', Auth::id(), $courseTag))
         );
+    }
+
+    /**
+     * @return K8sPod
+     */
+    public function getPodInstance(): K8sPod
+    {
+        return (new K8sPod($this->getCluster()))->whereNamespace(env('KUBE_NAMESPACE'));
     }
 
     /**
@@ -58,7 +67,9 @@ class Sandbox extends AbstractFactory
      */
     private function getPodDeployment()
     {
-        return base_path(self::K8S_PATH . '/' . $this->courseTag) . '/deployment.yaml';
+        return base_path(self::K8S_PATH . DIRECTORY_SEPARATOR . $this->courseTag)
+            . DIRECTORY_SEPARATOR
+            . env('KUBE_DEPLOYMENT_FILE');
     }
 
     /**
@@ -81,6 +92,9 @@ class Sandbox extends AbstractFactory
             case CoursesTagsEnum::PHP_COURSE_TAG:
                 $imageName = ['wjurry/weblabs', 'php-8.1-cli'];
                 break;
+            case CoursesTagsEnum::JAVASCRIPT_COURSE_TAG:
+                $imageName = ['node', 'current-alpine3.16'];
+                break;
             default:
                 throw new \Exception('Invalid image name');
         }
@@ -96,7 +110,7 @@ class Sandbox extends AbstractFactory
      */
     private function getRemoteVolumePath($dirName)
     {
-        return self::BASE_K8S_VOLUME_PATH . DIRECTORY_SEPARATOR . $dirName;
+        return env('KUBE_VOLUMES_ROOT_PATH') . DIRECTORY_SEPARATOR . $dirName;
     }
 
     /**
@@ -108,8 +122,8 @@ class Sandbox extends AbstractFactory
         $volumeName = $this->getVolumeName();
         $relativeRemotePath = $volumeName . DIRECTORY_SEPARATOR . $courseTag;
 
-        $exitCode = Artisan::call('k8s:mkdir', [
-            'dir_name' => 'volumes' . DIRECTORY_SEPARATOR . $relativeRemotePath
+        $exitCode = Artisan::call('k8s:mk-volume-dir', [
+            'volume_name' => $relativeRemotePath
         ]);
 
         if ($exitCode != 0) {
@@ -129,12 +143,12 @@ class Sandbox extends AbstractFactory
     /**
      * @return K8sResource|K8sPod
      */
-    public function createPod()
+    public function createPod(string $courseTag)
     {
         return K8s::fromYamlFile(
             KubernetesCluster::fromUrl(env('KUBE_HOST')),
             $this->getPodDeployment()
-        )->setName($this->getPodName());
+        )->setName($this->getPodName($courseTag));
     }
 
     /**
@@ -168,40 +182,38 @@ class Sandbox extends AbstractFactory
         $this->courseTag = $courseTag;
 
         if ($this->isContainerReady($courseTag)) {
-            return [$this->getPodName(), $this->getVolumeName()];
+            return [$this->getPodName($courseTag), $this->getVolumeName()];
         }
 
-
         try {
-            $pod = (new K8sPod($this->getCluster()))->getByName($this->getPodName());
+            $pod = $this->getPodInstance()->getByName($this->getPodName($courseTag));
             $container = $pod->getContainer($courseTag);
 
             if ($container && !$container->isReady()) {
                 // Pod restartPolicy is Always, so if it is not running,
-                // that means there is something wrong in kubernetes server
+                // that means there is something wrong in kubernetes pod
                 $pod->delete();
-                $pod = $this->createPod();
+                $pod = $this->createPod($courseTag);
             }
         } catch (KubernetesAPIException $exception) {
-            if ($exception->getCode() == 404) {
-                $pod = $this->createPod();
+            if ($exception->getCode() == 404) { // pod not found
+                $pod = $this->createPod($courseTag);
             } else {
                 throw $exception;
             }
         }
 
         $podContainers = $pod->getContainers();
-        $courseContainer = $pod->getContainer($courseTag);
 
-        if (!$courseContainer) {
+        if (!isset($container)) {
             $volume = $this->createVolume($courseTag);
             $pod->addVolumes([$volume]);
-            $courseContainer = $this->createContainer($volume);
-            $podContainers = array_merge($podContainers, [$courseContainer]);
+            $container = $this->createContainer($volume);
+            $podContainers = array_merge($podContainers, [$container]);
         }
 
         $pod->setContainers($podContainers)->createOrUpdate()->watch(function ($result, K8sPod $pod) use ($courseTag) {
-            if (($container = $pod->getContainer('php')) && $container->isReady()) {
+            if (($container = $pod->getContainer($courseTag)) && $container->isReady()) {
                 return true;
             }
         });
@@ -216,7 +228,7 @@ class Sandbox extends AbstractFactory
     public function isContainerReady(string $courseTag)
     {
         try {
-            $pod = (new K8sPod($this->getCluster()))->getByName($this->getPodName());
+            $pod = $this->getPodInstance()->getByName($this->getPodName($courseTag));
             if ($pod && ($container = $pod->getContainer($courseTag))) {
                 return $container->isReady();
             }
@@ -241,7 +253,7 @@ class Sandbox extends AbstractFactory
     {
         $this->courseTag = $courseTag;
 
-        $pod = (new K8sPod($this->getCluster()))->getByName($podId);
+        $pod = $this->getPodInstance()->getByName($podId);
         if ($pod && ($containers = $pod->getContainers())) {
             foreach ($containers as $container) {
                 if (($containerName = $container->getAttribute('name')) != $courseTag) {
@@ -278,9 +290,11 @@ class Sandbox extends AbstractFactory
 
                 $commandResult = $this->getSshTunnel()->execute(
                     sprintf(
-                        'timeout %u microk8s kubectl exec %s -- %s %s %s',
+                        'timeout %u microk8s kubectl exec %s -c=%s --namespace=%s -- %s %s %s',
                         env('KUBE_MAX_EXEC_TIME'),
                         $podId,
+                        $containerName,
+                        env('KUBE_NAMESPACE'),
                         CommandsEnum::getCommand($courseTag),
                         $this->optionsForCommand($options),
                         $tempFile->getTempFileName()

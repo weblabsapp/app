@@ -54,7 +54,7 @@ Route::post('/sandbox/create/{courseTag}', [SandboxController::class, 'create'])
     ->middleware(['auth', 'throttle:1,1', 'resolve_entities']) // one time per 1 minute
     ->name('createSandbox');
 
-Route::get('/sandbox/id', [SandboxController::class, 'getId'])
+Route::get('/sandbox/{courseTag}/id', [SandboxController::class, 'getId'])
     ->middleware(['auth', 'throttle:1,1']) // one time per 1 minute
     ->name('getSandboxName');
 

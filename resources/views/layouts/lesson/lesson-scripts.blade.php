@@ -26,7 +26,7 @@
                 $('.language-options').find('.language-option:checked').map((index, element) => {
                     languageOptionsObj[$(element).attr('name')] = $(element).val();
                 });
-                let sandboxId = localStorage.getItem('sandbox_id') || getSandboxId();
+                let sandboxId = localStorage.getItem('sandbox_id') || getSandboxId('{{ $courseTag }}');
                 let runCodeRoute = '{{ get_route('api.runCode', ['sandboxId' => ':sandboxId']) }}'
                     .replace(':sandboxId', sandboxId);
 
@@ -92,12 +92,14 @@
             $('[rel="tooltip"]').tooltip();
         });
 
-        function getSandboxId() {
+        function getSandboxId(courseTag) {
             let sandboxId = null;
+            let url = '{{ get_route('api.getSandboxName', ['courseTag' => ':courseTag']) }}'
+                .replace(':courseTag', courseTag);
 
             $.ajax({
                 type: 'GET',
-                url: '{{ get_route('api.getSandboxName') }}',
+                url: url,
                 async: false,
                 success: function (response, call = false) {
                     if (call !== true) {
