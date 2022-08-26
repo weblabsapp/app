@@ -59,7 +59,7 @@ Route::get('/sandbox/{courseTag}/id', [SandboxController::class, 'getId'])
     ->name('getSandboxName');
 
 Route::post('/sandbox/{sandboxId}/run', [SandboxController::class, 'runCode'])
-    ->middleware(['auth', 'throttle:2,1']) // 30 times per 1 minute
+    ->middleware(['auth', 'throttle:60,1']) // 30 times per 1 minute
     ->name('runCode');
 
 Route::post('/cloud/upload', [CloudController::class, 'uploadLessonFile'])
