@@ -10,8 +10,8 @@
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
     <meta property="og:url" content=""/>
     <meta property="og:type" content="text/html"/>
-    <meta property="og:title" content="Weblabs Coming Soon"/>
-    <meta property="og:description" content="Weblabs - Interactive development learning"/>
+    <meta property="og:title" content="Weblabs"/>
+    <meta property="og:description" content="Interactive development learning"/>
     <meta property="og:image" content="{{ asset('images/code_64.png') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -28,7 +28,7 @@
     <script src="{{ asset('js/modernizr.min.js') }}" defer></script>
 
     <!-- Bootstrap -->
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
 
     <!-- Bootstrap custom tooltips -->
     <script src="{{ asset('js/bootstrap-tooltip-custom-class.min.js') }}" defer></script>
