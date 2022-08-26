@@ -91,10 +91,10 @@ class SandboxController extends ApiController
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function getId()
+    public function getId($courseTag)
     {
         $this->setResponseData([
-            'sandbox_id' => Sandbox::factory()->getPodName()
+            'sandbox_id' => Sandbox::factory()->getPodName($courseTag)
         ]);
 
         return $this->response();
