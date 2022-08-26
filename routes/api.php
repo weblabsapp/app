@@ -75,7 +75,7 @@ Route::get('/cloud/{prefix}/{courseTag}/{lessonTag}/{fileName}', [CloudControlle
     ->name('cloudGetLessonFile');
 
 Route::delete('/cloud/{courseTag}/{lessonTag}/{fileName}', [CloudController::class, 'deleteLessonFile'])
-    ->middleware(['auth', 'throttle:2,1', 'resolve_entities']) // 2 times per 1 minute
+    ->middleware(['auth', 'throttle:10,1', 'resolve_entities']) // 2 times per 1 minute
     ->name('cloudDeleteLessonFile');
 
 Route::post('/course/{courseTag}/lesson/{lessonTag}/complete', [LessonController::class, 'markAsCompleted'])
