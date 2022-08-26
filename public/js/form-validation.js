@@ -1,42 +1,45 @@
 const validation = require('./validate.min');
 const ValidationError = require('./exceptions/validation.error.min');
 
-if (!window.visibleTooltips) {
+if (!window.visibleTooltips || typeof window.visibleTooltips === "undefined") {
     window.visibleTooltips = {};
 }
 
-let formValidation = {
-    validate: (form, constraints = {}, showErrorsAs = "text") => {
-        formValidation.resetErrors(form);
+class FormValidation {
+    validate(form, constraints = {}, showErrorsAs = "text") {
+        this.resetErrors(form);
         let errors = validation.validate(form, constraints);
         if (errors) {
-            formValidation.showErrors(form, errors, showErrorsAs);
+            this.showErrors(form, errors, showErrorsAs);
             throw new ValidationError('Validation failed!', errors);
         }
-    },
-    showErrors: (form, errors, showAs = "text") => {
+    };
+
+    showErrors(form, errors, showAs = "text") {
         form.querySelectorAll("input[name]:not([type='hidden']), select[name], textarea").forEach((input) => {
-            formValidation.showErrorsForInput(input, errors && errors[input.name], showAs);
+            this.showErrorsForInput(input, errors && errors[input.name], showAs);
         });
-    },
-    showErrorsForInput: (input, errors, showAs) => {
-        let formGroup = formValidation.closestParent(input.parentNode, "form-group");
-        formValidation.resetFormGroup(formGroup);
+    };
+
+    showErrorsForInput(input, errors, showAs) {
+        let formGroup = this.closestParent(input.parentNode, "form-group");
+        this.resetFormGroup(formGroup);
         if (errors) {
             formGroup.classList.add("has-error");
-            formValidation.addError(input, showAs, errors);
+            this.addError(input, showAs, errors);
         } else {
             formGroup.classList.add("has-success");
         }
-    },
-    addError: (input, type, errors) => {
+    };
+
+    addError(input, type, errors) {
         if(window.innerWidth < 740) {
             type = "text";
         }
         switch (type) {
             case "tooltip":
                 if (typeof bootstrap.Tooltip === "undefined") {
-                    formValidation.addError(input, "text", errors);
+                    this.addError(input, "text", errors);
                     return;
                 }
                 input.dataset.toggle = "tooltip";
@@ -83,25 +86,27 @@ let formValidation = {
                 input.parentNode.append(block);
                 break;
         }
-    },
-    resetErrors: (input) => {
+    };
+
+    resetErrors(input) {
         if (/^form$/i.test(input.nodeName)) {
-            let form = input, errorBag;
-            form.querySelectorAll("input[name]:not([type='hidden']), select[name], textarea").forEach((input) => {
+            let errorBag;
+            input.querySelectorAll("input[name]:not([type='hidden']), select[name], textarea").forEach((input) => {
                 input.closest('.form-group').classList.remove('has-error');
                 (errorBag = input.parentNode.querySelector('.invalid-feedback')) ? errorBag.remove() : [];
-                formValidation.resetTooltips(input);
+                this.resetTooltips(input);
             });
         } else {
             let errorBag;
             input.closest('.form-group').classList.remove('has-error');
             (errorBag = input.parentNode.querySelector('.invalid-feedback')) ? errorBag.remove() : [];
-            formValidation.resetTooltips(input);
+            this.resetTooltips(input);
         }
 
-        return formValidation;
-    },
-    resetTooltips: (input) => {
+        return this;
+    };
+
+    resetTooltips(input) {
         let errorTooltip = document.querySelector('#'+input.dataset.tooltipId);
         if (errorTooltip) {
             errorTooltip.remove();
@@ -115,24 +120,26 @@ let formValidation = {
             visibleTooltips[input.dataset.tooltipId].hide();
             delete visibleTooltips[input.dataset.tooltipId];
         }
-    },
-    resetFormGroup: (formGroup) => {
+    };
+
+    resetFormGroup(formGroup) {
         formGroup.classList.remove("has-error");
         formGroup.classList.remove("has-success");
         formGroup.querySelectorAll(".help-block.error").forEach((el) => {
             el.parentNode.removeChild(el);
         });
-    },
-    closestParent: (child, className) => {
+    };
+
+    closestParent(child, className) {
         if (!child || child === document) {
             return null;
         }
         if (child.classList.contains(className)) {
             return child;
         } else {
-            return formValidation.closestParent(child.parentNode, className);
+            return this.closestParent(child.parentNode, className);
         }
     }
-};
+}
 
-module.exports = formValidation;
+window.formValidation = new FormValidation();

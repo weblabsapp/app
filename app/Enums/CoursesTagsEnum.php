@@ -6,7 +6,7 @@ class CoursesTagsEnum
 {
     const PHP_COURSE_TAG = 'php';
     const PYTHON_COURSE_TAG = 'python';
-    const JAVASCRIPT_COURSE_TAG = 'js';
+    const JAVASCRIPT_COURSE_TAG = 'javascript';
 
     public static function getCourseTypeExtension($courseTag)
     {

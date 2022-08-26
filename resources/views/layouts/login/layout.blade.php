@@ -10,6 +10,9 @@
     <!-- Toasts -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/toast.min.css') }}"/>
 
+    <!-- Validation -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/validation.min.css') }}"/>
+
 
     <!-- JS -->
     <!-- Time Ago -->

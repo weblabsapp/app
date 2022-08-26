@@ -1,6 +1,7 @@
 @push('scripts')
+    <script type="text/javascript" src="{{ asset('js/form-validation-bundle.min.js') }}"></script>
+    @include('partials.recaptcha-validator')
     <script type="text/javascript">
-
         // Resend verification email
         function resendVerificationEmail(token) {
             let url = '{{ urldecode(get_route('api.resendVerifyEmail', ['token' => ':token'])) }}';

@@ -1,23 +1,34 @@
 @push('scripts')
-    <script>
-        var require = { paths: { vs: '{{ asset('js/node_modules/monaco-editor/min/vs') }}' } };
-    </script>
-    <script src="{{ asset('js/node_modules/monaco-editor/min/vs/loader.js') }}" defer></script>
-    <script src="{{ asset('js/node_modules/monaco-editor/min/vs/editor/editor.main.nls.js') }}" defer></script>
-    <script src="{{ asset('js/node_modules/monaco-editor/min/vs/editor/editor.main.js') }}" defer></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.9.6/ace.min.js"
+            charset="utf-8"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.9.6/mode-{{ $courseTag }}.min.js"
+            charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.9.6/ext-language_tools.min.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.9.6/theme-xcode.min.js"
+            charset="utf-8"></script>
 
     <script>
         window.addEventListener('load', (event) => {
-            let editor = monaco.editor.create(document.getElementById('editor'), {
-                value: ['<\?php', '\necho "Hello World!";', ''].join('\n'),
-                language: 'php'
+            ace.require("ace/ext/language_tools");
+
+            let editor = ace.edit("editor");
+
+            editor.session.setValue(['<\?php', '\necho "Hello World!";', ''].join('\n'));
+            editor.setFontSize(18);
+            editor.setTheme("ace/theme/xcode");
+            editor.session.setMode("ace/mode/{{ $courseTag }}");
+            editor.setOptions({
+                useWorker: false,
+                enableBasicAutocompletion: true,
+                enableLiveAutocompletion: true
             });
 
             // Hack to define editor globally
             window.editor = editor;
 
-            function runCode()
-            {
+            function runCode() {
                 $('#run-code-icon').addClass('hidden');
                 $('#run-code-spinner').removeClass('hidden');
 
@@ -74,13 +85,14 @@
             document.getElementById('run-code').onclick = runCode;
 
             window.loadedContent = editor.getValue();
-            editor.onDidChangeModelContent((event) => {
+
+            editor.on('change', (event) => {
                 window.isContentChanged = true;
             });
 
         });
 
-        $(window).on('beforeunload', function(e) {
+        $(window).on('beforeunload', function (e) {
             let editorValue = editor.getValue();
             let loadedContent = window.loadedContent || editorValue;
             if (typeof isContentChanged !== "undefined" && isContentChanged && loadedContent !== editorValue) {
