@@ -86,7 +86,7 @@ Route::delete('/course/{courseTag}/disenroll', [\App\Http\Controllers\Api\Enroll
     ->middleware(['auth', 'throttle:1,1', 'resolve_entities'])
     ->name('disEnrollCourse');
 
-Route::post('/account/profile/{attribute}', [AccountController::class, 'updateAttribute'])
+Route::put('/account/profile/{attribute}', [AccountController::class, 'updateAttribute'])
     ->middleware(['auth', 'throttle:20,1'])
     ->name('updateProfileAttribute');
 

@@ -1,9 +1,15 @@
 @push('scripts')
+    <script type="text/javascript" src="{{ asset('js/form-validation-bundle.min.js') }}"></script>
     <script type="text/javascript">
         let constraints = {
             name: {
                 presence: {
                     message: "^" + translate('invalid_name')
+                }
+            },
+            username: {
+                presence: {
+                    message: "^" + translate('invalid_username')
                 }
             },
             email: {
@@ -12,6 +18,16 @@
                 },
                 email: {
                     message: "^" + translate('invalid_email_address')
+                }
+            },
+            job_title: {
+                presence: {
+                    message: "^" + translate('invalid_job_title')
+                }
+            },
+            city: {
+                presence: {
+                    message: "^" + translate('invalid_city')
                 }
             },
             gender: {
@@ -70,7 +86,7 @@
             loader('show');
 
             $.ajax({
-                type: 'POST',
+                type: 'PUT',
                 url: url,
                 data: JSON.stringify(requestBody),
                 success: function (response, call = false) {

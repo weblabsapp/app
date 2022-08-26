@@ -123,11 +123,11 @@
                                        value="{{ \Illuminate\Support\Facades\Auth::user()->name }}"/>
                             </div>
                             <div class="col-sm-1 text-secondary">
-                                <a id="profile-name-edit-btn" class="text-secondary edit-profile-attribute-btn" href="#"
+                                <a id="profile-name-edit-btn" class="text-secondary edit-profile-attribute-btn" href="javascript:;"
                                    onclick="editProfileAttribute(this);" data-attribute="name"><i
                                             class="fa fa-pencil"></i></a>
                                 <a id="profile-name-save-btn" class="text-secondary hidden save-profile-attribute-btn"
-                                   href="#" onclick="saveProfileAttribute(this);" data-attribute="name">
+                                   href="javascript:;" onclick="saveProfileAttribute(this);" data-attribute="name">
                                     <i class="fa-solid fa-floppy-disk"></i>
                                 </a>
                             </div>
@@ -143,11 +143,11 @@
                                        value="{{ \Illuminate\Support\Facades\Auth::user()->username }}"/>
                             </div>
                             <div class="col-sm-1 text-secondary">
-                                <a id="profile-username-edit-btn" class="text-secondary edit-profile-attribute-btn" href="#"
+                                <a id="profile-username-edit-btn" class="text-secondary edit-profile-attribute-btn" href="javascript:;"
                                    onclick="editProfileAttribute(this);" data-attribute="username"><i
                                             class="fa fa-pencil"></i></a>
                                 <a id="profile-username-save-btn" class="text-secondary hidden save-profile-attribute-btn"
-                                   href="#" onclick="saveProfileAttribute(this);" data-attribute="username">
+                                   href="javascript:;" onclick="saveProfileAttribute(this);" data-attribute="username">
                                     <i class="fa-solid fa-floppy-disk"></i>
                                 </a>
                             </div>
@@ -172,11 +172,11 @@
                                 </div>
                             </div>
                             <div class="col-sm-1 text-secondary">
-                                <a id="profile-email-edit-btn" class="text-secondary" href="#"
+                                <a id="profile-email-edit-btn" class="text-secondary" href="javascript:;"
                                    onclick="editProfileAttribute(this);" data-attribute="email"><i
                                             class="fa fa-pencil"></i></a>
                                 <a id="profile-email-save-btn" class="text-secondary hidden"
-                                   href="#" onclick="saveProfileAttribute(this);" data-attribute="email">
+                                   href="javascript:;" onclick="saveProfileAttribute(this);" data-attribute="email">
                                     <i class="fa-solid fa-floppy-disk"></i>
                                 </a>
                             </div>
@@ -192,11 +192,11 @@
                                        value="{{ \Illuminate\Support\Facades\Auth::user()->job_title }}"/>
                             </div>
                             <div class="col-sm-1 text-secondary">
-                                <a id="profile-job_title-edit-btn" class="text-secondary" href="#"
+                                <a id="profile-job_title-edit-btn" class="text-secondary" href="javascript:;"
                                    onclick="editProfileAttribute(this);" data-attribute="job_title"><i
                                             class="fa fa-pencil"></i></a>
                                 <a id="profile-job_title-save-btn" class="text-secondary hidden"
-                                   href="#" onclick="saveProfileAttribute(this);" data-attribute="job_title">
+                                   href="javascript:;" onclick="saveProfileAttribute(this);" data-attribute="job_title">
                                     <i class="fa-solid fa-floppy-disk"></i>
                                 </a>
                             </div>
@@ -215,11 +215,11 @@
                                 </select>
                             </div>
                             <div class="col-sm-1 text-secondary">
-                                <a id="profile-country-edit-btn" class="text-secondary" href="#"
+                                <a id="profile-country-edit-btn" class="text-secondary" href="javascript:;"
                                    onclick="editProfileAttribute(this);" data-attribute="country"><i
                                             class="fa fa-pencil"></i></a>
                                 <a id="profile-country-save-btn" class="text-secondary hidden"
-                                   href="#" onclick="saveProfileAttribute(this);" data-attribute="country">
+                                   href="javascript:;" onclick="saveProfileAttribute(this);" data-attribute="country">
                                     <i class="fa-solid fa-floppy-disk"></i>
                                 </a>
                             </div>
@@ -235,11 +235,11 @@
                                        value="{{ \Illuminate\Support\Facades\Auth::user()->city }}"/>
                             </div>
                             <div class="col-sm-1 text-secondary">
-                                <a id="profile-city-edit-btn" class="text-secondary" href="#"
+                                <a id="profile-city-edit-btn" class="text-secondary" href="javascript:;"
                                    onclick="editProfileAttribute(this);" data-attribute="city"><i
                                             class="fa fa-pencil"></i></a>
                                 <a id="profile-city-save-btn" class="text-secondary hidden"
-                                   href="#" onclick="saveProfileAttribute(this);" data-attribute="city">
+                                   href="javascript:;" onclick="saveProfileAttribute(this);" data-attribute="city">
                                     <i class="fa-solid fa-floppy-disk"></i>
                                 </a>
                             </div>
@@ -258,11 +258,11 @@
                                 </select>
                             </div>
                             <div class="col-sm-1 text-secondary">
-                                <a id="profile-gender-edit-btn" class="text-secondary" href="#"
+                                <a id="profile-gender-edit-btn" class="text-secondary" href="javascript:;"
                                    onclick="editProfileAttribute(this);" data-attribute="gender"><i
                                             class="fa fa-pencil"></i></a>
                                 <a id="profile-gender-save-btn" class="text-secondary hidden"
-                                   href="#"  onclick="saveProfileAttribute(this);" data-attribute="gender">
+                                   href="javascript:;"  onclick="saveProfileAttribute(this);" data-attribute="gender">
                                     <i class="fa-solid fa-floppy-disk"></i>
                                 </a>
                             </div>
