@@ -323,6 +323,7 @@
 
                 let fileName = $(this).data('file-name');
                 let fileIndex = $(this).data('file-index');
+                let currentFilesCounter = $(this).closest('table').find('.files-count');
                 let url = '{{ get_route('api.cloudDeleteLessonFile', [
                     'courseTag' => ':courseTag',
                     'lessonTag' => ':lessonTag',
@@ -343,6 +344,7 @@
 
                         // Remove related HTML element
                         $('tr#file-index-' + fileIndex).remove();
+                        currentFilesCounter.text(parseInt(currentFilesCounter.text()) - 1);
 
                         return {
                             message: translate(response.content.message),
