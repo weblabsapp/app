@@ -3,7 +3,7 @@ const detectIncognito = require('./detectIncognito.min');
 window.userLocation = require('./user-location.min');
 window.formValidation = require('./form-validation');
 window.imgLoader = new Image();
-imgLoader.src= 'https://cdn.weblabs.app/assets/images/loader.gif';
+imgLoader.src= 'https://wlabscdn.com/images/loader.gif';
 
 window.addEventListener("load", (e) => {
     // Detect browser private mode
