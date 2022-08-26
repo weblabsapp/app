@@ -322,6 +322,7 @@
                 loader('show');
 
                 let fileName = $(this).data('file-name');
+                let fileIndex = $(this).data('file-index');
                 let url = '{{ get_route('api.cloudDeleteLessonFile', [
                     'courseTag' => ':courseTag',
                     'lessonTag' => ':lessonTag',
@@ -339,6 +340,10 @@
                         if (call !== true) {
                             return;
                         }
+
+                        // Remove related HTML element
+                        $('tr#file-index-' + fileIndex).remove();
+
                         return {
                             message: translate(response.content.message),
                             status: TOAST_STATUS.SUCCESS
@@ -384,7 +389,7 @@
         function listFiles(container, filesList, filesCount, linksExpireIn, showDownloadLink = true) {
             let tdList = [];
 
-            filesList.forEach(function (file) {
+            filesList.forEach(function (file, index) {
                 let actionButtons = [], downloadLink = '', loadLink = '';
                 if (showDownloadLink) {
                     downloadLink = '<a href="javascript:;" data-link=":download_link" target="_blank" title="Download file" class="download-file-link"><i class="fa-solid fa-cloud-arrow-down"></i></a>'
@@ -396,17 +401,19 @@
                         .replace(':file_name', file.file_name);
                 }
 
-                let deleteLink = '<a href="javascript:;" class="ml-2 delete-file-link" title="Delete file" data-file-name=":file_name"><i class="fa fa-trash"></i></a>'
-                    .replace(':file_name', file.file_name);
+                let deleteLink = '<a href="javascript:;" class="ml-2 delete-file-link" title="Delete file" data-file-name=":file_name" data-file-index=":file_index"><i class="fa fa-trash"></i></a>'
+                    .replace(':file_name', file.file_name)
+                    .replace(':file_index', index);
 
                 actionButtons.push(loadLink, downloadLink, deleteLink);
 
-                let cell = '<tr><th scope="row">:file_name</th><td>:file_size</td><td>:last_modified</td><td class="text-center">:action_buttons</td></tr>'
+                let cell = '<tr id="file-index-:file_index"><th scope="row">:file_name</th><td>:file_size</td><td>:last_modified</td><td class="text-center">:action_buttons</td></tr>'
                     .replaceAll(':file_name', file.file_name)
                     .replace(':file_size', file.file_size)
                     // .replace(':last_modified', file.last_modified ?? 'N/A')
                     .replace(':last_modified', file.last_modified ?? 'N/A')
-                    .replace(':action_buttons', actionButtons.join(''));
+                    .replace(':action_buttons', actionButtons.join(''))
+                    .replace(':file_index', index);
 
                 tdList.push(cell);
             });
