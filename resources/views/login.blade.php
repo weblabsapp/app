@@ -14,7 +14,7 @@
         </div>
     @else
         <div id="main-page" class="row w-100 h-100 m-0">
-            <div class="col-md-6 border-right m-auto">
+            <div class="col-md-6 m-auto">
                 <div id="login-info" class="text-center">
                     <div class="d-sm-block d-md-none mb-5">
                         <img class="mb-4" src="{{ asset('images/code_64.png') }}" alt="" width="72" height="72">
