@@ -276,7 +276,7 @@ final class CountriesEnum
      * @param string $country
      * @return false|mixed
      */
-    public static function getCountryLabel(string $country)
+    public static function getCountryLabel(?string $country)
     {
         return (new \ReflectionClass(__CLASS__))
             ->getConstant($country);
