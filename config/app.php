@@ -176,6 +176,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\NovaServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ResponseMacroServiceProvider::class,
         Aws\Laravel\AwsServiceProvider::class,
@@ -233,6 +234,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'GoogleReCaptchaV2'=> TimeHunter\LaravelGoogleReCaptchaV2\Facades\GoogleReCaptchaV2::class,
         'AWS' => Aws\Laravel\AwsFacade::class,
+        'Nova' => \Laravel\Nova\Nova::class,
     ],
 
 ];

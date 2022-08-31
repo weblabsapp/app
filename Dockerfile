@@ -28,10 +28,22 @@ RUN chmod +x utilities/install-dependencies.sh && ./utilities/install-dependenci
 # Install required PHP extensions
 RUN chmod +x utilities/install-php-extensions.sh && ./utilities/install-php-extensions.sh
 
+# Add deploy keys
+RUN mkdir /root/.ssh/
+COPY .ssh /root/.ssh/
+RUN chmod -R 600 /root/.ssh
+
+# make sure your domain is accepted
+RUN touch /root/.ssh/known_hosts
+RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
+
+# Copy SSH config
+COPY .ssh/config ~/.ssh/
+
 # Install composer & dependencies
 RUN echo "Installing Composer" && rm -rf vendor composer.lock && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     composer clearcache && \
-    composer install
+    composer install --prefer-dist
 
 ENTRYPOINT ["/bin/bash", "utilities/docker-entrypoint.sh"]

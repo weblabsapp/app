@@ -48,6 +48,11 @@ return [
             'input_key' => 'access_token',
             'storage_key' => 'access_token',
         ],
+
+        'admins' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
     ],
 
     /*
@@ -73,6 +78,11 @@ return [
             'model' => App\Models\Account::class,
         ],
 
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Account::class,
+        ]
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -96,11 +106,16 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'users',
+            'provider' => 'accounts',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
+        'admin' => [
+            'provider' => 'admin',
+            'table' => 'password_resets',
+            'expire' => 60
+        ]
     ],
 
     /*

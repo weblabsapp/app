@@ -18,7 +18,7 @@ class AccountObserver
     public static function creating(Account $account)
     {
         // Hash password
-        $account->password = Hash::make($account->password);
+//        $account->password = Hash::make($account->password);
     }
 
     /**
