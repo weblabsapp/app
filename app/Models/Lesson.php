@@ -16,7 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $tag
  * @property integer $topic_id
  * @property integer $lesson_order
- * @property string $content
+ * @property string $explore_content
+ * @property string $full_content
  * @property bool $is_active
  * @property string $created_at
  * @property string $updated_at
@@ -36,7 +37,8 @@ class Lesson extends Model
         'course_id',
         'title',
         'tag',
-        'content',
+        'explore_content',
+        'full_content',
         'is_active'
     ];
 
