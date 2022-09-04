@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Account;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Laravel\Nova\Nova;
@@ -17,6 +19,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot()
     {
         parent::boot();
+
+        Nova::footer(function ($request) {
+            return Blade::render('<p class="text-center">Web Labs Admin Dashboard - 
+            <a class="link-default" href="'.env('APP_URL').'">Home Page</a></p>');
+        });
     }
 
     /**
@@ -53,10 +60,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     protected function gate()
     {
-        Gate::define('viewNova', function ($user) {
-            return in_array($user->email, [
-                //
-            ]);
+        Gate::define('viewNova', function (Account $account) {
+            return !empty($account->admin) && $account->admin->is_active;
         });
     }
 

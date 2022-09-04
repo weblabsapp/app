@@ -64,10 +64,12 @@ class LessonController extends Controller
             ]);
 
             $lesson->setRelation('progress', $progress);
+            $course = $request->attributes->get('course');
 
             return view($viewPath, [
                 'courseTag' => $courseTag,
                 'courseFileExt' => CoursesTagsEnum::getCourseTypeExtension($courseTag),
+                'courseLogo' => $course->logo,
                 'lesson' => $lesson,
                 'lessonTag' => $lessonTag,
                 'nextAndPreviousLessons' => $nextAndPreviousLessons,

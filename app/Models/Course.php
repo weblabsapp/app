@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Traits\Activatable;
 use App\Models\Traits\UuidPrimary;
+use App\Observers\CourseObserver;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,9 +17,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $tag
  * @property string $logo
  * @property bool $is_active
- * @property string $created_at
- * @property string $updated_at
- * @property string $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $deleted_at
+ *
  * @property Lesson[] $lessons
  * @property Enroll[] $enrollments
  */
@@ -36,6 +39,13 @@ class Course extends Model
         'is_active'
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::observe(CourseObserver::class);
+    }
+
     /**
      * Get course active lessons
      *
@@ -43,7 +53,7 @@ class Course extends Model
      */
     public function lessons()
     {
-        return $this->hasMany(Lesson::class, 'id', 'course_id');
+        return $this->hasMany(Lesson::class, 'course_id', 'id');
     }
 
     /**

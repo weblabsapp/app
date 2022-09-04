@@ -283,7 +283,11 @@
                             <div class="card-header">
                                 <ul class="nav nav-tabs card-header-tabs">
                                     <a class="navbar-brand p-0">
-                                        <img src="{{ asset(sprintf('images/%s_logo_32.png', $enrollment->course->tag)) }}" alt="{{ $enrollment->course->tag }} logo"/>
+                                        <img
+                                            src="{{ \Illuminate\Support\Facades\Storage::disk('s3assets')->url($enrollment->course->logo) }}"
+                                            alt="{{ $enrollment->course->tag }} logo"
+                                            width="32"
+                                        />
                                     </a>
                                     <li class="nav-item">
                                         <a class="nav-link active text-dark" href="#">

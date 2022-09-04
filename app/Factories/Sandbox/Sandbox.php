@@ -69,7 +69,7 @@ class Sandbox extends AbstractFactory
     {
         return base_path(self::K8S_PATH . DIRECTORY_SEPARATOR . $this->courseTag)
             . DIRECTORY_SEPARATOR
-            . env('KUBE_DEPLOYMENT_FILE');
+            . sprintf(env('KUBE_DEPLOYMENT_FILE'), $this->courseTag);
     }
 
     /**

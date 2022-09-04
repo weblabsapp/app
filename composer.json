@@ -16,18 +16,20 @@
         "czim/laravel-repository": "^2.1",
         "diglactic/laravel-breadcrumbs": "^7.2",
         "doctrine/dbal": "^3.4",
+        "emilianotisato/nova-tinymce": "^2.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
+        "laravel/nova": "dev-main",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.0",
+        "league/flysystem-aws-s3-v3": "^1.0",
         "predis/predis": "^1.1",
         "renoki-co/laravel-php-k8s": "^3.4",
         "spatie/ssh": "^1.7",
         "timehunter/laravel-google-recaptcha-v2": "^1.0",
-        "xobotyi/rsync": "^1.0",
-        "laravel/nova":  "dev-main"
+        "xobotyi/rsync": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

@@ -1,5 +1,4 @@
 <div class="card">
-
     <div class="card-header">
         <span><strong>Lesson:</strong> {{ $lesson->topic->title }} \ {{ strtoupper($courseTag) }} {{ ucwords($lesson->tag) }}</span>
         <div class="float-right">

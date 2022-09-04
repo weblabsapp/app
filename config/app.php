@@ -179,7 +179,6 @@ return [
         App\Providers\NovaServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ResponseMacroServiceProvider::class,
-        Aws\Laravel\AwsServiceProvider::class,
 
     ],
 

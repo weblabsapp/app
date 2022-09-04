@@ -49,4 +49,14 @@ class Topic extends Model
         return $this->hasMany(Lesson::class, 'topic_id', 'id')
             ->orderBy('lesson_order');
     }
+
+    /**
+     * Get course this topic belongs to
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id', 'id');
+    }
 }

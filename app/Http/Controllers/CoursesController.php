@@ -62,11 +62,10 @@ class CoursesController extends Controller
     public function explore($courseTag, Request $request)
     {
         $course = $this->courseRepository->query()
-            ->with('topics', function (Relation $query) {
-                $query->with('lessons', function (Relation $query) {
-                    $query->withInactive();
-                });
-            })
+            ->with([
+                'topics',
+                'topics.lessons' => fn ($query) => $query->withInactive()
+            ])
             ->where('tag', $courseTag)
             ->first();
 

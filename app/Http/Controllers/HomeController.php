@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\CourseRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -33,8 +34,14 @@ class HomeController extends Controller
      */
     public function home(Request $request)
     {
+        $courses = $this->coursesRepository->all(['*'], true);
+
+        $courses->map(function ($course) {
+            $course->logo = Storage::disk('s3assets')->url($course->logo);
+        });
+
         return view('home', [
-            'courses' => $this->coursesRepository->all(['*'], true)
+            'courses' => $courses
         ]);
     }
 

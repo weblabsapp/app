@@ -44,7 +44,7 @@
 
                                 <div id="{{ $lesson->tag }}" class="collapse{{ $index == 0 ? ' show' : '' }}" aria-labelledby="{{ $topic->slug }}-tab" data-parent="#{{ $topic->slug }}-accordion">
                                     <div class="card-body">
-                                        {!! $lesson->content !!}
+                                        {!! $lesson->explore_content !!}
                                     </div>
                                 </div>
                             </div>

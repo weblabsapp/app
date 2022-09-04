@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 /**
@@ -30,20 +31,20 @@ use Illuminate\Support\Str;
  * @property float|null $latitude
  * @property string|null $user_agent
  * @property array $social_profiles
- * @property \DateTime|null $email_verified_at
+ * @property Carbon|null $email_verified_at
  * @property string|null $access_token
  * @property string|null $remember_token
  * @property string|null $email_verification_token
  * @property string|null $forget_password_token
  * @property boolean $is_active
  * @property boolean $is_email_hidden
- * @property \DateTime|null $created_at
- * @property \DateTime|null $updated_at
- * @property \DateTime|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
  *
  * @property Collection $enrollments
- *
  * @property EmailSubscription|null $subscription
+ * @property Admin $admin
  */
 class Account extends Model implements Authenticatable
 {
@@ -178,5 +179,15 @@ class Account extends Model implements Authenticatable
     public function enrollments()
     {
         return $this->hasMany(Enroll::class, 'account_id', 'id');
+    }
+
+    /**
+     * Get admin
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function admin()
+    {
+        return $this->hasOne(Admin::class, 'account_id', 'id')->ofMany();
     }
 }

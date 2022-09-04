@@ -55,14 +55,24 @@ return [
             'visibility' => 'public',
         ],
 
-        's3' => [
+        's3scripts' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
+            'region' => env('AWS_REGION'),
+            'bucket' => env('AWS_SCRIPTS_BUCKET'),
+            'endpoint' => env('AWS_API_ENDPOINT'),
+            'use_path_style_endpoint' => true,
+        ],
+
+        's3assets' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_REGION'),
+            'bucket' => env('AWS_ASSETS_BUCKET'),
+            'endpoint' => env('AWS_API_ENDPOINT'),
+            'use_path_style_endpoint' => true,
         ],
 
     ],

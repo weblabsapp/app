@@ -18,9 +18,16 @@ class AppServiceProvider extends ServiceProvider
     {
         if(env('APP_DEBUG')) {
             DB::listen(function($query) {
+                $bindings = array_map(function ($binding) {
+                    if ($binding instanceof \DateTime) {
+                        $binding = $binding->format(\DateTimeInterface::RFC3339);
+                    }
+                    return $binding;
+                }, $query->bindings);
+
                 File::append(
                     storage_path('logs/query.log'),
-                    $query->sql . ' [' . implode(', ', $query->bindings) . ']' . PHP_EOL
+                    $query->sql . ' [' . implode(', ', $bindings) . ']' . PHP_EOL
                 );
             });
         }

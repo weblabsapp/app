@@ -14,8 +14,8 @@
 
 @section('lesson_content')
 <div class="row mr-0 ml-0">
-    @include('partials.lesson-editor', ['course' => $courseTag])
-    <div class="col-md-6 pr-0">
+    @include('partials.lesson-editor', ['courseTag' => $courseTag, 'courseLogo' => $courseLogo])
+    <div class="col-md-6 pr-0 pl-0">
         @include('layouts.lesson.lesson-info', ['courseTag' => $courseTag, 'lesson' => $lesson])
     </div>
 </div>
