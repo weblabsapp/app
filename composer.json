@@ -15,6 +15,7 @@
         "aws/aws-sdk-php-laravel": "^3.7",
         "czim/laravel-repository": "^2.1",
         "diglactic/laravel-breadcrumbs": "^7.2",
+        "doctrine/dbal": "^3.4",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
