@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="card-body">
-        {!! $lesson->content !!}
+        {!! $lesson->full_content !!}
     </div>
 </div>
 
