@@ -12,8 +12,8 @@ class CommandsEnum
         self::PHP => [
             'basic-syntax' => [
                 'short_open_tag' => [
-                    'value' => 0,
-                    'label' => 'Disable short tags'
+                    'value' => 1,
+                    'label' => 'Short Open Tags'
                 ]
             ],
             'types' => []

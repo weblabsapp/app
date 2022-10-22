@@ -8,6 +8,7 @@ use App\Observers\LessonObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Whitecube\NovaFlexibleContent\Value\FlexibleCast;
 
 /**
  * @property string $id
@@ -18,6 +19,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer $lesson_order
  * @property string $explore_content
  * @property string $full_content
+ * @property Model $command_options
+ * @property array $checklist
  * @property bool $is_active
  * @property string $created_at
  * @property string $updated_at
@@ -39,7 +42,14 @@ class Lesson extends Model
         'tag',
         'explore_content',
         'full_content',
-        'is_active'
+        'is_active',
+        'command_options',
+        'complete_summaries'
+    ];
+
+    protected $casts = [
+        'command_options' => FlexibleCast::class,
+        'complete_summaries' => FlexibleCast::class
     ];
 
     public static function boot()
@@ -56,7 +66,8 @@ class Lesson extends Model
      */
     public function topic()
     {
-        return $this->belongsTo(Topic::class, 'topic_id', 'id');
+        return $this->belongsTo(Topic::class, 'topic_id', 'id')
+            ->orderBy('topic_order');
     }
 
     /**
@@ -77,5 +88,16 @@ class Lesson extends Model
     public function progress()
     {
         return $this->hasOne(LessonProgress::class, 'lesson_id', 'id');
+    }
+
+    /**
+     * Get completeness checklist
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function checklist()
+    {
+        return $this->hasMany(LessonCompletenessChecklist::class, 'lesson_id', 'id')
+            ->orderBy('id');
     }
 }

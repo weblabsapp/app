@@ -55,7 +55,7 @@ class CloudController extends ApiController
         $fileNameWithExt = sprintf('%s.%s', $fileName, CoursesTagsEnum::getCourseTypeExtension($course));
 
         $fileCloudInfo = [
-            'Bucket' => env('AWS_BUCKET'),
+            'Bucket' => env('AWS_SCRIPTS_BUCKET'),
             'Key' => sprintf(
                 '%s/%s/%s/%s',
                 $accountId,
@@ -93,24 +93,24 @@ class CloudController extends ApiController
      * Get list of lesson files for a specific user
      *
      * @param $prefix
-     * @param $course
-     * @param $lessonId
+     * @param $courseTag
+     * @param $lessonTag
      * @param Request $request
      * @return \App\Http\Responses\JsonResponse
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function listLessonFiles($prefix, $course, $lessonId, Request $request)
+    public function listLessonFiles($prefix, $courseTag, $lessonTag, Request $request)
     {
-        $data = $this->getFromCache($prefix, $course, $lessonId);
+        $data = $this->getFromCache($prefix, $courseTag, $lessonTag);
 
         if (empty($data)) {
-            $key = sprintf('%s/%s/%s', $prefix, $course, $lessonId);
+            $key = sprintf('%s/%s/%s', $prefix, $courseTag, $lessonTag);
 
             $objects = $this->s3->listObjects([
-                    'Bucket' => env('AWS_BUCKET'),
+                    'Bucket' => env('AWS_SCRIPTS_BUCKET'),
                     'Key' => $key,
-                    'Prefix' => sprintf('%s/%s/%s', $prefix, $course, $lessonId)
+                    'Prefix' => sprintf('%s/%s/%s', $prefix, $courseTag, $lessonTag)
                 ])->get('Contents') ?? [];
 
             $files = [];
@@ -121,8 +121,8 @@ class CloudController extends ApiController
             foreach ($objects as $object) {
                 $fileName = explode(DIRECTORY_SEPARATOR, $object['Key']);
                 $downloadCommand = $this->s3->getCommand('GetObject', [
-                    'Bucket' => env('AWS_BUCKET'),
-                    'Key' => sprintf('%s/%s/%s/%s', $prefix, $course, $lessonId, end($fileName))
+                    'Bucket' => env('AWS_SCRIPTS_BUCKET'),
+                    'Key' => sprintf('%s/%s/%s/%s', $prefix, $courseTag, $lessonTag, end($fileName))
                 ]);
                 $downloadLink = (string) $this->s3
                     ->createPresignedRequest(
@@ -144,7 +144,7 @@ class CloudController extends ApiController
                 'links_expire_in' => $expiryTimestamp
             ];
 
-            $this->cacheLessons($prefix, $course, $lessonId, $data, $expiryTime->diffInSeconds());
+            $this->cacheFiles($prefix, $courseTag, $lessonTag, $data, $expiryTime->diffInSeconds());
         }
 
         $data['files_list'] = array_map(function ($file) { // Readable last modified in time ago
@@ -166,19 +166,19 @@ class CloudController extends ApiController
      * Get a lesson file
      *
      * @param $prefix
-     * @param $course
-     * @param $lessonId
+     * @param $courseTag
+     * @param $lessonTag
      * @param $fileName
      * @param Request $request
      * @return \App\Http\Responses\JsonResponse
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function getLessonFile($prefix, $course, $lessonId, $fileName, Request $request)
+    public function getLessonFile($prefix, $courseTag, $lessonTag, $fileName, Request $request)
     {
         $file = $this->s3->getObject([
-            'Bucket' => env('AWS_BUCKET'),
-            'Key' => sprintf('%s/%s/%s/%s', $prefix, $course, $lessonId, $fileName)
+            'Bucket' => env('AWS_SCRIPTS_BUCKET'),
+            'Key' => sprintf('%s/%s/%s/%s', $prefix, $courseTag, $lessonTag, $fileName)
         ]);
 
         $this->setResponseData([
@@ -191,26 +191,26 @@ class CloudController extends ApiController
     /**
      * Delete a lesson file
      *
-     * @param $course
-     * @param $lessonId
+     * @param $courseTag
+     * @param $lessonTag
      * @param $fileName
      * @param Request $request
      * @return \App\Http\Responses\JsonResponse
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function deleteLessonFile($course, $lessonId, $fileName, Request $request)
+    public function deleteLessonFile($courseTag, $lessonTag, $fileName, Request $request)
     {
         $fileInfo = [
-            'Bucket' => env('AWS_BUCKET'),
-            'Key' => sprintf('%s/%s/%s/%s', Auth::id(), $course, $lessonId, $fileName)
+            'Bucket' => env('AWS_SCRIPTS_BUCKET'),
+            'Key' => sprintf('%s/%s/%s/%s', Auth::id(), $courseTag, $lessonTag, $fileName)
         ];
 
         Chain::start()
             ->invoke([$this->s3, 'deleteObject'], [$fileInfo])
             ->invoke([$this->lessonFileRepository, 'deleteWhere'], [[
                 'account_id' => Auth::id(),
-                'lesson_id' => $lessonId,
+                'lesson_id' => $lessonTag,
                 'file_name' => $fileName
             ]]);
 
@@ -220,7 +220,7 @@ class CloudController extends ApiController
             'show_toast' => true
         ]);
 
-        $this->deleteCachedFiles(Auth::id(), $course, $lessonId);
+        $this->deleteCachedFiles(Auth::id(), $courseTag, $lessonTag);
 
         return $this->response();
     }
@@ -254,7 +254,7 @@ class CloudController extends ApiController
      * @param $ttl
      * @return void
      */
-    private function cacheLessons($accountId, $course, $lessonId, $files, $ttl)
+    private function cacheFiles($accountId, $course, $lessonId, $files, $ttl)
     {
         try {
             Redis::set(md5(sprintf('%s.%s.%s', $accountId, $course, $lessonId)), $files, 'EX', $ttl);

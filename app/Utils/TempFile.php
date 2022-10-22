@@ -26,11 +26,12 @@ class TempFile
      *
      * @param $content
      * @param $extension
+     * @param null $fileName
      * @return false|int
      */
-    public function write($content, $extension)
+    public function write($content, $extension, $fileName = null)
     {
-        $tempFileName = sprintf('%u.%s', time(), $extension);
+        $tempFileName = sprintf('%s.%s', $fileName ?? time(), $extension);
         $tempFile = fopen(self::$tempPath . DIRECTORY_SEPARATOR . $tempFileName, 'w+');
         $isWritten = fwrite($tempFile, $content);
         fclose($tempFile);

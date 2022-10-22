@@ -2,7 +2,7 @@
 
 @section('head')
 
-    <meta http-equiv="refresh" content="5;URL={{ get_route('web.myAccountPage') }}" />
+    <meta http-equiv="refresh" content="5;URL={{ get_route('web.accountPage') }}" />
 
     <!-- CSS -->
 

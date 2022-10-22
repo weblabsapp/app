@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Activatable;
 use App\Observers\TopicObserver;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Topic extends Model
 {
     use HasFactory,
+        Activatable,
         SoftDeletes;
 
     protected $fillable = [
@@ -48,5 +50,15 @@ class Topic extends Model
     {
         return $this->hasMany(Lesson::class, 'topic_id', 'id')
             ->orderBy('lesson_order');
+    }
+
+    /**
+     * Get course this topic belongs to
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 }

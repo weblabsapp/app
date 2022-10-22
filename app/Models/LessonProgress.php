@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $account_id
  * @property string $lesson_id
  * @property bool $is_completed
+ * @property array $checklist_completeness
  * @property string $created_at
  * @property string $updated_at
  * @property string $deleted_at
@@ -26,5 +27,15 @@ class LessonProgress extends Model
         'account_id',
         'lesson_id',
         'is_completed',
+        'checklist_completeness'
     ];
+
+    protected $casts = [
+        'checklist_completeness' => 'array'
+    ];
+
+    public function lesson()
+    {
+        return $this->belongsTo(Lesson::class, 'lesson_id', 'id');
+    }
 }

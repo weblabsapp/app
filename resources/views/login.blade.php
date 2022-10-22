@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <img class="mb-4" src="{{ asset('images/code_64_account.png') }}" alt="" width="72" height="72">
                 <h1 class="h3 mb-3 font-weight-normal">You are already logged in!</h1>
-                <p><small>To go to your account, please click here: <a href="{{ get_route('web.myAccountPage') }}">My
+                <p><small>To go to your account, please click here: <a href="{{ get_route('web.accountPage') }}">My
                             Account</a></small></p>
                 <p><small>If you are about to log out, please click here: <a href="{{ get_route('web.logoutPage') }}">Logout</a></small>
                 </p>

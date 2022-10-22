@@ -82,7 +82,10 @@ class ActivatableScope implements Scope
     protected function addSetActive(Builder $builder)
     {
         $builder->macro('setActive', function (Builder $builder, $userType = null) {
-            $builder->onlyInactive();
+            $model = $builder->getModel();
+            $builder
+                ->whereKey($model->{$model->getKeyName()})
+                ->onlyInactive();
 
             return $builder->update([$builder->getModel()->getQualifiedIsActiveColumn() => true]);
         });
@@ -94,7 +97,10 @@ class ActivatableScope implements Scope
     protected function addSetInactive(Builder $builder)
     {
         $builder->macro('setInactive', function (Builder $builder) {
-            $builder->onlyActive();
+            $model = $builder->getModel();
+            $builder
+                ->whereKey($model->{$model->getKeyName()})
+                ->onlyActive();
 
             return $builder->update([$builder->getModel()->getQualifiedIsActiveColumn() => false]);
         });

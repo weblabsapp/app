@@ -43,7 +43,7 @@ class CoursesController extends Controller
 
         foreach ($enrolls as $enroll) {
             $enroll->course->last_enrolled_lesson_tag = $this->lessonProgressRepository->getLastEnrolledLessonTag(Auth::id(), $enroll->course->id);
-            $enroll->course->progress_count = $this->courseRepository->getProgressCount(Auth::id(), $enroll->course->id);
+            $enroll->course->progress_count = $this->courseRepository->getLessonsProgress(Auth::id(), $enroll->course->id);
         }
 
         return view('courses', [
@@ -62,11 +62,10 @@ class CoursesController extends Controller
     public function explore($courseTag, Request $request)
     {
         $course = $this->courseRepository->query()
-            ->with('topics', function (Relation $query) {
-                $query->with('lessons', function (Relation $query) {
-                    $query->withInactive();
-                });
-            })
+            ->with([
+                'topics',
+                'topics.lessons' => fn ($query) => $query->withInactive()
+            ])
             ->where('tag', $courseTag)
             ->first();
 

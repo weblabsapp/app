@@ -70,12 +70,13 @@ class SandboxController extends ApiController
         $request->validated();
 
         $courseTag = $request->json('courseTag');
+        $lessonTag = $request->json('lessonTag');
         $code = $request->json('code');
         $options = $request->json('options');
 
         Chain::start()
             ->invoke([$this->repository, 'findBy'], ['sandbox_id', $sandboxId])
-            ->invoke([Sandbox::factory(), 'executeCommand'], [$sandboxId, $courseTag, $code, $options]);
+            ->invoke([Sandbox::factory(), 'executeCommand'], [$sandboxId, $courseTag, $lessonTag, $code, $options]);
 
         $this->setResponseData([
             'output' => Chain::getResultOf(1)

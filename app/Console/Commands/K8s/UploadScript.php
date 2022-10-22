@@ -55,7 +55,7 @@ class UploadScript extends Command
                 SSH::CONF_EXECUTABLE => 'ssh',
                 SSH::CONF_OPTIONS => [
                     SSH::OPT_OPTION => ['PasswordAuthentication=no', 'StrictHostKeyChecking=no'],
-                    SSH::OPT_IDENTIFICATION_FILE => base_path('.ssh') . DIRECTORY_SEPARATOR . env('VM_SSH_PRV_KEY'),
+                    SSH::OPT_IDENTIFICATION_FILE => env('VM_SSH_PRV_KEY'),
                 ]
             ],
         ]);

@@ -41,40 +41,33 @@ class LessonController extends Controller
      */
     public function getLesson($courseTag, $lessonTag, Request $request)
     {
-        $viewPath = $this->getLessonViewPath($courseTag, $lessonTag);
-
         $this->enrollRepository->enroll(Auth::id(), $request->attributes->get('course')->id);
 
-        if ($viewPath && view()->exists($viewPath)) {
-            if (!Sandbox::factory()->isContainerReady($courseTag)) {
-                return redirect()->route('web.enrollPage', ['courseTag' => $courseTag])
-                    ->with('messages', ['warning' => 'You still have not created a sandbox. Start by click on "Create Sandbox".']);
-            }
-
-            $lesson = $this->lessonRepository->getLessonInfo($lessonTag, Auth::id());
-            $nextAndPreviousLessons = $this->lessonRepository->getNextAndPreviousLessons($lesson);
-
-            if (!$lesson) {
-                NotFoundException::throw(__('lesson not found'));
-            }
-
-            $progress = $this->lessonProgressRepository->createProgress([
-                'account_id' => Auth::id(),
-                'lesson_id' => $lesson->id
-            ]);
-
-            $lesson->setRelation('progress', $progress);
-
-            return view($viewPath, [
-                'courseTag' => $courseTag,
-                'courseFileExt' => CoursesTagsEnum::getCourseTypeExtension($courseTag),
-                'lesson' => $lesson,
-                'lessonTag' => $lessonTag,
-                'nextAndPreviousLessons' => $nextAndPreviousLessons,
-            ]);
+        if (!Sandbox::factory()->isContainerReady($courseTag)) {
+            return redirect()->route('web.enrollPage', ['courseTag' => $courseTag])
+                ->with('messages', ['warning' => 'You still have not created a sandbox. Start by click on "Create Sandbox".']);
         }
 
-        NotFoundException::throw();
+        $lesson = $request->attributes->get('lesson');
+        $nextAndPreviousLessons = $this->lessonRepository->getNextAndPreviousLessons($lesson);
+
+        $progress = $this->lessonProgressRepository->createProgress([
+            'account_id' => Auth::id(),
+            'lesson_id' => $lesson->id
+        ]);
+
+        $lesson->setRelation('progress', $progress);
+
+        $course = $request->attributes->get('course');
+
+        return view('lesson', [
+            'courseTag' => $courseTag,
+            'courseFileExt' => CoursesTagsEnum::getCourseTypeExtension($courseTag),
+            'courseLogo' => $course->logo,
+            'lesson' => $lesson,
+            'lessonTag' => $lessonTag,
+            'nextAndPreviousLessons' => $nextAndPreviousLessons,
+        ]);
     }
 
     /**

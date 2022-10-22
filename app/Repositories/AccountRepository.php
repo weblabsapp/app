@@ -166,4 +166,19 @@ class AccountRepository extends BaseRepository
 
         return $account;
     }
+
+    /**
+     * Update social profiles for an account
+     *
+     * @param Account $account
+     * @param array $socialProfiles
+     * @return \Illuminate\Database\Eloquent\Model|null
+     * @throws \Throwable
+     */
+    public function updateSocialProfiles(Account $account, array $socialProfiles = [])
+    {
+        $account->updateOrFail(['social_profiles' => $socialProfiles]);
+
+        return $account;
+    }
 }

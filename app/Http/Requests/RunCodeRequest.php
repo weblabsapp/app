@@ -29,6 +29,7 @@ class RunCodeRequest extends FormRequest
     {
         return [
             'courseTag' => ['required', Rule::in(CoursesTagsEnum::getAllTags())],
+            'lessonTag' => ['required', 'string'],
             'code' => ['required', 'string'],
             'options' => [new ValidatePhpOptionsFactory($this->json('courseTag'))]
         ];

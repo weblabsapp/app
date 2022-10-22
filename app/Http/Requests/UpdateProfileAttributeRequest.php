@@ -41,9 +41,9 @@ class UpdateProfileAttributeRequest extends FormRequest
             'attribute' => [Rule::in(['name', 'email', 'job_title', 'country', 'city', 'gender', 'username'])],
             'updated_attributes.*' => [Rule::in(['name', 'username', 'email', 'job_title', 'country', 'city', 'gender', 'is_email_hidden'])],
             'name' => ['string', 'max:200'],
-            'email' => ['email:rfc,dns', Rule::unique('accounts')->ignore($this->user()->id, 'id')],
+            'email' => ['email:rfc,dns', Rule::unique('accounts')->ignore($this->user()->id, 'id')], // check trashed also
             'gender' => [Rule::in(GendersEnum::getGenders())],
-            'username' => ['alpha_dash', Rule::unique('accounts')->ignore($this->user()->id, 'id')->withoutTrashed()],
+            'username' => ['regex:/[A-Za-z0-9\_\-]+/i', Rule::unique('accounts')->ignore($this->user()->id, 'id')], // check trashed also
             'job_title' => ['string', 'max:200'],
             'country' => [Rule::in(CountriesEnum::getCountries())],
             'city' => ['alpha_dash']

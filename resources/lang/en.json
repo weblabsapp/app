@@ -57,5 +57,8 @@
     "sandbox ready notification title":  "Your sandbox is ready!",
     "sandbox ready notification text": "No more to wait, :receiver_name. Your sandbox for :course_tag is ready to use. :action_buttons",
     "new lesson added notification title": "New lesson was added!",
-    "new lesson added notification text": "Psst .. :lesson_title lesson for :course_tag was added. :action_buttons"
+    "new lesson added notification text": "Psst .. :lesson_title lesson for :course_tag was added. :action_buttons",
+    "invalid website url": "Invalid Website URL",
+    "invalid social username": "Invalid social username",
+    "username share info": "You should set a user name to be able to share your profile with public"
 }

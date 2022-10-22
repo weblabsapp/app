@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\NotFoundException;
 use App\Http\Requests\VerifyEmailRequest;
 use App\Repositories\AccountRepository;
+use App\Repositories\CourseRepository;
 use App\Repositories\TokenMappingRepository;
 use App\Utils\Chain;
 use Illuminate\Http\Request;
@@ -12,17 +14,17 @@ use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
-    /**
-     * @var AccountRepository
-     */
-    private $repository;
+    private AccountRepository $repository;
+    private CourseRepository $courseRepository;
 
     /**
      * @param AccountRepository $repository
+     * @param CourseRepository $courseRepository
      */
-    public function __construct(AccountRepository $repository)
+    public function __construct(AccountRepository $repository, CourseRepository $courseRepository)
     {
         $this->repository = $repository;
+        $this->courseRepository = $courseRepository;
     }
 
     /**
@@ -66,7 +68,7 @@ class AuthController extends Controller
 
         Auth::login($account);
 
-        return redirect(route('web.myAccountPage'));
+        return redirect(route('web.accountPage'));
     }
 
     /**
@@ -136,15 +138,43 @@ class AuthController extends Controller
     }
 
     /**
-     * Render my account page
+     * Render account page
      *
-     * @param Request $request
+     * @param $userName
+     * @param Request|null $request
      * @return \Illuminate\Contracts\View\View
+     * @throws \App\Exceptions\AbstractException
      */
-    public function myAccount(Request $request)
+    public function viewAccount($userName, Request $request = null)
     {
+        if (empty($userName)) {
+            $account = Auth::user();
+        } else {
+            $account = $this->repository->findBy('username', $userName);
+        }
+
+        if (empty($account)) {
+            NotFoundException::throw();
+        }
+
+        $account->social_profiles = array_filter($account->social_profiles ?? []);
+
+
+        // Get lessons progress for each courses
+        $pendingLessons = $inProgressLessons = $completedLessons = [];
+        foreach ($account->enrollments as $enrollment) {
+            $lessonsProgress = $this->courseRepository->getLessonsProgress($account->id, $enrollment->course_id, false);
+            $pendingLessons[$enrollment->course_id] = $lessonsProgress['pending'];
+            $inProgressLessons[$enrollment->course_id] = $lessonsProgress['in_progress'];
+            $completedLessons[$enrollment->course_id] = $lessonsProgress['completed'];
+        }
+
         return view('my-account', [
-            'enrollments' => Auth::user()->enrollments,
+            'account' => $account,
+            'enrollments' => $account->enrollments,
+            'pendingLessons' => $pendingLessons,
+            'inProgressLessons' => $inProgressLessons,
+            'completedLessons' => $completedLessons
         ]);
     }
 

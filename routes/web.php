@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\EnrollController;
@@ -32,7 +33,6 @@ Route::get('/account/signup', [AuthController::class, 'signup'])->name('signupPa
 Route::get('/account/forget', [AuthController::class, 'forget'])->name('forgetPasswordPage');
 Route::get('/account/verify', [AuthController::class, 'verify'])->name('verifyEmailPage');
 Route::get('/account/unsubscribe', [AuthController::class, 'unsubscribe'])->name('unsubscribePage');
-Route::get('/account/session/refresh', [AuthController::class, 'refreshSession'])->name('refreshSession');
 
 /** Explore Course */
 Route::get('/course/explore/{courseTag}', [CoursesController::class, 'explore'])->name('exploreCourse');
@@ -43,7 +43,8 @@ Route::get('/account/login/{provider}/callback', [AuthController::class, 'social
 
 Route::group(['middleware' => 'auth:web'], function () {
     /** Account page */
-    Route::get('/account', [AuthController::class, 'myAccount'])->name('myAccountPage');
+//    Route::get('/account', [AuthController::class, 'viewAccount'])->name('accountPage');
+    Route::get('/account/{userName?}', [AuthController::class, 'viewAccount'])->name('accountPage');
 
     /** Notifications page */
     Route::get('/notifications', [NotificationsController::class, 'list'])->name('notificationsPage');

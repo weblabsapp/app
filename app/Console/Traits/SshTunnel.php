@@ -20,7 +20,7 @@ trait SshTunnel
     public function getSshTunnel()
     {
         return $this->sshTunnle ?? $this->sshTunnel = Ssh::create(env('VM_SSH_USER'), env('VM_SSH_HOST'))
-            ->usePrivateKey(base_path('.ssh') . DIRECTORY_SEPARATOR . env('VM_SSH_PRV_KEY'))
+            ->usePrivateKey(env('VM_SSH_PRV_KEY'))
             ->addExtraOption('-o StrictHostKeyChecking=no')
             ->disablePasswordAuthentication();
     }
@@ -32,6 +32,6 @@ trait SshTunnel
      */
     public function getPrivateKeyPath()
     {
-        return base_path('.ssh') . DIRECTORY_SEPARATOR . env('VM_SSH_PRV_KEY');
+        return env('VM_SSH_PRV_KEY');
     }
 }
