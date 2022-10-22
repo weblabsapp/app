@@ -2,7 +2,7 @@
     <div id="actions-buttons" class="card">
         <div class="card-header">
             <p class="position-absolute" style="line-height: 2.2">
-                <img src="{{ \Illuminate\Support\Facades\Storage::disk('s3assets')->url($courseLogo) }}" width="32" />
+                <img src="{{ asset($courseLogo) }}" width="32" />
                 <strong>{{ $lesson->title }} (<span id="loaded-file-name">Untitled</span>)</strong>
             </p>
             @include('partials.lesson-action-buttons')
