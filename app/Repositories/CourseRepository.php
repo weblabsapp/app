@@ -25,7 +25,7 @@ class CourseRepository extends BaseRepository
      *
      * @param $columns
      * @param bool $withInActive
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
      */
     public function all($columns = ['*'], bool $withInActive = false)
     {
@@ -57,9 +57,9 @@ class CourseRepository extends BaseRepository
         $courseProgress = LessonProgress::query()
             ->select('lessons_progress.*')
             ->leftJoin('lessons', function (JoinClause $query) use ($accountId) {
-                $query->on('lessons_progress.lesson_id', '=', 'lessons.id');
-                $query->where('lessons_progress.account_id', $accountId);
-                $query->where('lessons_progress.deleted_at', '=', null);
+                $query->on('lessons_progress.lesson_id', '=', 'lessons.id')
+                    ->where('lessons_progress.account_id', $accountId)
+                    ->where('lessons_progress.deleted_at', '=', null);
             })
             ->join('enrolls', function (JoinClause $query) use ($accountId) {
                 $query->on('lessons.course_id', '=', 'enrolls.course_id');
