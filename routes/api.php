@@ -87,9 +87,13 @@ Route::delete('/course/{courseTag}/disenroll', [\App\Http\Controllers\Api\Enroll
     ->name('disEnrollCourse');
 
 Route::put('/account/profile/{attribute}', [AccountController::class, 'updateAttribute'])
-    ->middleware(['auth', 'throttle:20,1'])
+    ->middleware(['auth', 'throttle:20,1', 'can:edit-profile-attributes'])
     ->name('updateProfileAttribute');
 
-Route::post('/account/social-profiles', [AccountController::class, 'saveSocialProfiles'])
-    ->middleware(['auth', 'throttle:10,1'])
+Route::post('/account/social-profiles', [AccountController::class, 'updateSocialProfiles'])
+    ->middleware(['auth', 'throttle:10,1', 'can:edit-social-profiles'])
     ->name('saveSocialProfiles');
+
+Route::post('/account/avatar', [AccountController::class, 'updateAvatar'])
+    ->middleware(['auth', 'throttle:5,1', 'can:update-avatar'])
+    ->name('updateAvatar');

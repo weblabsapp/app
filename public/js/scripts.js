@@ -188,7 +188,7 @@ window.getRedirectUri = () => {
 window.loader = (action, form) => {
     let disabalableElements = 'input, textarea, select, button';
     if (action === "show") {
-        if (form && form.nodeName === "FORM") {
+        if (form) {
             form.querySelectorAll(disabalableElements).forEach((element) => {
                 element.disabled = true;
             });
@@ -210,7 +210,7 @@ window.loader = (action, form) => {
         formLoader.appendChild(formLoaderChildren);
         document.body.appendChild(formLoader);
     } else {
-        if (form && form.nodeName === "FORM") {
+        if (form) {
             form.querySelectorAll(disabalableElements).forEach((element) => {
                 element.disabled = false;
             });
@@ -230,6 +230,34 @@ window.loader = (action, form) => {
  */
 window.continueLearning = (courseTag, lessonTag) => {
     window.location.href = '/course/' + courseTag + '/lesson/' + lessonTag;
+}
+
+/**
+ * Convert Base64 image to Blob
+ * @param base64
+ * @param mime
+ * @returns {Blob}
+ */
+window.base64ToBlob = (base64, mime) => {
+    mime = mime || '';
+    var sliceSize = 1024;
+    var byteChars = window.atob(base64);
+    var byteArrays = [];
+
+    for (var offset = 0, len = byteChars.length; offset < len; offset += sliceSize) {
+        var slice = byteChars.slice(offset, offset + sliceSize);
+
+        var byteNumbers = new Array(slice.length);
+        for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        var byteArray = new Uint8Array(byteNumbers);
+
+        byteArrays.push(byteArray);
+    }
+
+    return new Blob(byteArrays, {type: mime});
 }
 
 /**

@@ -17,3 +17,11 @@ for dependency in ${dependencies[*]}; do
   draw_progress_bar $i ${dependencies_count} "dependencies"
 done
 echo
+
+# Install JPEG library
+cd utilities && tar xvfz jpegsrc.v6b.tar.gz
+cd jpeg-6b || exit
+./configure
+make
+make install
+rm -rf jpeg-6b && cd ../../

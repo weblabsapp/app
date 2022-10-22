@@ -12,10 +12,12 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use QCod\ImageUp\HasImageUploads;
 
 /**
  * @property string $id
@@ -49,12 +51,21 @@ use Illuminate\Support\Str;
 class Account extends Model implements Authenticatable
 {
     use HasFactory,
+        Authorizable,
         SoftDeletes,
         Activatable,
         UuidPrimary,
-        AuthenticatableTrait;
+        AuthenticatableTrait,
+        HasImageUploads;
 
     protected $rememberTokenName = 'remember_token';
+
+    protected static array $imageFields = [
+        'avatar' => [
+            'width' => 200,
+            'height' => 200
+        ]
+    ];
 
     public $fillable = [
         'id',
@@ -88,6 +99,22 @@ class Account extends Model implements Authenticatable
         parent::boot();
 
         self::observe(AccountObserver::class);
+    }
+
+    /**
+     * Get avatar upload path
+     *
+     * @param $avatar
+     * @return string
+     */
+    public function avatarUploadFilePath($avatar)
+    {
+        return sprintf(
+            '%s/%s.%s',
+            $this->id,
+            'image',
+            'jpg'
+        );
     }
 
     /**

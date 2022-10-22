@@ -3,11 +3,11 @@
 namespace App\Nova;
 
 use App\Nova\Actions\GetLessonsAction;
+use App\Nova\Actions\GetTopicsAction;
 use App\Nova\Filters\ActiveFilter;
 use Emilianotisato\NovaTinyMCE\NovaTinyMCE;
 use Illuminate\Validation\Rule;
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
@@ -140,6 +140,10 @@ class Course extends Resource
     {
         return [
             (new GetLessonsAction())
+                ->onlyInline()
+                ->showOnDetail(),
+
+            (new GetTopicsAction())
                 ->onlyInline()
                 ->showOnDetail()
         ];

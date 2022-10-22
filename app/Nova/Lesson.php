@@ -2,13 +2,22 @@
 
 namespace App\Nova;
 
+use App\Models\LessonCompletenessChecklist;
+use App\Nova\Actions\GetChecklistAction;
 use App\Nova\Filters\ActiveFilter;
 use App\Nova\Filters\LessonCourseFilter;
+use App\Nova\Filters\LessonTopicFilter;
 use Emilianotisato\NovaTinyMCE\NovaTinyMCE;
+use Illuminate\Database\Eloquent\Builder;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Whitecube\NovaFlexibleContent\Flexible;
 
 class Lesson extends Resource
 {
@@ -57,14 +66,34 @@ class Lesson extends Resource
                 ->hideFromIndex(),
 
             Text::make('Title', 'title')
-                ->showOnPreview(),
+                ->showOnPreview()
+                ->displayUsing(function($title) {
+                    return strlen($title) > 30
+                        ? strip_tags(substr($title, 0, 50)) . '...'
+                        : $title;
+                }),
 
             Text::make('Tag', 'tag')
-                ->showOnPreview(),
+                ->showOnPreview()
+                ->hideFromIndex()
+                ->readonly(),
 
             BelongsTo::make('Course', 'course', Course::class)
                 ->showOnPreview()
+                ->withoutTrashed()
                 ->readonly(fn (NovaRequest $request) => $request->isUpdateOrUpdateAttachedRequest()),
+
+            BelongsTo::make('Topic', 'topic', Topic::class)
+                ->dontReorderAssociatables()
+                ->showOnPreview()
+                ->withoutTrashed(),
+
+            Number::make('Order', 'lesson_order')
+                ->rules('required', 'integer', 'min:1')
+                ->sortable()
+                ->showOnIndex(),
+
+            Boolean::make('Is Active', 'is_active'),
 
             NovaTinyMCE::make('Explore content', 'explore_content')
                 ->options([
@@ -74,15 +103,43 @@ class Lesson extends Resource
                     ],
                     'plugins' => ['lists', 'preview', 'wordcount', 'directionality', 'link', 'codesample', 'table', 'code'],
                     'toolbar' => 'undo redo | blockquote link | bold italic forecolor | codesample | preview | table tabledelete | backcolor alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | code',
-                ]),
+                ])->onlyOnForms(),
 
             NovaTinyMCE::make('Full content', 'full_content')
                 ->options([
                     'menubar' => false,
                     'plugins' => ['lists', 'preview', 'wordcount', 'directionality', 'link', 'codesample', 'table', 'code'],
                     'toolbar' => 'undo redo | blockquote link | bold italic forecolor | codesample | preview | table tabledelete | backcolor alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | code',
-                ]),
+                ])->onlyOnForms(),
+
+            Flexible::make('Command Options', 'command_options')
+                ->addLayout('Option', 'option', [
+                    Text::make('Label', 'label'),
+                    Text::make('Key', 'key')->rules('required'),
+                    Select::make('Type', 'type')
+                        ->options([
+                            'bool' => 'Boolean',
+                            'text' => 'Text',
+                            'select' => 'Dropdown'
+                        ])->rules('required'),
+                    Text::make('Value', 'value')
+                ])->button('Add Option'),
+
+            HasMany::make('Checklist Summary', 'checklist', Checklist::class)
+                ->showOnDetail()
         ];
+    }
+
+    /**
+     * Manipulate topics relation query
+     *
+     * @param NovaRequest $request
+     * @param Builder $query
+     * @return Builder
+     */
+    public static function relatableTopics(NovaRequest $request, Builder $query)
+    {
+        return $query->reorder('topic_order');
     }
 
     /**
@@ -105,7 +162,8 @@ class Lesson extends Resource
     public function filters(NovaRequest $request)
     {
         return [
-            (new LessonCourseFilter()),
+            new LessonCourseFilter(),
+            new LessonTopicFilter(),
             new ActiveFilter()
         ];
     }
@@ -129,10 +187,10 @@ class Lesson extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new GetChecklistAction())
+                ->onlyInline()
+                ->showOnDetail()
+        ];
     }
-
-//    protected static function initializeQuery(NovaRequest $request, $query, $search, $withTrashed)
-//    {
-//    }
 }

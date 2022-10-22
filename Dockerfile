@@ -2,16 +2,20 @@
 # Weblabs Dockerfile
 # Copyrights to Wajdi Jurry <github.com/wajdijurry>
 #
-FROM php:7.4-cli
+FROM php:7.4-cli AS dependencies
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG APP_ENV=local
 
+# Update apt repos
+RUN echo "Updating repos ..." && apt-get -y update > /dev/null
+
+# Important! To prevent warning "debconf: delaying package configuration, since apt-utils is not installed"
+RUN apt-get install -y --no-install-recommends apt-utils
+
 # Important! To prevent this warning "debconf: unable to initialize frontend"
 RUN apt-get install -yq apt-utils git 2>&1 | grep -v "debconf: delaying package configuration, since apt-utils is not installed"
 
-# Update apt repos
-RUN echo "Updating repos ..." && apt-get -y update > /dev/null
 
 # Return working directory to its default state
 WORKDIR /app
@@ -24,6 +28,9 @@ RUN chmod +x artisan
 
 # Install required tools and dependencies
 RUN chmod +x utilities/install-dependencies.sh && ./utilities/install-dependencies.sh
+
+
+FROM dependencies As extensions
 
 # Install required PHP extensions
 RUN chmod +x utilities/install-php-extensions.sh && ./utilities/install-php-extensions.sh
@@ -39,6 +46,8 @@ RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 # Copy SSH config
 COPY .ssh/config ~/.ssh/
+
+FROM extensions As composer
 
 # Install composer & dependencies
 RUN echo "Installing Composer" && rm -rf vendor composer.lock && \

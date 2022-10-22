@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Activatable;
 use App\Observers\TopicObserver;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Topic extends Model
 {
     use HasFactory,
+        Activatable,
         SoftDeletes;
 
     protected $fillable = [

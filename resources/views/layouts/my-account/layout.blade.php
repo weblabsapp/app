@@ -15,6 +15,9 @@
     <!-- Validation -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/validation.min.css') }}"/>
 
+    <!-- Image Cropper -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/croppie.min.css') }}"/>
+
     <style>
         body {
             padding: 0;

@@ -8,7 +8,7 @@
             <small>
                 <p>You will be redirected to your account page.</p>
                 <p>If you are not redirected within 5 seconds, please click here: <a
-                            href="{{ get_route('web.myAccountPage') }}">My Account</a></p>
+                            href="{{ get_route('web.accountPage') }}">My Account</a></p>
             </small>
         </div>
     </div>

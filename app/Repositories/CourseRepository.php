@@ -43,9 +43,10 @@ class CourseRepository extends BaseRepository
      *
      * @param string $accountId
      * @param string $courseId
+     * @param bool $getCount
      * @return array
      */
-    public function getProgressCount(string $accountId, string $courseId)
+    public function getLessonsProgress(string $accountId, string $courseId, bool $getCount = true)
     {
         $courseLessons = Lesson::query()
             ->where('course_id', $courseId)
@@ -54,34 +55,54 @@ class CourseRepository extends BaseRepository
             ->all();
 
         $courseProgress = LessonProgress::query()
+            ->select('lessons_progress.*')
             ->leftJoin('lessons', function (JoinClause $query) use ($accountId) {
                 $query->on('lessons_progress.lesson_id', '=', 'lessons.id');
                 $query->where('lessons_progress.account_id', $accountId);
                 $query->where('lessons_progress.deleted_at', '=', null);
             })
-            ->join('enrolls', function (JoinClause $query) {
+            ->join('enrolls', function (JoinClause $query) use ($accountId) {
                 $query->on('lessons.course_id', '=', 'enrolls.course_id');
                 $query->where('enrolls.deleted_at', '=', null);
+                $query->where('enrolls.account_id', $accountId);
             })
-            ->orderBy('lessons_progress.id', 'DESC')
+            ->orderBy('lessons_progress.id', 'ASC')
             ->get()
             ->all();
 
-        $inProgressLessons = $enrolledCompletedLessons = 0;
-        $pendingLessons = array_diff(array_column($courseLessons, 'id'), array_column($courseProgress, 'lesson_id'));
+        if ($getCount) {
+            $inProgressLessons = $completedLessons = 0;
+            $pendingLessons = count(
+                array_diff(
+                    array_column($courseLessons, 'id'), array_column($courseProgress, 'lesson_id')
+                )
+            );
 
-        foreach ($courseProgress as $progress) {
-            if ($progress->is_completed) {
-                $enrolledCompletedLessons++;
-            } else {
-                $inProgressLessons++;
+            foreach ($courseProgress as $progress) {
+                if ($progress->is_completed) {
+                    $completedLessons++;
+                } else {
+                    $inProgressLessons++;
+                }
+            }
+        } else {
+            $pendingLessons = array_diff(array_column($courseLessons, 'id'), array_column($courseProgress, 'lesson_id'));
+
+            $completedLessons = $inProgressLessons = [];
+
+            foreach ($courseProgress as $progress) {
+                if ($progress->is_completed) {
+                    $completedLessons[] = $progress;
+                } else {
+                    $inProgressLessons[] = $progress;
+                }
             }
         }
 
         return [
-            'pending' => count($pendingLessons),
+            'pending' => $pendingLessons,
             'in_progress' => $inProgressLessons,
-            'completed' => $enrolledCompletedLessons
+            'completed' => $completedLessons
         ];
     }
 }

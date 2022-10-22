@@ -26,9 +26,14 @@ class LessonController extends ApiController
     public function markAsCompleted($lessonId, Request $request)
     {
         $lesson = $request->attributes->get('lesson');
+        $checkedItems = $request->post('checked_items');
 
-        $this->lessonProgressRepository->markAsCompleted(Auth::id(), $lesson->id);
+        $isCompleted = $this->lessonProgressRepository->markAsCompleted(Auth::id(), $lesson, $checkedItems);
 
-        return $this->response(Response::HTTP_NO_CONTENT);
+        $this->setResponseData([
+            'is_completed' => $isCompleted
+        ]);
+
+        return $this->response();
     }
 }

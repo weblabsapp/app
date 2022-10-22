@@ -76,14 +76,23 @@ class LessonProgressRepository extends BaseRepository
 
     /**
      * @param string $accountId
-     * @param string $lessonId
-     * @return void
+     * @param Lesson $lesson
+     * @param array $checkedList
+     * @return bool
      */
-    public function markAsCompleted(string $accountId, string $lessonId)
+    public function markAsCompleted(string $accountId, Lesson $lesson, array $checkedList = [])
     {
+        if (count($lesson->checklist) == 0 || count($lesson->checklist) == count($checkedList)) {
+            $updatedItems['is_completed'] = true;
+        }
+
+        $updatedItems['checklist_completeness'] = $checkedList;
+
         $this->query()
             ->where('account_id', $accountId)
-            ->where('lesson_id', $lessonId)
-            ->update(['is_completed' => true]);
+            ->where('lesson_id', $lesson->id)
+            ->update($updatedItems);
+
+        return $updatedItems['is_completed'] ?? false;
     }
 }

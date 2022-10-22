@@ -15,7 +15,7 @@
                 </li>
                 @if(\Illuminate\Support\Facades\Auth::user())
                 <li class="nav-item @yield('is-account-nav')">
-                    <a class="nav-link" href="{{ get_route('web.myAccountPage') }}">Account</a>
+                    <a class="nav-link" href="{{ get_route('web.accountPage') }}">Account</a>
                 </li>
                 @endif
                 <li class="nav-item @yield('is-courses-nav')">

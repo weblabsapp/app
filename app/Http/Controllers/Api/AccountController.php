@@ -8,9 +8,11 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\ResendVerificationEmailRequest;
 use App\Http\Requests\SignupRequest;
 use App\Http\Requests\UpdateProfileAttributeRequest;
+use App\Http\Requests\UpdateSocialProfilesRequest;
 use App\Mail\VerificationEmail;
 use App\Repositories\AccountRepository;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -132,9 +134,29 @@ class AccountController extends ApiController
         return $this->response();
     }
 
-    public function saveSocialProfiles(Request $request)
+    /**
+     * Update social profiles for an account
+     *
+     * @param UpdateSocialProfilesRequest $request
+     * @return \App\Http\Responses\JsonResponse
+     * @throws \Throwable
+     */
+    public function updateSocialProfiles(UpdateSocialProfilesRequest $request)
     {
+        $this->repository->updateSocialProfiles(Auth::user(), $request->json()->all());
 
+        return $this->response(Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * Update avatar for an account
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function updateAvatar(Request $request)
+    {
+        Auth::user()->uploadImage($request->file('avatar'), 'avatar');
     }
 
     /**

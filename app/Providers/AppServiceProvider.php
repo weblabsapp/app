@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Account;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -40,6 +43,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Gate::define('edit-profile-attributes', function (Account $account) {
+            return Auth::id() === $account->id || Auth::user()->admin;
+        });
+
+        Gate::define('edit-social-profiles', function (Account $account) {
+            return Auth::id() === $account->id || Auth::user()->admin;
+        });
+
+        Gate::define('update-avatar', function (Account $account) {
+            return Auth::id() === $account->id || Auth::user()->admin;
+        });
+
         Blade::directive('quote', function () {
             return '<?php $quote = \App\Factories\Quote::factory()->getRandomQuote();
                 echo sprintf(\'<div class="card bg-transparent border-0">

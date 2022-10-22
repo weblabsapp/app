@@ -244,15 +244,14 @@ class Sandbox extends AbstractFactory
      *
      * @param string $podId
      * @param string $courseTag
+     * @param string $lessonTag
      * @param string $code
      * @param array $options
      * @return string|void
      * @throws \Exception
      */
-    public function executeCommand(string $podId, string $courseTag, string $code, array $options = [])
+    public function executeCommand(string $podId, string $courseTag, string $lessonTag, string $code, array $options = [])
     {
-        $this->courseTag = $courseTag;
-
         $pod = $this->getPodInstance()->getByName($podId);
         if ($pod && ($containers = $pod->getContainers())) {
             foreach ($containers as $container) {
@@ -266,7 +265,7 @@ class Sandbox extends AbstractFactory
                 // Write script to a temp file
                 $tempFile = TempFile::setCacheDir(storage_path('k8s/cache'));
 
-                if (!$tempFile->write($code, CoursesTagsEnum::getCourseTypeExtension($courseTag))) {
+                if (!$tempFile->write($code, CoursesTagsEnum::getCourseTypeExtension($courseTag), $lessonTag)) {
                     throw new \Exception('cannot_write_script_file');
                 }
 
@@ -296,7 +295,7 @@ class Sandbox extends AbstractFactory
                         $containerName,
                         env('KUBE_NAMESPACE'),
                         CommandsEnum::getCommand($courseTag),
-                        $this->optionsForCommand($options),
+                        $this->optionsForCommand($courseTag, $options),
                         $tempFile->getTempFileName()
                     )
                 );
@@ -307,18 +306,22 @@ class Sandbox extends AbstractFactory
                     return "Execution timeout (exit code: 124)";
                 }
 
-                return htmlentities($commandResult->getOutput());
+                $output = $commandResult->getOutput();
+                $output = str_replace('    ', "\t", $output);
+
+                return htmlentities($output);
             }
         }
     }
 
     /**
+     * @param $courseTag
      * @param array $options
      * @return string
      */
-    private function optionsForCommand(array $options)
+    private function optionsForCommand($courseTag, array $options)
     {
-        switch ($this->courseTag) {
+        switch ($courseTag) {
             case CoursesTagsEnum::PHP_COURSE_TAG:
                 return implode(' ', array_map(function ($option, $value) {
                     return sprintf('-d%s=%s', $option, $value);

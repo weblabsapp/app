@@ -19,9 +19,14 @@ Breadcrumbs::for('courses', function (BreadcrumbTrail $trail) {
     $trail->push('Courses', get_route('web.getEnrolls'));
 });
 
-Breadcrumbs::for('my-account', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('account-page', function (BreadcrumbTrail $trail, $account) {
+    $sameUser = \Illuminate\Support\Facades\Auth::id() == $account->id;
+
     $trail->parent('home');
-    $trail->push('My Account', get_route('web.myAccountPage'));
+    $trail->push(
+        $sameUser ? 'My Account' : ($account->name ?? 'Weblabs Account'),
+        get_route('web.accountPage')
+    );
 });
 
 Breadcrumbs::for('notifications', function (BreadcrumbTrail $trail) {

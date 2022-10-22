@@ -53,6 +53,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->name('web.')
                 ->group(base_path('routes/web.php'));
+
+            Route::pattern('userName', '[A-Za-z0-9\_\-]+');
         });
     }
 

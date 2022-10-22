@@ -74,6 +74,7 @@ class Course extends Model
     public function topics()
     {
         return $this->hasMany(Topic::class, 'course_id', 'id')
+            ->onlyActive()
             ->orderBy('topic_order');
     }
 }

@@ -25,10 +25,10 @@
                             <span class="badge badge-info m-1">Completed <span class="badge badge-light">{{ $enrollment->course->progress_count['completed'] }}</span> </span>
                             <span class="badge badge-dark m-1">In Progress <span class="badge badge-light">{{ $enrollment->course->progress_count['in_progress'] }}</span> </span>
                             <br /><br />
-                            <small>Your progress</small>
+                            @php($total = $enrollment->course->progress_count['pending'] + $enrollment->course->progress_count['completed'] + $enrollment->course->progress_count['in_progress'])
+                            @php($progress = ceil($enrollment->course->progress_count['completed'] / $total * 100))
+                            <small>Your progress ({{ $progress }}%)</small>
                             <div class="progress mb-3" style="height: 5px; background-color: #d7d7d7;">
-                                @php($total = $enrollment->course->progress_count['pending'] + $enrollment->course->progress_count['completed'] + $enrollment->course->progress_count['in_progress'])
-                                @php($progress = ceil($enrollment->course->progress_count['completed'] / $total * 100))
                                 <div class="progress-bar bg-primary" role="progressbar" style="width: {{ $progress }}%" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="{{ $total }}"></div>
                             </div>
                             <div class="icon-block">

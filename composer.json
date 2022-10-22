@@ -21,14 +21,16 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
-        "laravel/nova": "dev-main",
+        "laravel/nova": "^4.0",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.0",
         "league/flysystem-aws-s3-v3": "^1.0",
         "predis/predis": "^1.1",
+        "qcod/laravel-imageup": "^1.2",
         "renoki-co/laravel-php-k8s": "^3.4",
         "spatie/ssh": "^1.7",
         "timehunter/laravel-google-recaptcha-v2": "^1.0",
+        "whitecube/nova-flexible-content": "^1.0",
         "xobotyi/rsync": "^1.0"
     },
     "require-dev": {
@@ -40,7 +42,7 @@
     },
     "repositories": {
         "laravel/nova": {
-            "type": "git",
+            "type": "vcs",
             "url": "nova:weblabsapp/admin.git"
         }
     },

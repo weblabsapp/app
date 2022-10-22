@@ -3,7 +3,7 @@
 source ./utilities/progressbar.sh || exit 1
 
 # Define array of php & pecl extensions
-php_extensions=(intl gettext gd bcmath zip pdo_mysql opcache sockets)
+php_extensions=(gd intl gettext bcmath zip pdo_mysql opcache sockets)
 pecl_extensions=(redis mongodb yaml)
 
 # Install xdebug extension if in dev mode
@@ -15,7 +15,7 @@ fi
 ### DO NOT EDIT AREA ###
 echo "Configuring pdo_mysql and gd extensions ..."
 docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd > /dev/null
-docker-php-ext-configure gd --with-freetype --with-jpeg > /dev/null
+docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg=/usr/local/bin > /dev/null
 echo "Done configuring!"
 
 echo "Installing php extensions ..."

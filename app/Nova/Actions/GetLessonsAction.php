@@ -4,8 +4,6 @@ namespace App\Nova\Actions;
 
 use App\Nova\Filters\ActiveFilter;
 use App\Nova\Filters\LessonCourseFilter;
-use Illuminate\Bus\Queueable;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
@@ -13,8 +11,6 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class GetLessonsAction extends Action
 {
-    use InteractsWithQueue, Queueable;
-
     public $name = 'View Lessons';
 
     public $withoutConfirmation = true;

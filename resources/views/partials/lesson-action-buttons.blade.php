@@ -121,316 +121,47 @@
     </div>
 </div>
 
-@push('scripts')
-    <script type="text/javascript">
-        $(function () {
-            let request = null;
-
-            $('.submit-save-code').on('click', function () {
-                if (typeof editor === "undefined") {
-                    alert('Code editor could not be found. Please refresh the page.');
-                    return false;
-                }
-                let editorValue = editor.getValue();
-                let fileName = $('#file-name').val();
-
-                if (typeof fileName === "undefined" || fileName.trim() === "") {
-                    alert('Please specify a valid file name.');
-                    return false;
-                }
-
-                loader('show');
-
-                $.ajax({
-                    type: 'POST',
-                    url: '{{ get_route('api.cloudUploadLessonFile') }}',
-                    dataType: 'json',
-                    data: JSON.stringify({
-                        content: editorValue,
-                        course_tag: '{{ $courseTag }}',
-                        lesson_tag: '{{ $lessonTag }}',
-                        file_name: fileName,
-                    }),
-                    success: function (response, call = false) {
-                        if (call !== true) {
-                            return;
-                        }
-                        $('#save-code-modal').modal('hide');
-                        localStorage.setItem(fileName+'.'+'{{ $courseFileExt }}', editorValue);
-                        window.loadedContent = editorValue;
-                        $('#loaded-file-name').text(fileName+'.'+'{{ $courseFileExt }}');
-                        return {
-                            message: translate(response.content.message),
-                            status: TOAST_STATUS.SUCCESS
-                        }
-                    },
-                    error: function (xhr, call = false) {
-                        if (call !== true) {
-                            return;
-                        }
-                        return {
-                            message: translate(...getErrorFromResponse(xhr)),
-                            status: TOAST_STATUS.DANGER
-                        }
-                    },
-                    complete: function (jqxhr, status) {
-                        if (status === "abort") {
-                            return false;
-                        }
-                        loader('hide');
-                    }
-                })
-            });
-
-            $('#save-code-modal, #load-code-modal').on('show.bs.modal', function (e) {
-                $(e.target).find('.lesson-files-loader').removeClass('hidden');
-
-                let prefix = '{{ \Illuminate\Support\Facades\Auth::id() }}';
-                let course = '{{ $courseTag }}';
-                let lessonTag = '{{ $lessonTag }}';
-                let showDownloadLink = true;
-
-                if ($(e.target).attr('id') === 'load-code-modal') {
-                    showDownloadLink = false;
-                }
-
-                let url = '{{ get_route('api.cloudListLessonFiles', ['prefix' => ':prefix', 'courseTag' => ':courseTag', 'lessonTag' => ':lessonTag']) }}'
-                    .replace(':prefix', prefix)
-                    .replace(':courseTag', course)
-                    .replace(':lessonTag', lessonTag);
-
-                request = $.ajax({
-                    type: 'GET',
-                    url: url,
-                    dataType: 'json',
-                    success: function (response, call = false) {
-                        if (call !== true) {
-                            return;
-                        }
-                        listFiles(
-                            e.target,
-                            response.content.files_list,
-                            response.content.files_count,
-                            response.content.links_expire_in,
-                            showDownloadLink
-                        );
-                    },
-                    error: function (xhr, call = false) {
-                        if (call !== true) {
-                            return;
-                        }
-                        return {
-                            message: translate(...getErrorFromResponse(xhr)),
-                            status: TOAST_STATUS.DANGER
-                        }
-                    },
-                    complete: function (jqxhr, status) {
-                        if (status === "abort") {
-                            return false;
-                        }
-                        if (status === "error") {
-                            $(e.target).find('.alert.alert-danger').removeClass('hidden');
-                        } else {
-                            $(e.target).find('.files-container').removeClass('hidden');
-                        }
-                        $(e.target).find('.lesson-files-loader').addClass('hidden');
-                    }
-                })
-            }).on('hidden.bs.modal', function (e) {
-                $(e.target).find('.files-container').addClass('hidden');
-                $(e.target).find('.alert.alert-danger').addClass('hidden');
-                if (typeof request !== "undefined") { // abort ajax call upon closing modal
-                    request.abort();
-                    request = null;
-                }
-            });
-
-            $(document).on('click', '#load-code-modal .load-file-link', function (e) {
-                e.preventDefault();
-
-                if (typeof editor === "undefined") {
-                    alert('Code editor could not be found. Please refresh the page.');
-                    return false;
-                }
-
-                let loadedContent = window.loadedContent || editor.getValue();
-
-                if (typeof isContentChanged !== "undefined" && isContentChanged && loadedContent !== editor.getValue()) {
-                    let confirmLoading = confirm('Editor has been modified. Do you want to proceed without saving?');
-                    if (confirmLoading !== true) {
-                        return false;
-                    }
-                }
-
-                let fileName = $(this).data('file-name');
-                let cachedContent = localStorage.getItem(fileName);
-
-                if (cachedContent) {
-                    afterLoad(fileName, cachedContent);
-                    return true;
-                }
-
-                loader('show');
-
-                let url = '{{ get_route('api.cloudGetLessonFile', [
-                    'prefix' => ':prefix',
-                    'courseTag' => ':courseTag',
-                    'lessonTag' => ':lessonTag',
-                    'fileName' => ':fileName'
-                ]) }}'
-                    .replace(':prefix', '{{ \Illuminate\Support\Facades\Auth::id() }}')
-                    .replace(':courseTag', '{{ $courseTag }}')
-                    .replace(':lessonTag', '{{ $lessonTag }}')
-                    .replace(':fileName', fileName);
-
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    dataType: 'json',
-                    success: function (response, call = false) {
-                        if (call !== true) {
-                            return;
-                        }
-                        let fileContent = response.content.file_content;
-                        afterLoad(fileName, fileContent);
-                    },
-                    error: function (xhr, call = false) {
-                        if (call !== true) {
-                            return;
-                        }
-                        return {
-                            message: translate(...getErrorFromResponse(xhr)),
-                            status: TOAST_STATUS.DANGER
-                        }
-                    },
-                    complete: function (jqxhr, status) {
-                        if (status === "abort") {
-                            return false;
-                        }
-
-                        $('#load-code-modal').modal('hide');
-                        loader('hide');
-                    }
-                })
-            });
-
-            $(document).on('click', '.delete-file-link', function (e) {
-                if (!confirm('Are you sure want to delete this file?')) {
-                    return false;
-                }
-
-                loader('show');
-
-                let fileName = $(this).data('file-name');
-                let fileIndex = $(this).data('file-index');
-                let currentFilesCounter = $(this).closest('table').find('.files-count');
-                let url = '{{ get_route('api.cloudDeleteLessonFile', [
-                    'courseTag' => ':courseTag',
-                    'lessonTag' => ':lessonTag',
-                    'fileName' => ':fileName'
-                ]) }}'
-                    .replace(':courseTag', '{{ $courseTag }}')
-                    .replace(':lessonTag', '{{ $lessonTag }}')
-                    .replace(':fileName', fileName);
-
-                $.ajax({
-                    type: 'DELETE',
-                    url: url,
-                    dataType: 'json',
-                    success: function (response, call = false) {
-                        if (call !== true) {
-                            return;
-                        }
-
-                        // Remove related HTML element
-                        $('tr#file-index-' + fileIndex).remove();
-                        currentFilesCounter.text(parseInt(currentFilesCounter.text()) - 1);
-
-                        return {
-                            message: translate(response.content.message),
-                            status: TOAST_STATUS.SUCCESS
-                        }
-                    },
-                    error: function (xhr, call = false) {
-                        if (call !== true) {
-                            return;
-                        }
-                        return {
-                            message: translate(...getErrorFromResponse(xhr)),
-                            status: TOAST_STATUS.DANGER
-                        }
-                    },
-                    complete: function (jqxhr, status) {
-                        if (status === "abort") {
-                            return false;
-                        }
-
-                        $('#load-code-modal').modal('hide');
-                        loader('hide');
-                    }
-                })
-            });
-
-            $(document).on('click', '.download-file-link', function (e) {
-                e.preventDefault();
-                let url = $(this).data('link');
-                window.open(url, '_blank');
-            });
-        });
-
-        /**
-         * Draw list of files in modal #save-code-modal
-         *
-         * @param container
-         * @param filesList
-         * @param filesCount
-         * @param linksExpireIn
-         * @param showDownloadLink
-         * @returns {boolean}
-         */
-        function listFiles(container, filesList, filesCount, linksExpireIn, showDownloadLink = true) {
-            let tdList = [];
-
-            filesList.forEach(function (file, index) {
-                let actionButtons = [], downloadLink = '', loadLink = '';
-                if (showDownloadLink) {
-                    downloadLink = '<a href="javascript:;" data-link=":download_link" target="_blank" title="Download file" class="download-file-link"><i class="fa-solid fa-cloud-arrow-down"></i></a>'
-                        .replace(':download_link', file.download_link)
-                        .replaceAll(':file_name', file.file_name)
-                        .replace(':file_size', file.file_size);
-                } else {
-                    loadLink = '<a href="javascript:;" class="load-file-link" data-file-name=":file_name" title="Load code from this file"><i class="fa-solid fa-code"></i></a>'
-                        .replace(':file_name', file.file_name);
-                }
-
-                let deleteLink = '<a href="javascript:;" class="ml-2 delete-file-link" title="Delete file" data-file-name=":file_name" data-file-index=":file_index"><i class="fa fa-trash"></i></a>'
-                    .replace(':file_name', file.file_name)
-                    .replace(':file_index', index);
-
-                actionButtons.push(loadLink, downloadLink, deleteLink);
-
-                let cell = '<tr id="file-index-:file_index"><th scope="row">:file_name</th><td>:file_size</td><td>:last_modified</td><td class="text-center">:action_buttons</td></tr>'
-                    .replaceAll(':file_name', file.file_name)
-                    .replace(':file_size', file.file_size)
-                    // .replace(':last_modified', file.last_modified ?? 'N/A')
-                    .replace(':last_modified', file.last_modified ?? 'N/A')
-                    .replace(':action_buttons', actionButtons.join(''))
-                    .replace(':file_index', index);
-
-                tdList.push(cell);
-            });
-
-            filesCount && $(container).find('.files-list tbody').html(tdList.join(''));
-            filesCount && $(container).find('.files-expire-in').text(linksExpireIn);
-            $(container).find('.files-count').text(filesCount);
-        }
-
-        function afterLoad(fileName, fileContent) {
-            editor.setValue(fileContent);
-            localStorage.setItem(fileName, fileContent);
-            window.loadedContent = fileContent;
-            $('#loaded-file-name').text(fileName);
-            $('#load-code-modal').modal('hide');
-        }
-    </script>
-@endpush
+<!-- Complete Checklist Modal -->
+<div id="complete-summary-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Completeness Checklist</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="complete-congrats" class="hidden">
+                    <lottie-player background="transparent" speed="0.5"
+                                   style="width: 300px; height: 300px; margin: auto;" loop></lottie-player>
+                    <h3 class="text-center">Congratulations !</h3>
+                    <p class="text-center">For completing {{ strtoupper($courseTag) }} - {{ $lesson->title }} lesson</p>
+                </div>
+                <div id="complete-summary">
+                    <p>After completing this lesson:</p>
+                    <ul class="list-unstyled">
+                        @foreach($lesson->checklist as $checklist)
+                            <li>
+                                <div class="form-check">
+                                    <input id="checklist-{{ $checklist->id }}" type="checkbox" class="form-check-input" value="{{ $checklist->id }}" {{ in_array($checklist->id, $lesson->progress->checklist_completeness ?? []) ? "checked" : "" }} />
+                                    <label for="checklist-{{ $checklist->id }}" class="form-check-label">{!! $checklist->text !!}</label>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="mark-as-completed-btn" type="button" class="btn btn-primary"  onclick="markAsCompleted('{{ $lessonTag }}', this);">Mark as completed</button>
+                @if(!empty($nextAndPreviousLessons['next_lesson']))
+                <a id="complete-next-lesson-btn" href="{{ get_route('web.getLesson', ['courseTag' => $courseTag, 'lessonTag' => $nextAndPreviousLessons['next_lesson']->tag]) }}" class="btn btn-primary hidden flashing">
+                    {{ $nextAndPreviousLessons['next_lesson']->title }}
+                    <i class="fa-solid fa-forward"></i>
+                </a>
+                @endif
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

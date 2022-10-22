@@ -39,7 +39,7 @@
                             return;
                         }
                         setTimeout(() => {
-                            window.location.href = getRedirectUri() || '{{ get_route('web.myAccountPage') }}';
+                            window.location.href = getRedirectUri() || '{{ get_route('web.accountPage') }}';
                         }, 1000);
                         localStorage.setItem('access_token', response.content.access_token);
                         localStorage.setItem('remember_token', response.content.remember_token);

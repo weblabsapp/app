@@ -3,19 +3,29 @@
         <div class="card-header">
             <p class="position-absolute" style="line-height: 2.2">
                 <img src="{{ \Illuminate\Support\Facades\Storage::disk('s3assets')->url($courseLogo) }}" width="32" />
-                <strong>Code editor (<span id="loaded-file-name">Untitled</span>)</strong>
+                <strong>{{ $lesson->title }} (<span id="loaded-file-name">Untitled</span>)</strong>
             </p>
             @include('partials.lesson-action-buttons')
         </div>
     </div>
     <div id="editor" class="col-md-12" style="height: 300px; border: 1px solid grey"></div>
     <div class="language-options form-check-inline">
-        @foreach(\App\Enums\CommandsEnum::getOptions($courseTag, $lessonTag) as $option => $properties)
+        @foreach($lesson->command_options as $option)
         <div class="form-check">
-            <input class="form-check-input language-option" type="checkbox" name="{{ $option }}" value="{{ $properties['value'] }}" id="disable-short-tags-option">
-            <label class="form-check-label" for="disable-short-tags-option">
-                {{ $properties['label'] }}
-            </label>
+            @switch($option->type)
+                @case('bool')
+                <input class="form-check-input language-option" type="checkbox" name="{{ $option->key }}" value="{{ $option->value }}" id="{{ $option->key }}-option" {{ $option->value ? "checked" : "" }}>
+                <label class="form-check-label" for="{{ $option->key }}-option">
+                    {{ $option->label ?? $option->key }}
+                </label>
+                @break
+                @case('text')
+                <input class="form-check-input language-option" type="text" name="{{ $option->key }}" value="{{ $option->value }}" id="{{ $option->key }}-option">
+                <label class="form-check-label" for="{{ $option->key }}-option">
+                    {{ $option->label ?? $option->key }}
+                </label>
+                @break
+            @endswitch
         </div>
         @endforeach
     </div>

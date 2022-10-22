@@ -49,7 +49,6 @@
 <script type="text/javascript" src="{{ asset('js/scripts-bundle.min.js') }}"></script>
 
 @include('partials.get-translations')
-@include('partials.session-renew')
 @includeWhen('prod' == env('APP_ENV'), 'partials.google-analytics')
 @stack('scripts')
 </body>
