@@ -15,7 +15,7 @@
                         </div>
                         <div class="profile-thumb-block" style="position: relative; top: -20px;">
                             <img
-                                src="{{ \Illuminate\Support\Facades\Storage::disk('s3assets')->url($enrollment->course->logo) }}"
+                                src="{{ asset($enrollment->course->logo) }}"
                                 alt="profile-image"
                                 class="profile"
                             />
