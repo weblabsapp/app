@@ -36,10 +36,6 @@ class HomeController extends Controller
     {
         $courses = $this->coursesRepository->all(['*'], true);
 
-        $courses->map(function ($course) {
-            $course->logo = Storage::disk('s3assets')->url($course->logo);
-        });
-
         return view('home', [
             'courses' => $courses
         ]);
