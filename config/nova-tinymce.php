@@ -13,10 +13,10 @@ return [
     */
 
     'default_options' => [
-        'content_css' => '/vendor/tinymce/skins/ui/oxide/content.min.css',
-        'skin_url' => '/vendor/tinymce/skins/ui/oxide',
-        'content_css_dark' => '/vendor/tinymce/skins/ui/oxide-dark/content.min.css',
-        'skin_url_dark' => '/vendor/tinymce/skins/ui/oxide-dark',
+        'content_css' => asset('vendor/tinymce/skins/ui/oxide/content.min.css'),
+        'skin_url' => asset('vendor/tinymce/skins/ui/oxide'),
+        'content_css_dark' => asset('vendor/tinymce/skins/ui/oxide-dark/content.min.css'),
+        'skin_url_dark' => asset('vendor/tinymce/skins/ui/oxide-dark'),
         'path_absolute' => '/',
         'plugins' => [
             'lists','preview','anchor','pagebreak','image','wordcount','fullscreen','directionality'
