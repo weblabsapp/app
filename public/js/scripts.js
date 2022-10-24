@@ -29,6 +29,28 @@ window.addEventListener("load", (e) => {
     });
 });
 
+window.addEventListener("resize", function (e) {
+    resizeButtons(window.outerWidth);
+});
+
+window.resizeButtons = (windowWidth) => {
+    let sizes = ['btn-sm', 'btn-md', 'btn-lg'];
+
+    if (windowWidth <= 655) {
+        document.querySelectorAll('button.btn, a.btn').forEach((button) => {
+            button.classList.remove(...sizes);
+            button.classList.add('btn-sm');
+        });
+    } else {
+        document.querySelectorAll('button.btn, a.btn').forEach((button) => {
+            button.classList.remove(...sizes);
+            button.classList.add('btn-md');
+        });
+    }
+}
+
+resizeButtons(window.outerWidth);
+
 /**
  * Map object entries against a custom callback
  *
