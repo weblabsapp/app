@@ -26,6 +26,7 @@ Route::get('/', [HomeController::class, 'home'])->name('homePage');
 Route::get('/coming-soon', [HomeController::class, 'comingSoon'])->name('comingSoonPage');
 Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacyPage');
 Route::get('/terms', [HomeController::class, 'terms'])->name('tosPage');
+Route::get('/data-deletion', [HomeController::class, 'dataDeletion'])->name('dataDeletionPage');
 
 Route::get('/account/login', [AuthController::class, 'login'])->name('loginPage');
 Route::get('/account/logout', [AuthController::class, 'logout'])->name('logoutPage');
