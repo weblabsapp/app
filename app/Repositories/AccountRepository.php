@@ -64,7 +64,9 @@ class AccountRepository extends BaseRepository
             return $this->findBy('email', $data['email']);
         } catch (QueryException $exception) {
             if ($exception->getCode() == "23000") {
-                throw new \Exception(__('duplicate email'));
+                DuplicateEntityException::throw('duplicate email', [
+                    'email_address' => $data['email']
+                ]);
             }
             throw $exception;
         }
@@ -85,7 +87,8 @@ class AccountRepository extends BaseRepository
         /** @var Account $account */
         $account = $this->query()
             ->where('social_type', $provider)
-            ->where('social_id', $socialId);
+            ->where('social_id', $socialId)
+            ->first();
 
         if (!$account) {
             NotFoundException::throw('entity not found or maybe deleted');
