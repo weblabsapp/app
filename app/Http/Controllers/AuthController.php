@@ -10,6 +10,7 @@ use App\Repositories\TokenMappingRepository;
 use App\Utils\Chain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
@@ -40,31 +41,47 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * @param $provider
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function socialLogin($provider, Request $request)
     {
         return Socialite::driver($provider)->redirect();
     }
 
+    /**
+     * Social login callback
+     *
+     * @param $provider
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \App\Exceptions\AbstractException
+     * @throws \Throwable
+     */
     public function socialLoginCallback($provider, Request $request)
     {
         $user = Socialite::driver($provider)->user();
 
-        if ($this->repository->exists(['email' => $user->getEmail()])) {
-            $account = $this->repository->updateSocialAccount($user->getId(), [
+        if ($this->repository->exists(['social_type' => $provider, 'email' => $user->getEmail()])) {
+            $account = $this->repository->updateSocialAccount($provider, $user->getId(), [
                 'email' => $user->getEmail(),
                 'name' => $user->getName(),
+                'avatar' => $user->getAvatar(),
                 'access_token' => $user->token,
             ]);
         } else {
             $account = $this->repository->createSocialAccount([
                 'email' => $user->getEmail(),
                 'name' => $user->getName(),
+                'avatar' => $user->getAvatar(),
+                'access_token' => $user->token,
+                'is_active' => 1,
                 'social_id' => $user->getId(),
                 'social_type' => $provider
             ]);
         }
-
-        $account->generateAccessToken();
 
         Auth::login($account);
 
@@ -158,6 +175,10 @@ class AuthController extends Controller
         }
 
         $account->social_profiles = array_filter($account->social_profiles ?? []);
+
+        if (!filter_var($account->avatar, FILTER_VALIDATE_URL)) {
+            $account->avatar = Storage::disk('s3assets')->url($account->avatar);
+        }
 
 
         // Get lessons progress for each courses

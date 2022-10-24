@@ -11,6 +11,8 @@ use App\Models\Account;
 use Carbon\Carbon;
 use Czim\Repository\BaseRepository;
 use Czim\Repository\Criteria\Common\Custom;
+use Illuminate\Database\QueryException;
+use Laravel\Socialite\Contracts\User;
 
 class AccountRepository extends BaseRepository
 {
@@ -52,27 +54,38 @@ class AccountRepository extends BaseRepository
      * Create a social login account
      *
      * @param array $data
-     * @return bool
+     * @return Account
      * @throws \Throwable
      */
     public function createSocialAccount(array $data)
     {
-        return $this->make($data)->saveOrFail();
+        try {
+            $this->make($data)->saveOrFail();
+            return $this->findBy('email', $data['email']);
+        } catch (QueryException $exception) {
+            if ($exception->getCode() == "23000") {
+                throw new \Exception(__('duplicate email'));
+            }
+            throw $exception;
+        }
     }
 
     /**
      * Update a social login account
      *
+     * @param string $provider
      * @param string $socialId
      * @param array $data
      * @return Account
      * @throws \App\Exceptions\AbstractException
      * @throws \Throwable
      */
-    public function updateSocialAccount(string $socialId, array $data)
+    public function updateSocialAccount(string $provider, string $socialId, array $data)
     {
         /** @var Account $account */
-        $account = parent::findBy('social_id', $socialId);
+        $account = $this->query()
+            ->where('social_type', $provider)
+            ->where('social_id', $socialId);
 
         if (!$account) {
             NotFoundException::throw('entity not found or maybe deleted');

@@ -73,17 +73,17 @@
                     </div>
 
                     <button class="btn btn-md btn-primary btn-block" type="submit">Sign in</button>
-{{--                    <div class="mt-3">--}}
-{{--                        <a class="btn btn-outline-secondary" href="{{ get_route('web.socialLogin', ['provider' => 'github']) }}">--}}
-{{--                            <i class="fa-brands fa-github"></i>--}}
-{{--                        </a>--}}
-{{--                        <a class="btn btn-outline-secondary" href="{{ get_route('web.socialLogin', ['provider' => 'facebook']) }}">--}}
-{{--                            <i class="fa-brands fa-facebook-f"></i>--}}
-{{--                        </a>--}}
-{{--                        <a class="btn btn-outline-secondary" href="{{ get_route('web.socialLogin', ['provider' => 'google']) }}">--}}
-{{--                            <i class="fa-brands fa-google"></i>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
+                    <div class="mt-3">
+                        <a class="btn btn-outline-secondary" href="{{ get_route('web.socialLogin', ['provider' => 'github']) }}">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a class="btn btn-outline-secondary" href="{{ get_route('web.socialLogin', ['provider' => 'facebook']) }}">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a class="btn btn-outline-secondary" href="{{ get_route('web.socialLogin', ['provider' => 'google']) }}">
+                            <i class="fa-brands fa-google"></i>
+                        </a>
+                    </div>
                 </form>
 
                 <div class="form-group mt-4 pt-5 border-top d-block d-sm-none">

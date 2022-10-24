@@ -16,13 +16,8 @@ class AccountSocial extends Migration
     public function up()
     {
         Schema::table(self::TABLE_NAME, function (Blueprint $table) {
-            $table->string('social_id')
-                ->after('password')
-                ->nullable();
-
-            $table->enum('social_type', ['github', 'facebook', 'google'])
-                ->after('social_id')
-                ->nullable();
+            $table->string('social_id')->after('password')->nullable();
+            $table->string('social_type')->after('social_id')->nullable();
         });
     }
 
