@@ -361,7 +361,7 @@
                             <ul class="nav nav-tabs card-header-tabs">
                                 <a class="navbar-brand p-0">
                                     <img
-                                        src="{{ asset($enrollment->course->logo) }}"
+                                        src="{{ Storage::disk('s3assets')->url($enrollment->course->logo) }}"
                                         alt="{{ $enrollment->course->tag }} logo"
                                         width="32"
                                     />

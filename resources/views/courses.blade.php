@@ -15,7 +15,7 @@
                         </div>
                         <div class="profile-thumb-block" style="position: relative; top: -20px;">
                             <img
-                                src="{{ asset($enrollment->course->logo) }}"
+                                src="{{ Storage::disk('s3assets')->url($enrollment->course->logo) }}"
                                 alt="profile-image"
                                 class="profile"
                             />
