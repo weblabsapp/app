@@ -15,7 +15,7 @@
                     <div class="d-flex flex-column align-items-center text-center">
                         <div>
                             @if(!empty($account->avatar))
-                            <img id="profile-picture" src="{{ Storage::disk('s3assets')->url($account->avatar) }}" alt="Admin"
+                            <img id="profile-picture" src="{{ $account->avatar }}" alt="Admin"
                                  class="rounded-circle border" width="150" style="border: 1px solid #e0e0e0;">
                             @else
                             <img id="profile-picture" src="{{ sprintf(asset('images/%s-avatar.png'), $account->gender ?? 'unknown') }}" alt="Admin"

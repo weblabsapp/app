@@ -69,7 +69,9 @@ class Account extends Model implements Authenticatable
 
     public $fillable = [
         'id',
+        'name',
         'email',
+        'avatar',
         'password',
         'username',
         'gender',
