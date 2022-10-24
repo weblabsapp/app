@@ -14,9 +14,9 @@
         </div>
     @else
         <div id="main-page" class="row w-100 h-100 m-0">
-            <div class="col-md-6 m-auto">
+            <div class="col-md-6 col-sm-6 m-auto">
                 <div id="login-info" class="text-center">
-                    <div class="d-sm-block d-md-none mb-5">
+                    <div class="d-block d-sm-none mb-5">
                         <img class="mb-4" src="{{ asset('images/code_64.png') }}" alt="" width="72" height="72">
                         <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
                     </div>
@@ -25,18 +25,18 @@
                             @quote
                         </div>
                     </div>
-                    <div class="form-group mt-3 d-none d-sm-none d-md-block">
+                    <div class="form-group mt-3 d-none d-sm-block">
                         <p>
-                            <a class="btn btn-secondary" href="{{ get_route('web.signupPage') }}">Create an account</a>
+                            <a class="btn btn-secondary btn-md" href="{{ get_route('web.signupPage') }}">Create Account</a>
                             &nbsp;
-                            <a class="btn btn-secondary" href="{{ get_route('web.homePage') }}">Go Home</a>
+                            <a class="btn btn-secondary btn-md" href="{{ get_route('web.homePage') }}">Go Home</a>
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 text-center m-auto">
+            <div class="col-md-6 col-sm-6 text-center m-auto">
                 <form id="login-form" class="auth-form text-center" action="{{ get_route('api.login') }}" method="post">
-                    <div class="d-none d-lg-block">
+                    <div class="d-none d-sm-block">
                         <img class="mb-4" src="{{ asset('images/code_64.png') }}" alt="" width="72" height="72">
                         <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
                     </div>
@@ -72,18 +72,25 @@
                         {!!  GoogleReCaptchaV2::render('recaptcha') !!}
                     </div>
 
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-
-                    {{--            <a href="{{ get_route('web.socialLogin', ['provider' => 'github']) }}">Github</a>--}}
-                    {{--            <a href="{{ get_route('web.socialLogin', ['provider' => 'facebook']) }}">Facebook</a>--}}
-                    {{--            <a href="{{ get_route('web.socialLogin', ['provider' => 'google']) }}">Google</a>--}}
+                    <button class="btn btn-md btn-primary btn-block" type="submit">Sign in</button>
+{{--                    <div class="mt-3">--}}
+{{--                        <a class="btn btn-outline-secondary" href="{{ get_route('web.socialLogin', ['provider' => 'github']) }}">--}}
+{{--                            <i class="fa-brands fa-github"></i>--}}
+{{--                        </a>--}}
+{{--                        <a class="btn btn-outline-secondary" href="{{ get_route('web.socialLogin', ['provider' => 'facebook']) }}">--}}
+{{--                            <i class="fa-brands fa-facebook-f"></i>--}}
+{{--                        </a>--}}
+{{--                        <a class="btn btn-outline-secondary" href="{{ get_route('web.socialLogin', ['provider' => 'google']) }}">--}}
+{{--                            <i class="fa-brands fa-google"></i>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
                 </form>
 
-                <div class="form-group mt-4 pt-5 border-top d-sm-block d-md-none">
+                <div class="form-group mt-4 pt-5 border-top d-block d-sm-none">
                     <p>
-                        <a class="btn btn-secondary" href="{{ get_route('web.signupPage') }}">Create an account</a>
+                        <a class="btn btn-secondary btn-md" href="{{ get_route('web.signupPage') }}">Create Account</a>
                         &nbsp;
-                        <a class="btn btn-secondary" href="{{ get_route('web.homePage') }}">Go Home</a>
+                        <a class="btn btn-secondary btn-md" href="{{ get_route('web.homePage') }}">Go Home</a>
                     </p>
                 </div>
             </div>

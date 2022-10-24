@@ -14,14 +14,14 @@
         </div>
     @else
     <div id="main-page" class="row w-100 h-100 m-0">
-        <div class="col-md-6 border-right m-auto">
+        <div class="col-md-6 col-sm-6 border-right m-auto">
             <div id="signup-info" class="text-center">
                 <img class="mb-4" src="{{ asset('images/code_64.png') }}" alt="" width="72" height="72">
                 <h1 class="h3 mb-3 font-weight-normal">Create new account</h1>
                 <div class="form-group">
                     <p>By sigining up, you agree with our <a href="{{ get_route('web.tosPage') }}" target="_blank">TOS <i class="fa-solid fa-arrow-up-right-from-square"></i></a>.</p>
                     <p>You can check your <a href="{{ get_route('web.privacyPage') }}" target="_blank">privacy policy <i class="fa-solid fa-arrow-up-right-from-square"></i></a> as well.</p>
-                    <div class="form-group mt-3 d-none d-sm-none d-md-block">
+                    <div class="form-group mt-3 d-none d-sm-block">
                         <br />
                         <a class="btn btn-secondary" href="{{ get_route('web.loginPage') }}">Login</a>
                         &nbsp;
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 m-auto text-center">
+        <div class="col-md-6 col-sm-6 m-auto text-center">
             <form id="signup-form" class="auth-form text-center" action="{{ get_route('api.signup') }}">
                 @csrf
                 <div class="group">
@@ -82,7 +82,7 @@
                 </div>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sing Up</button>
             </form>
-            <div class="form-group mt-4 pt-5 border-top d-sm-block d-md-none">
+            <div class="form-group mt-4 pt-5 border-top d-block d-sm-none">
                 <a class="btn btn-secondary" href="{{ get_route('web.loginPage') }}">Login</a>
                 &nbsp;
                 <a class="btn btn-secondary" href="{{ get_route('web.homePage') }}">Go Home</a>
