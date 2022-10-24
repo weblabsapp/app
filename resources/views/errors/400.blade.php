@@ -10,6 +10,15 @@
 
             <div id="cspio-description"><h6 class="text-light">Uh Oh! Maybe you missed something?</h6></div>
 
+            @foreach ([
+                    \App\Http\Responses\HtmlResponse::ALERT_TYPE_DANGER,
+                    \App\Http\Responses\HtmlResponse::ALERT_TYPE_WARNING
+                ] as $key)
+                @if(session()->has($key))
+                    <div class="alert alert-{{ $key }}"><strong>Reason:</strong> {{ session()->get($key) }}</div>
+                @endif
+            @endforeach
+
             <div id="cspio-socialprofiles">
                 <a href="https://fb.com/weblabsapp" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
                 <a href="https://www.linkedin.com/company/84129479" target="_blank"><i class="fab fa-linkedin-in fa-2x"></i></a>
