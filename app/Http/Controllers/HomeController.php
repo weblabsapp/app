@@ -64,6 +64,16 @@ class HomeController extends Controller
     {
         return view('terms-of-service');
     }
+
+    /**
+     * Display data deletion policy page
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function dataDeletion()
+    {
+        return view('data-deletion');
+    }
 }
 
 
