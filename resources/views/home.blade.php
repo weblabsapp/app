@@ -42,7 +42,7 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <h2 class="card-title">
-                            <img src="{{ asset($course->logo) }}" width="100" alt="{{ $course->tag }} logo">
+                            <img src="{{ $course->logo }}" width="100" alt="{{ $course->tag }} logo">
                         </h2>
                         <p class="card-text">
                             {!! $course->description !!}
