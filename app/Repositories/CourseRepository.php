@@ -58,14 +58,16 @@ class CourseRepository extends BaseRepository
             ->select('lessons_progress.*')
             ->leftJoin('lessons', function (JoinClause $query) use ($accountId) {
                 $query->on('lessons_progress.lesson_id', '=', 'lessons.id')
-                    ->where('lessons_progress.account_id', $accountId)
-                    ->where('lessons_progress.deleted_at', '=', null);
+                    ->where('lessons.is_active', '=', true)
+                    ->where('lessons.deleted_at', '=', null);
             })
             ->join('enrolls', function (JoinClause $query) use ($accountId) {
                 $query->on('lessons.course_id', '=', 'enrolls.course_id');
                 $query->where('enrolls.deleted_at', '=', null);
                 $query->where('enrolls.account_id', $accountId);
             })
+            ->where('lessons_progress.account_id', $accountId)
+            ->where('lessons_progress.deleted_at', '=', null)
             ->orderBy('lessons_progress.id', 'ASC')
             ->get()
             ->all();
