@@ -19,9 +19,9 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('APP_DOMAIN'), env('REST_API_DOMAIN'), env('ASSET_DOMAIN')],
+    'allowed_origins' => [env('APP_DOMAIN'), env('REST_API_DOMAIN')],
 
-    'allowed_origins_patterns' => [sprintf('/(.*).%s/i', env('ALLOWED_ORIGINS')), env('ASSET_DOMAIN')],
+    'allowed_origins_patterns' => [sprintf('/(.*).%s/i', env('ALLOWED_ORIGINS'))],
 
     'allowed_headers' => ['*'],
 
