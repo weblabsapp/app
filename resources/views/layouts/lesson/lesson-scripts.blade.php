@@ -13,8 +13,6 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
-    <script type="application/json" src="{{ asset('json/96871-star.json') }}"></script>
-
     <script>
         window.addEventListener('load', (event) => {
             ace.require("ace/ext/language_tools");
@@ -438,7 +436,7 @@
                     $('#mark-as-completed-btn').remove();
                     $('#complete-next-lesson-btn').removeClass('hidden');
                     let player = document.querySelector("lottie-player");
-                    player.load("{{ asset('json/96871-star.json') }}");
+                    player.load('{{ file_get_contents(asset('json/96871-star.json')) }}');
                     player.play();
                 },
                 error: function (xhr, call = false) {
