@@ -436,7 +436,7 @@
                     $('#mark-as-completed-btn').remove();
                     $('#complete-next-lesson-btn').removeClass('hidden');
                     let player = document.querySelector("lottie-player");
-                    player.load('{{ file_get_contents(asset('json/96871-star.json')) }}');
+                    player.load("{{ asset('json/96871-star.json') }}");
                     player.play();
                 },
                 error: function (xhr, call = false) {
