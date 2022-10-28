@@ -13,6 +13,8 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
+    <script type="application/json" src="{{ asset('json/96871-star.json') }}"></script>
+
     <script>
         window.addEventListener('load', (event) => {
             ace.require("ace/ext/language_tools");
