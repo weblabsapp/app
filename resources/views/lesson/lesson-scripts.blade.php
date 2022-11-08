@@ -12,6 +12,7 @@
             integrity="sha512-RjWHxvDlXm3I4xLhSj4MeIwRmHDaZr2p6rXhxTgaPEeoUmTtWmgL1c3pIp1iceLnsk95xF5DJw9LvFmwNY2i/Q=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script type="text/javascript" src="{{ asset('js/macro.js') }}"></script>
 
     <script>
         window.addEventListener('load', (event) => {
@@ -99,7 +100,15 @@
             editor.on('change', (event) => {
                 window.isContentChanged = true;
             });
+        });
 
+        $('#apply-pip-btn').on('click', function () {
+            applyPip($('#lesson-video')[0]);
+        });
+
+        $('#close-request-pip-dev').on('click', function () {
+            $('#request-pip-div').hide();
+            $('#lesson-video').css({ filter: 'brightness(100%)' })
         });
 
         $(window).on('beforeunload', function (e) {
@@ -366,6 +375,17 @@
                 window.open(url, '_blank');
             });
         });
+
+        $('#watch-tutorial-modal').on('hidden.bs.modal', function () {
+            if (!pipActive) {
+                $('#lesson-video')[0].pause();
+            }
+        });
+
+        @if(!empty($lesson->video))
+        $('#lesson-video')[0].addEventListener("timeupdate", {!! $lesson->macros !!}, false);
+        applyListeners($('#lesson-video')[0]);
+        @endif
 
         function getSandboxId(courseTag) {
             let sandboxId = null;

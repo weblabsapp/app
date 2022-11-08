@@ -20,6 +20,7 @@ use Whitecube\NovaFlexibleContent\Value\FlexibleCast;
  * @property string $explore_content
  * @property string $full_content
  * @property Model $command_options
+ * @property string $macros
  * @property array $checklist
  * @property bool $is_active
  * @property string $created_at
@@ -28,6 +29,7 @@ use Whitecube\NovaFlexibleContent\Value\FlexibleCast;
  *
  * @property Course $course
  * @property Topic $topic
+ * @property LessonVideo|null $video
  */
 class Lesson extends Model
 {
@@ -44,7 +46,8 @@ class Lesson extends Model
         'full_content',
         'is_active',
         'command_options',
-        'complete_summaries'
+        'complete_summaries',
+        'macros'
     ];
 
     protected $casts = [
@@ -99,5 +102,15 @@ class Lesson extends Model
     {
         return $this->hasMany(LessonCompletenessChecklist::class, 'lesson_id', 'id')
             ->orderBy('id');
+    }
+
+    /**
+     * Get the video for this lesson
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function video()
+    {
+        return $this->hasOne(LessonVideo::class, 'lesson_id', 'id');
     }
 }

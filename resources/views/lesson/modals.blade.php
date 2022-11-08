@@ -1,19 +1,3 @@
-<div class="text-right">
-    <div class="btn-group" role="group" aria-label="Basic example">
-    {{--    <button class="btn btn-info" rel="tooltip" data-placement="top" title="Share code"><i class="fa-solid fa-share-nodes"></i></button>--}}
-        <button class="btn btn-dark" rel="tooltip" data-placement="top" title="Watch tutorial"><i class="fa-solid fa-clapperboard"></i></button>
-        <button class="btn btn-secondary" rel="tooltip" data-placement="top" data-toggle="modal" data-target="#save-code-modal" data-keyboard="false" data-backdrop="static" title="Save code" data-course="{{ $courseTag }}"><i class="fa fa-save"></i></button>
-        <button class="btn btn-dark" rel="tooltip" data-placement="top" data-toggle="modal" data-target="#load-code-modal" data-keyboard="false" data-backdrop="static" title="Load code from file" data-course="{{ $courseTag }}"><i class="fa-solid fa-code"></i></button>
-        <button id="run-code" class="btn btn-success" rel="tooltip" data-placement="top" title="Run code">
-            <i id="run-code-icon" class="fa fa-play"></i>
-            <spinner id="run-code-spinner" class="hidden">
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <span class="sr-only">Loading...</span>
-            </spinner>
-        </button>
-    </div>
-</div>
-
 <!-- Save File Modal -->
 <div class="modal fade" id="save-code-modal" tabindex="-1" role="dialog" aria-labelledby="save-code-modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -49,11 +33,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row" colspan="4" class="text-center">
-                                        You have no files yet!
-                                    </th>
-                                </tr>
+                            <tr>
+                                <th scope="row" colspan="4" class="text-center">
+                                    You have no files yet!
+                                </th>
+                            </tr>
                             </tbody>
                         </table>
                         <span>
@@ -155,13 +139,48 @@
             <div class="modal-footer">
                 <button id="mark-as-completed-btn" type="button" class="btn btn-primary"  onclick="markAsCompleted('{{ $lessonTag }}', this);">Mark as completed</button>
                 @if(!empty($nextAndPreviousLessons['next_lesson']))
-                <a id="complete-next-lesson-btn" href="{{ get_route('web.getLesson', ['courseTag' => $courseTag, 'lessonTag' => $nextAndPreviousLessons['next_lesson']->tag]) }}" class="btn btn-primary hidden flashing">
-                    {{ $nextAndPreviousLessons['next_lesson']->title }}
-                    <i class="fa-solid fa-forward"></i>
-                </a>
+                    <a id="complete-next-lesson-btn" href="{{ get_route('web.getLesson', ['courseTag' => $courseTag, 'lessonTag' => $nextAndPreviousLessons['next_lesson']->tag]) }}" class="btn btn-primary hidden flashing">
+                        {{ $nextAndPreviousLessons['next_lesson']->title }}
+                        <i class="fa-solid fa-forward"></i>
+                    </a>
                 @endif
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+
+@if(!empty($lesson->video))
+    <!-- Watch Tutorial Modal -->
+    <div class="modal fade" id="watch-tutorial-modal" tabindex="-1" role="dialog" aria-labelledby="watch-tutorial-modal" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ strtoupper($courseTag) }} > {{ $lesson->title }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <video id="lesson-video" class="img-fluid rounded mb-4 mb-lg-0" src="{{ asset(sprintf('videos/%s', $lesson->video->file_name)) }}" controls
+                           preload="none" poster="{{ asset(sprintf('images/%s', $lesson->video->poster)) }}"
+                           controlsList="nodownload noplaybackrate"
+                           data-request-pip-time="10"
+                           data-require-pip="true"
+                    ></video>
+
+                    <div id="request-pip-div">
+                        <div class="input-group">
+                            <span class="form-control">Click here to minimize <i class='fa-solid fa-arrow-right'></i></span>
+                            <div class="input-group-append">
+                                <button id="apply-pip-btn" class="btn btn-primary flashing"><i class="fa-solid fa-minimize"></i></button>
+                                <button class="btn btn-info" rel="tooltip" data-placement="top" title="This video is an interactive, so requires PiP mode."><i class="fa-solid fa-circle-exclamation"></i></button>
+                                <button id="close-request-pip-dev" class="btn btn-danger"><i class="fa-solid fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif

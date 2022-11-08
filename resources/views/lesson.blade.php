@@ -3,26 +3,36 @@
 @section('is-courses-nav', 'active')
 
 @section('content')
-<div class="main-body">
-    @section('lessonName')
-        {{ $lesson->title }}
-    @endsection
+    <div class="main-body">
+        <div id="video-macro-overlay"></div>
 
-    @section('breadcrumb')
-        <!-- Breadcrumb -->
-        {{ Breadcrumbs::render('lesson', $lesson) }}
-        <!-- /Breadcrumb -->
-    @endsection
+        @section('lessonName')
+            {{ $lesson->title }}
+        @endsection
 
-    <div class="row mr-0 ml-0">
-        @include('partials.lesson-editor', ['courseTag' => $courseTag, 'courseLogo' => $courseLogo])
-        <div class="col-md-6 pr-0 pl-0">
-            @include('layouts.lesson.lesson-info', ['courseTag' => $courseTag, 'lesson' => $lesson])
+        @section('breadcrumb')
+            <!-- Breadcrumb -->
+            {{ Breadcrumbs::render('lesson', $lesson) }}
+            <!-- /Breadcrumb -->
+        @endsection
+
+        <div class="row mr-0 ml-0">
+            @include('lesson.lesson-editor', ['courseTag' => $courseTag, 'courseLogo' => $courseLogo])
+            <div class="col-md-6 pr-0 pl-0">
+                @include('lesson.lesson-info', ['courseTag' => $courseTag, 'lesson' => $lesson])
+            </div>
         </div>
-    </div>
 
-    @include('layouts.lesson.lesson-scripts')
-</div>
+        @include('lesson.modals', [
+            'courseFileExt' => $courseFileExt,
+            'courseTag' => $courseTag,
+            'lesson' => $lesson,
+            'lessonTag' => $lessonTag,
+            'nextAndPreviousLessons' => $nextAndPreviousLessons,
+            ''
+        ])
+        @include('lesson.lesson-scripts')
+    </div>
 @endsection
 
 @section('footer')
