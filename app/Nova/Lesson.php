@@ -16,6 +16,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Whitecube\NovaFlexibleContent\Flexible;
 
@@ -124,6 +125,8 @@ class Lesson extends Resource
                         ])->rules('required'),
                     Text::make('Value', 'value')
                 ])->button('Add Option'),
+
+            Textarea::make('macros'),
 
             HasMany::make('Checklist Summary', 'checklist', Checklist::class)
                 ->showOnDetail()
