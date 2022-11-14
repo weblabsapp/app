@@ -15,8 +15,8 @@
                     <div class="d-flex flex-column align-items-center text-center">
                         <div>
                             @if(!empty($account->avatar))
-                            <img id="profile-picture" src="{{ $account->avatar }}" alt="Admin"
-                                 class="rounded-circle border" width="150" style="border: 1px solid #e0e0e0;">
+                            <img id="profile-picture" src="{{ $account->avatar_sm ?? $account->avatar }}" alt="Admin" data-large="{{ $account->avatar }}"
+                                 class="rounded-circle border blurry-load" width="150" height="150" style="border: 1px solid #e0e0e0; background-image: url({{ $account->avatar_sm }}); background-size: cover;">
                             @else
                             <img id="profile-picture" src="{{ sprintf(asset('images/%s-avatar.png'), $account->gender ?? 'unknown') }}" alt="Admin"
                                  class="rounded-circle border" width="150" style="border: 1px solid #e0e0e0;">

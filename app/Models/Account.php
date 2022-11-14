@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use App\Models\Hooks\BlurAvatar;
 use App\Models\Traits\Activatable;
 use App\Models\Traits\UuidPrimary;
 use App\Observers\AccountObserver;
@@ -33,6 +34,8 @@ use QCod\ImageUp\HasImageUploads;
  * @property float|null $latitude
  * @property string|null $user_agent
  * @property array $social_profiles
+ * @property string|null $avatar
+ * @property string|null $avatar_sm
  * @property Carbon|null $email_verified_at
  * @property string|null $access_token
  * @property string|null $remember_token
@@ -64,6 +67,12 @@ class Account extends Model implements Authenticatable
         'avatar' => [
             'width' => 200,
             'height' => 200
+        ],
+        'avatar_sm' => [
+            'width' => 200,
+            'height' => 200,
+            'resize_image_quality' => 50,
+            'before_save' => BlurAvatar::class
         ]
     ];
 
@@ -106,15 +115,29 @@ class Account extends Model implements Authenticatable
     /**
      * Get avatar upload path
      *
-     * @param $avatar
      * @return string
      */
-    public function avatarUploadFilePath($avatar)
+    public function avatarUploadFilePath()
     {
         return sprintf(
             '%s/%s.%s',
             $this->id,
             'image',
+            'jpg'
+        );
+    }
+
+    /**
+     * Get avatar sm upload path
+     *
+     * @return string
+     */
+    public function avatarSmUploadFilePath()
+    {
+        return sprintf(
+            '%s/%s.%s',
+            $this->id,
+            'image-sm',
             'jpg'
         );
     }
