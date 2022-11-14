@@ -1,6 +1,10 @@
 @push('scripts')
     <script type="text/javascript" src="{{ asset('js/croppie.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/form-validation-bundle.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/blurry-load.min.js') }}"></script>
+    <script type="text/javascript">
+        new BlurryImageLoad().load();
+    </script>
     <script type="text/javascript">
         let profile_attributes_constraints = {
             name: {

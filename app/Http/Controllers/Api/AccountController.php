@@ -17,6 +17,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class AccountController extends ApiController
 {
@@ -156,7 +157,10 @@ class AccountController extends ApiController
      */
     public function updateAvatar(Request $request)
     {
-        Auth::user()->uploadImage($request->file('avatar'), 'avatar');
+        $account = Auth::user();
+
+        $account->uploadImage($request->file('avatar'), 'avatar');
+        $account->uploadImage($request->file('avatar'), 'avatar_sm');
     }
 
     /**

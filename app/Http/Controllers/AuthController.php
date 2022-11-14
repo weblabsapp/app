@@ -176,10 +176,13 @@ class AuthController extends Controller
 
         $account->social_profiles = array_filter($account->social_profiles ?? []);
 
-        if (!filter_var($account->avatar, FILTER_VALIDATE_URL)) {
+        if (!empty($account->avatar) && !filter_var($account->avatar, FILTER_VALIDATE_URL)) {
             $account->avatar = Storage::disk('s3assets')->url($account->avatar);
         }
 
+        if (!empty($account->avatar_sm) && !filter_var($account->avatar_sm, FILTER_VALIDATE_URL)) {
+            $account->avatar_sm = Storage::disk('s3assets')->url($account->avatar_sm);
+        }
 
         // Get lessons progress for each courses
         $pendingLessons = $inProgressLessons = $completedLessons = [];
