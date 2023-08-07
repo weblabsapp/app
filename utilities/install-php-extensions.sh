@@ -8,7 +8,7 @@ pecl_extensions=(redis mongodb yaml)
 
 # Install xdebug extension if in dev mode
 if [ "$APP_ENV" == "local" ]; then
-  pecl_extensions+=(xdebug)
+  pecl_extensions+=(xdebug-3.1.6)
 fi
 
 

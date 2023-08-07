@@ -2,7 +2,9 @@
 /public/hot
 /public/storage
 /storage/*.key
+/k8s/config
 /vendor
+/php_extensions/xdebug-3.1.6.ini
 .env
 .env.dev
 .env.prod

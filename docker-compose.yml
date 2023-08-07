@@ -42,7 +42,8 @@ services:
     env_file: .env
     network_mode: bridge
     extra_hosts:
-      - cloud-api.weblabs.local:192.168.100.5
+      - cloud-api.weblabs.local:192.168.100.30
+      - k8s-virtual-machine.local:192.168.100.36
     depends_on:
       - db
       - redis

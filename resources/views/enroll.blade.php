@@ -80,7 +80,7 @@
                                 return;
                             }
                             // Reject the Promise with error message to show as tab content
-                            reject( "An error loading the resource" );
+                            reject( "An error occurred while loading the resource" );
 
                             // Hide the loader
                             wizard.smartWizard("loader", "hide");

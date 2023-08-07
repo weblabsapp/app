@@ -1,7 +1,7 @@
-{{--@extends('layouts.main')--}}
+@extends('layouts.main')
 
-{{--@section('head')--}}
-{{--    <link rel="stylesheet" href="{{ asset('css/coming-soon.min.css') }}">--}}
+@section('head')
+    <link rel="stylesheet" href="{{ asset('css/coming-soon.min.css') }}">
 
     <!-- CSS -->
     <!-- Google Fonts -->
@@ -9,7 +9,7 @@
           type='text/css'>
 
     <!-- Animate CSS -->
-{{--    <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}"/>--}}
+    <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}"/>
 
     <!-- Calculated Styles -->
     <link rel="stylesheet" href="{{ asset('css/style.min.css') }}"/>
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="{{ asset('js/bootstrap-toaster.min.js') }}" defer></script>
 
     <!-- Validate.js -->
-{{--    <script type="text/javascript" src="{{ asset('js/validate.min.js') }}" defer></script>--}}
+    <script type="text/javascript" src="{{ asset('js/validate.min.js') }}" defer></script>
 @endsection
 
 @section('page_title')

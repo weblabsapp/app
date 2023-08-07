@@ -38,6 +38,7 @@ class Sandbox extends AbstractFactory
     public function getCluster()
     {
         return KubernetesCluster::fromUrl(env('KUBE_HOST'))
+            ->withCaCertificate(env('KUBE_CERTIFICATE'))
             ->withToken(env('KUBE_BEARER_TOKEN'));
     }
 
@@ -211,6 +212,8 @@ class Sandbox extends AbstractFactory
             $container = $this->createContainer($volume);
             $podContainers = array_merge($podContainers, [$container]);
         }
+
+        $pod->onCluster($this->getCluster());
 
         $pod->setContainers($podContainers)->createOrUpdate()->watch(function ($result, K8sPod $pod) use ($courseTag) {
             if (($container = $pod->getContainer($courseTag)) && $container->isReady()) {
