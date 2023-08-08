@@ -88,7 +88,8 @@ class CourseRepository extends BaseRepository
                 }
             }
         } else {
-            $pendingLessons = array_diff(array_column($courseLessons, 'id'), array_column($courseProgress, 'lesson_id'));
+            $pendingLessonsIds = array_diff(array_column($courseLessons, 'id'), array_column($courseProgress, 'lesson_id'));
+            $pendingLessons = Lesson::query()->whereIn('id', $pendingLessonsIds);
 
             $completedLessons = $inProgressLessons = [];
 

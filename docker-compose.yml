@@ -12,7 +12,7 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE}
       TZ: ${APP_TIMEZONE}
     ports:
-      - ${DB_PORT}:3306
+      - 127.0.0.1:${DB_PORT}:3306
     network_mode: bridge
 
   redis:
@@ -24,7 +24,7 @@ services:
     volumes:
       - redis-dev:/data
     ports:
-      - ${REDIS_PORT}:6379
+      - 127.0.0.1:${REDIS_PORT}:6379
     network_mode: bridge
 
   app:
@@ -35,14 +35,14 @@ services:
     command: php artisan serve --host=0.0.0.0
     container_name: weblabs-dev-app
     ports:
-      - ${APP_PORT}:8000
+      - 127.0.0.1:${APP_PORT}:8000
     volumes:
       - .:/app
       - /app/vendor
     env_file: .env
     network_mode: bridge
     extra_hosts:
-      - cloud-api.weblabs.local:192.168.100.5
+      - k8s-virtual-machine.local:192.168.100.36
     depends_on:
       - db
       - redis
