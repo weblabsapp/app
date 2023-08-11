@@ -18,14 +18,10 @@ class LessonVideosTable extends Migration
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('lesson_id');
-            $table->string('file_name');
+            $table->string('video_url');
             $table->string('poster')->nullable();
             $table->timestamps();
             $table->softDeletes();
-        });
-
-        Schema::table('lessons', function (Blueprint $table) {
-            $table->uuid('video_id')->after('topic_id')->nullable();
         });
     }
 
@@ -37,6 +33,5 @@ class LessonVideosTable extends Migration
     public function down()
     {
         Schema::drop(self::TABLE_NAME);
-        Schema::dropColumns('lessons', ['video_id']);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use App\Models\LessonCompletenessChecklist;
 use App\Nova\Actions\GetChecklistAction;
 use App\Nova\Filters\ActiveFilter;
 use App\Nova\Filters\LessonCourseFilter;
@@ -12,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
@@ -128,6 +128,8 @@ class Lesson extends Resource
 
             Textarea::make('macros'),
 
+            HasOne::make('Tutorial Video', 'video', LessonVideo::class),
+
             HasMany::make('Checklist Summary', 'checklist', Checklist::class)
                 ->showOnDetail()
         ];
@@ -193,7 +195,7 @@ class Lesson extends Resource
         return [
             (new GetChecklistAction())
                 ->onlyInline()
-                ->showOnDetail()
+                ->showOnDetail(),
         ];
     }
 }

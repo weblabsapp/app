@@ -162,8 +162,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <video id="lesson-video" class="img-fluid rounded mb-4 mb-lg-0" src="{{ asset(sprintf('videos/%s', $lesson->video->file_name)) }}" controls
-                           preload="none" poster="{{ asset(sprintf('images/%s', $lesson->video->poster)) }}"
+                    <video id="lesson-video" class="img-fluid rounded mb-4 mb-lg-0" src="{{ $lesson->video->video_url }}" controls
+                           preload="none" poster="{{ $lesson->video->poster }}"
                            controlsList="nodownload noplaybackrate"
                            data-request-pip-time="10"
                            data-require-pip="true"
