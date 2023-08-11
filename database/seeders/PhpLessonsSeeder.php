@@ -32,7 +32,7 @@ class PhpLessonsSeeder extends Seeder
                 'title' => 'Basic Syntax',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 1,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 When PHP parses a file, it looks for opening and closing tags, which are <code>&lt;?php</code> and <code>?&gt;</code> 
 which tell PHP to start and stop interpreting the code between them. Parsing in this manner allows PHP to be embedded in all sorts of different documents, as everything outside of a pair of opening and closing tags is ignored by the PHP parser.
 
@@ -52,7 +52,7 @@ HTML,
                 'title' => 'Types',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 2,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">PHP supports ten primitive types.</p>
 <p class="para">Four scalar types:</p>
 <ul class="itemizedlist">
@@ -83,7 +83,7 @@ HTML,
                 'title' => 'Variables',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 3,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">Variables in PHP are represented by a dollar sign followed by the name of the variable. The variable name is case-sensitive.</p>
 <p class="para">Variable names follow the same rules as other labels in PHP. A valid variable name starts with a letter or underscore, followed by any number of letters, numbers, or underscores. As a regular expression, it would be expressed thus:&nbsp;<code class="code">^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$</code></p>
 <hr>
@@ -102,7 +102,7 @@ HTML,
                 'title' => 'Constants',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 4,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>A constant is an identifier (name) for a simple value. As the name suggests, that value cannot change during the execution of the script (except for magic constants, which aren't actually constants). Constants are case-sensitive. By convention, constant identifiers are always uppercase.</p>
 <p>The name of a constant follows the same rules as any label in PHP. A valid constant name starts with a letter or underscore, followed by any number of letters, numbers, or underscores. As a regular expression, it would be expressed thusly: <code>^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$</code></p>
 <p>It is possible to <code>define()</code> constants with reserved or even invalid names, whose value can only be retrieved with the <code>constant()</code> function. However, doing so is not recommended.</p>
@@ -121,7 +121,7 @@ HTML,
                 'title' => 'Expressions',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 5,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Expressions are the most important building blocks of PHP. In PHP, almost anything you write is an expression. The simplest yet most accurate way to define an expression is "anything that has a value".</p>
 <p>The most basic forms of expressions are constants and variables. When you type <code>$a = 5</code>, you're assigning '5' into <code>$a</code>. '5', obviously, has the value 5, or in other words '5' is an expression with the value of 5 (in this case, '5' is an integer constant).</p>
 <p>After this assignment, you'd expect $a's value to be 5 as well, so if you wrote <code>$b = $a</code>, you'd expect it to behave just as if you wrote <code>$b = 5</code>. In other words, <code>$a</code> is an expression with the value of 5 as well. If everything works right, this is exactly what will happen.</p>
@@ -137,7 +137,7 @@ HTML,
                 'title' => 'Operators',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 6,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">An operator is something that takes one or more values (or expressions, in programming jargon) and yields another value (so that the construction itself becomes an expression).</p>
 <p class="para">Operators can be grouped according to the number of values they take. Unary operators take only one value, for example&nbsp;<code class="literal">!</code>&nbsp;(the&nbsp;<a class="link" href="https://www.php.net/manual/en/language.operators.logical.php" target="_blank">logical not operator</a>) or&nbsp;<code class="literal">++</code>&nbsp;(the&nbsp;<a class="link" href="https://www.php.net/manual/en/language.operators.increment.php" target="_blank">increment operator</a>). Binary operators take two values, such as the familiar&nbsp;<a class="link" href="https://www.php.net/manual/en/language.operators.arithmetic.php" target="_blank">arithmetical operators</a>&nbsp;<code class="literal">+</code>&nbsp;(plus) and&nbsp;<code class="literal">-</code>&nbsp;(minus), and the majority of PHP operators fall into this category. Finally, there is a single&nbsp;<a class="link" href="https://www.php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary">ternary operator</a>,&nbsp;<code class="literal">? :</code>, which takes three values; this is usually referred to simply as "the ternary operator" (although it could perhaps more properly be called the conditional operator).</p>
 <p class="para">A full list of PHP operators follows in the section&nbsp;<a class="link" href="https://www.php.net/manual/en/language.operators.precedence.php" target="_blank">Operator Precedence</a>. The section also explains operator precedence and associativity, which govern exactly how expressions containing several different operators are evaluated.</p>
@@ -166,7 +166,7 @@ HTML,
                 'title' => 'Control Structures',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 7,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Any PHP script is built out of a series of statements. A statement can be an assignment, a function call, a loop, a conditional statement or even a statement that does nothing (an empty statement). Statements usually end with a semicolon. In addition, statements can be grouped into a statement-group by encapsulating a group of statements with curly braces. A statement-group is a statement by itself as well.</p>
 
 <hr>
@@ -200,7 +200,7 @@ HTML,
                 'title' => 'Functions',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 8,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>PHP function is a piece of code that can be reused many times. It can take input as argument list and return value. There are thousands of built-in functions in PHP.</p>
 <p>In PHP, we can define Conditional function, Function within Function and Recursive function also.</p>
 
@@ -224,7 +224,7 @@ HTML,
                 'title' => 'Classes and Objects',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 9,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">PHP includes a complete object model. Some of its features are:&nbsp;<a class="link" href="https://www.php.net/manual/en/language.oop5.visibility.php" target="_blank">visibility</a>,&nbsp;<a class="link" href="https://www.php.net/manual/en/language.oop5.abstract.php" target="_blank">abstract</a>&nbsp;and&nbsp;<a class="link" href="https://www.php.net/manual/en/language.oop5.final.php" target="_blank">final</a>&nbsp;classes and methods, additional&nbsp;<a class="link" href="https://www.php.net/manual/en/language.oop5.magic.php" target="_blank">magic methods</a>,&nbsp;<a class="link" href="https://www.php.net/manual/en/language.oop5.interfaces.php" target="_blank">interfaces</a>, and&nbsp;<a class="link" href="https://www.php.net/manual/en/language.oop5.cloning.php" target="_blank">cloning</a>.</p>
 <p class="para">PHP treats objects in the same way as references or handles, meaning that each variable contains an object reference rather than a copy of the entire object. See&nbsp;<a class="link" href="https://www.php.net/manual/en/language.oop5.references.php" target="_blank">Objects and References</a></p>
 
@@ -263,7 +263,7 @@ HTML,
                 'title' => 'Namespaces',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 10,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">What are namespaces? In the broadest definition namespaces are a way of encapsulating items. This can be seen as an abstract concept in many places. For example, in any operating system directories serve to group related files, and act as a namespace for the files within them. As a concrete example, the file&nbsp;<code class="literal">foo.txt</code>&nbsp;can exist in both directory&nbsp;<code class="literal">/home/greg</code>&nbsp;and in&nbsp;<code class="literal">/home/other</code>, but two copies of&nbsp;<code class="literal">foo.txt</code>&nbsp;cannot co-exist in the same directory. In addition, to access the&nbsp;<code class="literal">foo.txt</code>&nbsp;file outside of the&nbsp;<code class="literal">/home/greg</code>&nbsp;directory, we must prepend the directory name to the file name using the directory separator to get&nbsp;<code class="literal">/home/greg/foo.txt</code>. This same principle extends to namespaces in the programming world.</p>
 <p class="simpara">In the PHP world, namespaces are designed to solve two problems that authors of libraries and applications encounter when creating re-usable code elements such as classes or functions:</p>
 <ol>
@@ -294,7 +294,7 @@ HTML,
                 'title' => 'Enumerations',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 11,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Enumerations, or "Enums" allow a developer to define a custom type that is limited to one of a discrete number of possible values. That can be especially helpful when defining a domain model, as it enables "making invalid states unrepresentable."</p>
 <p class="para">Enums appear in many languages with a variety of different features. In PHP, Enums are a special kind of object. The Enum itself is a class, and its possible cases are all single-instance objects of that class. That means Enum cases are valid objects and may be used anywhere an object may be used, including type checks.</p>
 <p class="para">The most popular example of enumerations is the built-in boolean type, which is an enumerated type with legal values&nbsp;<strong><code>true</code></strong>&nbsp;and&nbsp;<strong><code>false</code></strong>. Enums allows developers to define their own arbitrarily robust enumerations.</p>
@@ -321,7 +321,7 @@ HTML,
                 'title' => 'Errors',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 12,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <h5><a href="https://www.php.net/manual/en/language.errors.php" target="_blank">Read more about Errors in PHP</a></h5>
 HTML,
                 'is_active' => 0
@@ -331,7 +331,7 @@ HTML,
                 'title' => 'Exceptions',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 13,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">PHP has an exception model similar to that of other programming languages. An exception can be thrown, and caught within PHP. Code may be surrounded in a <code class="literal">try</code> block, to facilitate the catching of potential exceptions. Each <code class="literal">try</code> must have at least one corresponding <code class="literal">catch</code> or <code class="literal">finally</code> block.</p>
 <p class="para">If an exception is thrown and its current function scope has no <code class="literal">catch</code> block, the exception will "bubble up" the call stack to the calling function until it finds a matching <code class="literal">catch</code> block. All <code class="literal">finally</code> blocks it encounters along the way will be executed. If the call stack is unwound all the way to the global scope without encountering a matching <code class="literal">catch</code> block, the program will terminate with a fatal error unless a global exception handler has been set.</p>
 <p class="para">The thrown object must be an instance of the Exception class or a subclass of Exception. Trying to throw an object that is not will result in a PHP Fatal Error.</p>
@@ -352,7 +352,7 @@ HTML,
                 'title' => 'Fibers',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 14,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Fibers represent full-stack, interruptible functions. Fibers may be suspended from anywhere in the call-stack, pausing execution within the fiber until the fiber is resumed at a later time.</p>
 <p class="para">Fibers pause the entire execution stack, so the direct caller of the function does not need to change how it invokes the function.</p>
 <p class="para">Execution may be interrupted anywhere in the call stack using <code>Fiber::suspend()</code> (that is, the call to <code>Fiber::suspend()</code>&gt; may be in a deeply nested function or not even exist at all).</p>
@@ -370,7 +370,7 @@ HTML,
                 'title' => 'Generators',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 15,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Generators provide an easy way to implement simple <a class="link" href="https://www.php.net/manual/en/language.oop5.iterations.php" target="_blank">iterators</a> without the overhead or complexity of implementing a class that implements the <a class="classname" href="https://www.php.net/manual/en/class.iterator.php" target="_blank">Iterator</a> interface.</p>
 <p class="para">A generator allows you to write code that uses <code>foreach</code> to iterate over a set of data without needing to build an array in memory, which may cause you to exceed a memory limit, or require a considerable amount of processing time to generate. Instead, you can write a generator function, which is the same as a normal <a class="link" href="https://www.php.net/manual/en/functions.user-defined.php" target="_blank">function</a>, except that instead of <code>return</code>ing once, a generator can <code>yield</code> as many times as it needs to in order to provide the values to be iterated over.</p>
 <p class="para">A simple example of this is to reimplement the <a class="function" href="https://www.php.net/manual/en/function.range.php" target="_blank">range()</a> function as a generator. The standard <code>range()</code> function has to generate an array with every value in it and return it, which can result in large arrays: for example, calling <strong class="command">range(0, 1000000)</strong> will result in well over 100 MB of memory being used.</p>
@@ -391,7 +391,7 @@ HTML,
                 'title' => 'Attributes',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 16,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Attributes offer the ability to add structured, machine-readable metadata information on declarations in code: Classes, methods, functions, parameters, properties and class constants can be the target of an attribute. The metadata defined by attributes can then be inspected at runtime using the&nbsp;<a class="link" href="https://www.php.net/manual/en/book.reflection.php" target="_blank">Reflection APIs</a>. Attributes could therefore be thought of as a configuration language embedded directly into code.</p>
 <p class="para">With attributes the generic implementation of a feature and its concrete use in an application can be decoupled. In a way it is comparable to interfaces and their implementations. But where interfaces and implementations are about code, attributes are about annotating extra information and configuration. Interfaces can be implemented by classes, yet attributes can also be declared on methods, functions, parameters, properties and class constants. As such they are more flexible than interfaces.</p>
 <p class="para">A simple example of attribute usage is to convert an interface that has optional methods to use attributes. Lets assume an&nbsp;<code class="literal">ActionHandler</code>&nbsp;interface representing an operation in an application, where some implementations of an action handler require setup and others do not. Instead of requiring all classes that implement&nbsp;<code class="literal">ActionHandler</code>&nbsp;to implement a method&nbsp;<code class="literal">setUp()</code>, an attribute can be used. One benefit of this approach is that we can use the attribute several times.</p>
@@ -412,7 +412,7 @@ HTML,
                 'title' => 'References Explained',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 17,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>References in PHP are a means to access the same variable content by different names. They are not like C pointers; for instance, you cannot perform pointer arithmetic using them, they are not actual memory addresses, and so on. See&nbsp;<a class="xref" href="https://www.php.net/manual/en/language.references.arent.php" target="_blank">What References Are Not</a>&nbsp;for more information. Instead, they are symbol table aliases. Note that in PHP, variable name and variable content are different, so the same content can have different names. The closest analogy is with Unix filenames and files - variable names are directory entries, while variable content is the file itself. References can be likened to hardlinking in Unix filesystem.</p>
 
 <hr>
@@ -434,7 +434,7 @@ HTML,
                 'title' => 'Predefined Variables',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 18,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>PHP provides a large number of predefined variables to all scripts. The variables represent everything from&nbsp;<a class="link" href="https://www.php.net/manual/en/language.variables.external.php" target="_blank">external variables</a>&nbsp;to built-in environment variables, last error messages to last retrieved headers.</p>
 
 <hr>
@@ -463,7 +463,7 @@ HTML,
                 'title' => 'Predefined Exceptions',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 19,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <ul class="chunklist chunklist_part">
     <li><a href="https://www.php.net/manual/en/class.exception.php" target="_blank">Exception</a></li>
     <li><a href="https://www.php.net/manual/en/class.errorexception.php" target="_blank">ErrorException</a></li>
@@ -487,7 +487,7 @@ HTML,
                 'title' => 'Predefined Interfaces and Classes',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 20,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <ul class="chunklist chunklist_part">
     <li><a href="https://www.php.net/manual/en/class.traversable.php" target="_blank">Traversable</a></li>
     <li><a href="https://www.php.net/manual/en/class.iterator.php" target="_blank">Iterator</a></li>
@@ -512,7 +512,7 @@ HTML,
                 'title' => 'Supported Protocols and Wrappers',
                 'topic_id' => $topics['language-reference']->id,
                 'lesson_order' => 21,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>PHP comes with many built-in wrappers for various URL-style protocols for use with the filesystem functions such as <code>fopen()</code>, <code>copy()</code>, <code>file_exists()</code> and <code>filesize()</code>. In addition to these wrappers, it is possible to register custom wrappers using the <code>stream_wrapper_register()</code> function.</p>
 
 <hr>
@@ -539,7 +539,7 @@ HTML,
                 'title' => 'Security Introduction',
                 'topic_id' => $topics['security']->id,
                 'lesson_order' => 22,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">PHP is a powerful language and the interpreter, whether included in a web server as a module or executed as a separate&nbsp;<abbr title="Common Gateway Interface">CGI</abbr>&nbsp;binary, is able to access files, execute commands and open network connections on the server. These properties make anything run on a web server insecure by default. PHP is designed specifically to be a more secure language for writing&nbsp;<abbr title="Common Gateway Interface">CGI</abbr>&nbsp;programs than Perl or C, and with correct selection of compile-time and runtime configuration options, and proper coding practices, it can give you exactly the combination of freedom and security you need.</p>
 <p class="simpara">As there are many different ways of utilizing PHP, there are many configuration options controlling its behaviour. A large selection of options guarantees you can use PHP for a lot of purposes, but it also means there are combinations of these options and server configurations that result in an insecure setup.</p>
 <p class="simpara">The configuration flexibility of PHP is equally rivalled by the code flexibility. PHP can be used to build complete server applications, with all the power of a shell user, or it can be used for simple server-side includes with little risk in a tightly controlled environment. How you build that environment, and how secure it is, is largely up to the PHP developer.</p>
@@ -552,7 +552,7 @@ HTML,
                 'title' => 'General Consideration',
                 'topic_id' => $topics['security']->id,
                 'lesson_order' => 23,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">A completely secure system is a virtual impossibility, so an approach often used in the security profession is one of balancing risk and usability. If every variable submitted by a user required two forms of biometric validation (such as a retinal scan and a fingerprint), you would have an extremely high level of accountability. It would also take half an hour to fill out a fairly complex form, which would tend to encourage users to find ways of bypassing the security.</p>
 <p class="simpara">The best security is often unobtrusive enough to suit the requirements without the user being prevented from accomplishing their work, or over-burdening the code author with excessive complexity. Indeed, some security attacks are merely exploits of this kind of overly built security, which tends to erode over time.</p>
 <p class="simpara">A phrase worth remembering: A system is only as good as the weakest link in a chain. If all transactions are heavily logged based on time, location, transaction type, etc. but the user is only verified based on a single cookie, the validity of tying the users to the transaction log is severely weakened.</p>
@@ -566,7 +566,7 @@ HTML,
                 'title' => 'Install as CGI Library',
                 'topic_id' => $topics['security']->id,
                 'lesson_order' => 24,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <ul class="chunklist chunklist_chapter">
     <li><a href="https://www.php.net/manual/en/security.cgi-bin.attacks.php" target="_blank">Possible attacks</a></li>
     <li><a href="https://www.php.net/manual/en/security.cgi-bin.default.php" target="_blank">Case 1: only public files served</a></li>
@@ -582,7 +582,7 @@ HTML,
                 'title' => 'Install as Apache Module',
                 'topic_id' => $topics['security']->id,
                 'lesson_order' => 25,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">When&nbsp;<abbr title="PHP: Hypertext Preprocessor">PHP</abbr>&nbsp;is used as an Apache module it inherits Apache's user permissions (typically those of the "nobody" user). This has several impacts on security and authorization. For example, if you are using&nbsp;<abbr title="PHP: Hypertext Preprocessor">PHP</abbr>&nbsp;to access a database, unless that database has built-in access control, you will have to make the database accessible to the "nobody" user. This means a malicious script could access and modify the database, even without a username and password. It's entirely possible that a web spider could stumble across a database administrator's web page, and drop all of your databases. You can protect against this with Apache authorization, or you can design your own access model using LDAP,&nbsp;<var class="filename">.htaccess</var>&nbsp;files, etc. and include that code as part of your&nbsp;<abbr title="PHP: Hypertext Preprocessor">PHP</abbr>&nbsp;scripts.</p>
 <p class="simpara">Often, once security is established to the point where the&nbsp;<abbr title="PHP: Hypertext Preprocessor">PHP</abbr>&nbsp;user (in this case, the apache user) has very little risk attached to it, it is discovered that&nbsp;<abbr title="PHP: Hypertext Preprocessor">PHP</abbr>&nbsp;is now prevented from writing any files to user directories. Or perhaps it has been prevented from accessing or changing databases. It has equally been secured from writing good and bad files, or entering good and bad database transactions.</p>
 <p class="simpara">A frequent security mistake made at this point is to allow apache root permissions, or to escalate apache's abilities in some other way.</p>
@@ -596,7 +596,7 @@ HTML,
                 'title' => 'Session Security',
                 'topic_id' => $topics['security']->id,
                 'lesson_order' => 26,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">It is important keeping HTTP session management secure. Session related security is described in&nbsp;<a class="link" href="https://www.php.net/manual/en/session.security.php" target="_blank">Session Security</a>&nbsp;section of&nbsp;<a class="link" href="https://www.php.net/manual/en/book.session.php" target="_blank">Session module</a>&nbsp;reference.</p>
 HTML,
                 'is_active' => 0
@@ -606,7 +606,7 @@ HTML,
                 'title' => 'Filesystem Security',
                 'topic_id' => $topics['security']->id,
                 'lesson_order' => 27,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara"><abbr title="PHP: Hypertext Preprocessor">PHP</abbr>&nbsp;is subject to the security built into most server systems with respect to permissions on a file and directory basis. This allows you to control which files in the filesystem may be read. Care should be taken with any files which are world readable to ensure that they are safe for reading by all users who have access to that filesystem.</p>
 <p class="simpara">Since&nbsp;<abbr title="PHP: Hypertext Preprocessor">PHP</abbr>&nbsp;was designed to allow user level access to the filesystem, it's entirely possible to write a&nbsp;<abbr title="PHP: Hypertext Preprocessor">PHP</abbr>&nbsp;script that will allow you to read system files such as /etc/passwd, modify your ethernet connections, send massive printer jobs out, etc. This has some obvious implications, in that you need to ensure that the files that you read from and write to are the appropriate ones.</p>
 
@@ -623,7 +623,7 @@ HTML,
                 'title' => 'Database Security',
                 'topic_id' => $topics['security']->id,
                 'lesson_order' => 28,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">Nowadays, databases are cardinal components of any web based application by enabling websites to provide varying dynamic content. Since very sensitive or secret information can be stored in a database, you should strongly consider protecting your databases.</p>
 <p class="simpara">To retrieve or to store any information you need to connect to the database, send a legitimate query, fetch the result, and close the connection. Nowadays, the commonly used query language in this interaction is the Structured Query Language (SQL). See how an attacker can&nbsp;<a class="link" href="https://www.php.net/manual/en/security.database.sql-injection.php" target="_blank">tamper with an SQL query</a>.</p>
 <p class="simpara">As you can surmise,&nbsp;<abbr title="PHP: Hypertext Preprocessor">PHP</abbr>&nbsp;cannot protect your database by itself. The following sections aim to be an introduction into the very basics of how to access and manipulate databases within&nbsp;<abbr title="PHP: Hypertext Preprocessor">PHP</abbr>&nbsp;scripts.</p>
@@ -645,7 +645,7 @@ HTML,
                 'title' => 'Error Reporting',
                 'topic_id' => $topics['security']->id,
                 'lesson_order' => 29,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">With PHP security, there are two sides to error reporting. One is beneficial to increasing security, the other is detrimental.</p>
 <p class="para">A standard attack tactic involves profiling a system by feeding it improper data, and checking for the kinds, and contexts, of the errors which are returned. This allows the system cracker to probe for information about the server, to determine possible weaknesses. For example, if an attacker had gleaned information about a page based on a prior form submission, they may attempt to override variables, or modify them:</p>
 <div id="example-434" class="example">
@@ -692,7 +692,7 @@ HTML,
                 'title' => 'User Submitted Data',
                 'topic_id' => $topics['security']->id,
                 'lesson_order' => 30,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The greatest weakness in many&nbsp;<abbr title="PHP: Hypertext Preprocessor">PHP</abbr>&nbsp;programs is not inherent in the language itself, but merely an issue of code not being written with security in mind. For this reason, you should always take the time to consider the implications of a given piece of code, to ascertain the possible damage if an unexpected variable is submitted to it.</p>
 <div id="example-437" class="example">
     <p><strong>Example #1 Dangerous Variable Usage</strong></p>
@@ -719,7 +719,7 @@ HTML,
                 'title' => 'Hiding PHP',
                 'topic_id' => $topics['security']->id,
                 'lesson_order' => 31,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">In general, security by obscurity is one of the weakest forms of security. But in some cases, every little bit of extra security is desirable.</p>
 <p class="para">A few simple techniques can help to hide&nbsp;<abbr title="PHP: Hypertext Preprocessor">PHP</abbr>, possibly slowing down an attacker who is attempting to discover weaknesses in your system. By setting expose_php to&nbsp;<code class="literal">off</code>&nbsp;in your&nbsp;<var class="filename">php.ini</var>&nbsp;file, you reduce the amount of information available to them.</p>
 <p class="para">Another tactic is to configure web servers such as apache to parse different filetypes through&nbsp;<abbr title="PHP: Hypertext Preprocessor">PHP</abbr>, either with an&nbsp;<var class="filename">.htaccess</var>&nbsp;directive, or in the apache configuration file itself. You can then use misleading file extensions:</p>
@@ -761,7 +761,7 @@ HTML,
                 'title' => 'Keeping Current',
                 'topic_id' => $topics['security']->id,
                 'lesson_order' => 32,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">PHP, like any other large system, is under constant scrutiny and improvement. Each new version will often include both major and minor changes to enhance security and repair any flaws, configuration mishaps, and other issues that will affect the overall security and stability of your system.</p>
 <p class="simpara">Like other system-level scripting languages and programs, the best approach is to update often, and maintain awareness of the latest versions and their changes.</p>
 HTML,
@@ -772,7 +772,7 @@ HTML,
                 'title' => 'HTTP Authentication with PHP',
                 'topic_id' => $topics['features']->id,
                 'lesson_order' => 33,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>It is possible to use the&nbsp;
     <span class="function"><a class="function" href="https://www.php.net/manual/en/function.header.php" target="_blank">header()</a></span>
     &nbsp;function to send an&nbsp;<code class="literal">"Authentication Required"</code>&nbsp;
@@ -796,7 +796,7 @@ HTML,
                 'title' => 'Cookies',
                 'topic_id' => $topics['features']->id,
                 'lesson_order' => 34,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>It is possible to use the&nbsp;
     <span class="function"><a class="function" href="https://www.php.net/manual/en/function.header.php" target="_blank">header()</a></span>
     &nbsp;function to send an&nbsp;<code class="literal">"Authentication Required"</code>&nbsp;
@@ -820,7 +820,7 @@ HTML,
                 'title' => 'Sessions',
                 'topic_id' => $topics['features']->id,
                 'lesson_order' => 35,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Session support in PHP consists of a way to preserve certain data across subsequent accesses. This enables you to build more customized applications and increase the appeal of your web site. All information is in the&nbsp;<a class="link" href="https://www.php.net/manual/en/book.session.php" target="_blank">Session reference</a>&nbsp;section.</p>
 HTML,
                 'is_active' => 0
@@ -830,7 +830,7 @@ HTML,
                 'title' => 'Handling File Uploads',
                 'topic_id' => $topics['features']->id,
                 'lesson_order' => 36,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>A PHP script can be used with a HTML form to allow users to upload files to the server. Initially files are uploaded into a temporary directory and then relocated to a target destination by a PHP script.</p>
 <p>Information in the&nbsp;<strong>phpinfo.php</strong>&nbsp;page describes the temporary directory that is used for file uploads as&nbsp;<strong>upload_tmp_dir</strong>&nbsp;and the maximum permitted size of files that can be uploaded is stated as&nbsp;<strong>upload_max_filesize</strong>. These parameters are set into PHP configuration file&nbsp;<strong>php.ini</strong></p>
 <p>The process of uploading a file follows these steps −</p>
@@ -875,7 +875,7 @@ HTML,
                 'title' => 'Using Remote Files',
                 'topic_id' => $topics['features']->id,
                 'lesson_order' => 37,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <div id="features.remote-files" class="chapter">
     <p class="para">As long as&nbsp;<strong class="option unknown">allow_url_fopen</strong>&nbsp;is enabled in&nbsp;<var class="filename">php.ini</var>, you can use&nbsp;<abbr title="Hypertext Transfer Protocol">HTTP</abbr>&nbsp;and&nbsp;<abbr title="File Transfer Protocol">FTP</abbr>&nbsp;URLs with most of the functions that take a filename as a parameter. In addition, URLs can be used with the&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.include.php" target="_blank">include</a></span>,&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.include-once.php" target="_blank">include_once</a></span>,&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.require.php" target="_blank">require</a></span>&nbsp;and&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.require-once.php" target="_blank">require_once</a></span>&nbsp;statements (<strong class="option unknown">allow_url_include</strong>&nbsp;must be enabled for these). See&nbsp;<a class="xref" href="https://www.php.net/manual/en/wrappers.php" target="_blank">Supported Protocols and Wrappers</a>&nbsp;for more information about the protocols supported by PHP.</p>
     <p class="para">For example, you can use this to open a file on a remote web server, parse the output for the data you want, and then use that data in a database query, or simply to output it in a style matching the rest of your website.</p>
@@ -909,7 +909,7 @@ HTML,
                 'title' => 'Connection Handling',
                 'topic_id' => $topics['features']->id,
                 'lesson_order' => 38,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Internally in PHP a connection status is maintained. There are 4 possible states:</p>
 <ul class="itemizedlist">
     <li class="listitem"><span class="simpara">0 - NORMAL</span></li>
@@ -929,7 +929,7 @@ HTML,
                 'title' => 'Persistent Database Connections',
                 'topic_id' => $topics['features']->id,
                 'lesson_order' => 39,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">Persistent connections are links that do not close when the execution of your script ends. When a persistent connection is requested, PHP checks if there's already an identical persistent connection (that remained open from earlier) - and if it exists, it uses it. If it does not exist, it creates the link. An 'identical' connection is a connection that was opened to the same host, with the same username and the same password (where applicable).</p>
 <p class="simpara">People who aren't thoroughly familiar with the way web servers work and distribute the load may mistake persistent connects for what they're not. In particular, they do&nbsp;<em class="emphasis">not</em>&nbsp;give you an ability to open 'user sessions' on the same link, they do&nbsp;<em class="emphasis">not</em>&nbsp;give you an ability to build up a transaction efficiently, and they don't do a whole lot of other things. In fact, to be extremely clear about the subject, persistent connections don't give you&nbsp;<em class="emphasis">any</em>&nbsp;functionality that wasn't possible with their non-persistent brothers.</p>
 <p class="simpara">Why?</p>
@@ -946,7 +946,7 @@ HTML,
                 'title' => 'Command Line Usage',
                 'topic_id' => $topics['features']->id,
                 'lesson_order' => 40,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The main focus of&nbsp;<abbr title="Command Line Interpreter/Interface">CLI</abbr>&nbsp;<abbr title="Server Application Programming Interface">SAPI</abbr>&nbsp;is for developing shell applications with PHP. There are quite a few differences between the&nbsp;<abbr title="Command Line Interpreter/Interface">CLI</abbr>&nbsp;<abbr title="Server Application Programming Interface">SAPI</abbr>&nbsp;and other&nbsp;<abbr title="Server Application Programming Interface">SAPI</abbr>s which are explained in this chapter. It is worth mentioning that&nbsp;<abbr title="Command Line Interpreter/Interface">CLI</abbr>&nbsp;and&nbsp;<abbr title="Common Gateway Interface">CGI</abbr>&nbsp;are different&nbsp;<abbr title="Server Application Programming Interface">SAPI</abbr>s although they do share many of the same behaviors.</p>
 <p class="para">The&nbsp;<abbr title="Command Line Interpreter/Interface">CLI</abbr>&nbsp;<abbr title="Server Application Programming Interface">SAPI</abbr>&nbsp;is enabled by default using&nbsp;<strong class="option configure">--enable-cli</strong>, but may be disabled using the&nbsp;<strong class="option configure">--disable-cli</strong>&nbsp;option when running&nbsp;<strong class="command">./configure</strong>.</p>
 <p class="para">The name, location and existence of the&nbsp;<abbr title="Command Line Interpreter/Interface">CLI</abbr>/<abbr title="Common Gateway Interface">CGI</abbr>&nbsp;binaries will differ depending on how PHP is installed on your system. By default when executing&nbsp;<strong class="command">make</strong>, both the&nbsp;<abbr title="Common Gateway Interface">CGI</abbr>&nbsp;and&nbsp;<abbr title="Command Line Interpreter/Interface">CLI</abbr>&nbsp;are built and placed as&nbsp;<var class="filename">sapi/cgi/php-cgi</var>&nbsp;and&nbsp;<var class="filename">sapi/cli/php</var>&nbsp;respectively, in your PHP source directory. You will note that both are named&nbsp;<var class="filename">php</var>. What happens during&nbsp;<strong class="command">make install</strong>&nbsp;depends on your configure line. If a module&nbsp;<abbr title="Server Application Programming Interface">SAPI</abbr>&nbsp;is chosen during configure, such as apxs, or the&nbsp;<strong class="option configure">--disable-cgi</strong>&nbsp;option is used, the&nbsp;<abbr title="Command Line Interpreter/Interface">CLI</abbr>&nbsp;is copied to&nbsp;<var class="filename">{PREFIX}/bin/php</var>&nbsp;during&nbsp;<strong class="command">make install</strong>&nbsp;otherwise the&nbsp;<abbr title="Common Gateway Interface">CGI</abbr>&nbsp;is placed there. So, for example, if&nbsp;<strong class="option configure">--with-apxs&nbsp;</strong>is in your configure line then the&nbsp;<abbr title="Command Line Interpreter/Interface">CLI</abbr>&nbsp;is copied to&nbsp;<var class="filename">{PREFIX}/bin/php&nbsp;</var>during&nbsp;<strong class="command">make install</strong>. If you want to override the installation of the&nbsp;<abbr title="Common Gateway Interface">CGI</abbr>&nbsp;binary, use&nbsp;<strong class="command">make install-cli</strong>&nbsp;after&nbsp;<strong class="command">make install</strong>. Alternatively you can specify&nbsp;<strong class="option configure">--disable-cgi</strong>&nbsp;in your configure line.</p>
@@ -984,7 +984,7 @@ HTML,
                 'title' => 'Garbage Collection',
                 'topic_id' => $topics['features']->id,
                 'lesson_order' => 41,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>As of PHP 7.3, PHP provides basic garbage collection information in user land PHP, via <code>gc_status</code>. The function returns: The number of garbage collection runs. The number of objects collected</p>
 
 <hr>
@@ -1002,7 +1002,7 @@ HTML,
                 'title' => 'DTrace Dynamic Tracing',
                 'topic_id' => $topics['features']->id,
                 'lesson_order' => 42,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">DTrace is an always-available, low overhead, tracing framework available on a number of platforms including Solaris, macOS, Oracle Linux and BSD. DTrace can trace operating system behavior and user program execution. It can display argument values and be used to infer performance statistics. Probes are monitored by user created scripts written in the DTrace D scripting language. This allows efficient analysis of data points.</p>
 <p class="para">PHP probes that are not being actively monitored by a user's DTrace D script do not contain instrumented code so there is no performance degradation during normal application execution. Probes that are being monitored incur an overhead low enough to generally allow DTrace monitoring on live production systems.</p>
 <p class="para">PHP incorporates "User-level Statically Defined Tracing" (USDT) probes that are triggered at runtime. For example, when a D script is monitoring PHP's&nbsp;<code class="literal">function-entry</code>&nbsp;probe, then, every time a PHP script function is called, this probe is fired and the associated D script action code is executed. This action code could, for example, print probe arguments such as the source file location of the PHP function. Or the action could aggregate data such as the number of times each function is called.</p>
@@ -1025,7 +1025,7 @@ HTML,
                 'title' => 'Affecting PHP\'s Behavior > APCu',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 43,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">APCu is an in-memory key-value store for PHP. Keys are of type&nbsp;<span class="type">string</span>&nbsp;and values can be any PHP variables. APCu only supports userland caching of variables.</p>
 <p class="para">APCu is APC stripped of opcode caching.</p>
 <p class="para">The first APCu codebase was versioned 4.0.0, it was forked from the head of the APC master branch at the time. PHP 7 support is available as of APCu 5.0.0. PHP 8 support is available as of APCu 5.1.19.</p>
@@ -1047,7 +1047,7 @@ HTML,
                 'title' => 'Affecting PHP\'s Behavior > Componere',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 44,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Componere&nbsp;<sub class="subscript">(latin, English: compose)</sub>&nbsp;targets production environments and provides an API for composition of classes, monkey patching, and casting.</p>
 <p class="formalpara">&nbsp;</p>
 <h5 class="title">Composition:</h5>
@@ -1074,7 +1074,7 @@ HTML,
                 'title' => 'Affecting PHP\'s Behavior > Error Handling',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 45,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">These are functions dealing with error handling and logging. They allow you to define your own error handling rules, as well as modify the way the errors can be logged. This allows you to change and enhance error reporting to suit your needs.</p>
 <p class="para">With the logging functions, you can send messages directly to other machines, to an email (or email to pager gateway!), to system logs, etc., so you can selectively log and monitor the most important parts of your applications and websites.</p>
 <p class="para">The error reporting functions allow you to customize what level and kind of error feedback is given, ranging from simple notices to customized functions returned during errors.</p>
@@ -1095,7 +1095,7 @@ HTML,
                 'title' => 'Affecting PHP\'s Behavior > FFI — Foreign Function Interface',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 46,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This extension allows the loading of shared libraries (<var class="filename">.DLL</var>&nbsp;or&nbsp;<var class="filename">.so</var>), calling of C functions and accessing of C data structures in pure PHP, without having to have deep knowledge of the Zend extension API, and without having to learn a third “intermediate” language. The public API is implemented as a single class&nbsp;<span class="classname"><a class="classname" href="https://www.php.net/manual/en/class.ffi.php" target="_blank">FFI</a></span>&nbsp;with several static methods (some of them may be called dynamically), and overloaded object methods, which perform the actual interaction with C data.</p>
 <div class="alert alert-warning"><strong class="caution">Caution</strong>
     <p class="para">FFI is dangerous, since it allows to interface with the system on a very low level. The FFI extension should only be used by developers having a working knowledge of C and the used C APIs. To minimize the risk, the FFI API usage may be restricted with the&nbsp;<a class="link" href="https://www.php.net/manual/en/ffi.configuration.php#ini.ffi.enable">ffi.enable</a>&nbsp;<var class="filename">php.ini</var>&nbsp;directive.</p>
@@ -1128,7 +1128,7 @@ HTML,
                 'title' => 'Affecting PHP\'s Behavior > OPcache',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 47,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">OPcache improves PHP performance by storing precompiled script bytecode in shared memory, thereby removing the need for PHP to load and parse scripts on each request.</p>
 <p class="para">This extension is bundled with PHP 5.5.0 and later, and is&nbsp;<a class="link external" href="https://pecl.php.net/package/ZendOpcache" target="_blank">»&nbsp;available in PECL</a>&nbsp;for PHP versions 5.2, 5.3 and 5.4.</p>
 
@@ -1147,7 +1147,7 @@ HTML,
                 'title' => 'Affecting PHP\'s Behavior > Output Control - Output Buffering Control',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 48,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>The Output Control functions allow you to control when output is sent from the script. This can be useful in several different situations, especially if you need to send headers to the browser after your script has begun outputting data. The Output Control functions do not affect headers sent using&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.header.php" target="_blank">header()</a></span>&nbsp;or&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.setcookie.php" target="_blank">setcookie()</a></span>, only functions such as&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.echo.php" target="_blank">echo</a></span>&nbsp;and data between blocks of PHP code.</p>
 
 <hr>
@@ -1166,7 +1166,7 @@ HTML,
                 'title' => 'Affecting PHP\'s Behavior > PHP Options/Info',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 49,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>This functions enable you to get a lot of information about PHP itself, e.g. runtime configuration, loaded extensions, version and much more. You'll also find functions to set options for your running PHP. The probably best known function of PHP -&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.phpinfo.php" target="_blank">phpinfo()</a></span>&nbsp;- can be found here.</p>
 
 <hr>
@@ -1184,7 +1184,7 @@ HTML,
                 'title' => 'Affecting PHP\'s Behavior > phpdbg - Interactive PHP Debugger',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 50,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Implemented as a SAPI module, phpdbg can exert complete control over the environment without impacting the functionality or performance of your code.</p>
 <p class="para">phpdbg aims to be a lightweight, powerful, easy to use debugging platform for PHP. It offers the following features:</p>
 <ul class="itemizedlist">
@@ -1344,7 +1344,7 @@ HTML,
                 'title' => 'Affecting PHP\'s Behavior > runkit7',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 51,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">The runkit7 extension provides means to modify constants, user-defined functions, and user-defined classes. It also provides for custom superglobal variables.</p>
 <p class="simpara">This package is a fork of the&nbsp;<a class="link external" href="https://pecl.php.net/package/runkit" target="_blank">»&nbsp;runkit</a>&nbsp;package providing PHP 7 support.</p>
 
@@ -1363,7 +1363,7 @@ HTML,
                 'title' => 'Affecting PHP\'s Behavior > uopz - User Operations for Zend',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 52,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The uopz - User Operations for Zend - extension exposes Zend Engine functionality normally used at compilation and execution time in order to allow modification of the internal structures that represent PHP code, and for user code to interact with the VM.</p>
 <p class="para">uopz supports the following activities:</p>
 <ul class="simplelist">
@@ -1399,7 +1399,7 @@ HTML,
                 'title' => 'Affecting PHP\'s Behavior > Xhprof - Hierarchical ',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 53,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">XHProf is a light-weight hierarchical and instrumentation based profiler. During the data collection phase, it keeps track of call counts and inclusive metrics for arcs in the dynamic callgraph of a program. It computes exclusive metrics in the reporting/post processing phase, such as wall (elapsed) time, CPU time and memory usage. A functions profile can be broken down by callers or callees. XHProf handles recursive functions by detecting cycles in the callgraph at data collection time itself and avoiding the cycles by giving unique depth qualified names for the recursive invocations.</p>
 <p class="para">XHProf includes a simple HTML based user interface (written in PHP). The browser based UI for viewing profiler results makes it easy to view results or to share results with peers. A callgraph image view is also supported.</p>
 <p class="para">XHProf reports can often be helpful in understanding the structure of the code being executed. The hierarchical nature of the reports can be used to determine, for example, what chain of calls led to a particular function getting called.</p>
@@ -1422,7 +1422,7 @@ HTML,
                 'title' => 'Affecting PHP\'s Behavior > Yac - Yet Another Cache',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 54,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Yac (Yet Another cache), is a lock-free, shared memory user data cache, could be used to replace APC, local memcache.</p>
 
 <hr>
@@ -1440,7 +1440,7 @@ HTML,
                 'title' => 'Authentication Service - Radius',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 55,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This package is based on the libradius (Remote Authentication Dial In User Service) of FreeBSD. It allows clients to perform authentication and accounting by means of network requests to remote servers.</p>
 <p class="para">This PECL extension adds full support for Radius Authentication (<a class="link external" href="http://www.faqs.org/rfcs/rfc2865" target="_blank">»&nbsp;RFC 2865</a>) and Radius Accounting (<a class="link external" href="http://www.faqs.org/rfcs/rfc2866" target="_blank">»&nbsp;RFC 2866</a>). This package is available for Unix (tested on FreeBSD and Linux) and for Windows.</p>
 <blockquote class="blockquote">
@@ -1464,7 +1464,7 @@ HTML,
                 'title' => 'Command Line Specific Extensions - Readline',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 56,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The readline functions implement an interface to the GNU Readline library. These are functions that provide editable command lines. An example being the way Bash allows you to use the arrow keys to insert characters or scroll through command history. Because of the interactive nature of this library, it will be of little use for writing Web applications, but may be useful when writing scripts used from a&nbsp;<a class="link" href="https://www.php.net/manual/en/features.commandline.php" target="_blank">command line</a>.</p>
 <p class="para">As of PHP 7.1.0 this extension is supported on Windows.</p>
 <div class="alert alert-warning"><strong class="caution">Caution</strong>
@@ -1486,7 +1486,7 @@ HTML,
                 'title' => 'Compression and Archive Extensions - Bzip2',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 57,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>The bzip2 functions are used to transparently read and write bzip2 (.bz2) compressed files.</p>
 
 <hr>
@@ -1505,7 +1505,7 @@ HTML,
                 'title' => 'Compression and Archive Extensions - LZF',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 58,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>LZF is a very fast compression algorithm, ideal for saving space with only slight speed cost. It can be optimized for speed or space at the time of compilation. This extension is using&nbsp;<a class="link external" href="http://oldhome.schmorp.de/marc/liblzf.html" target="_blank">»&nbsp;liblzf</a>&nbsp;library by Marc Lehmann for its operations.</p>
 
 <hr>
@@ -1523,7 +1523,7 @@ HTML,
                 'title' => 'Compression and Archive Extensions - Phar',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 59,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The phar extension provides a way to put entire PHP applications into a single file called a "phar" (PHP Archive) for easy distribution and installation. In addition to providing this service, the phar extension also provides a file-format abstraction method for creating and manipulating tar and zip files through the&nbsp;<span class="classname"><a class="classname" href="https://www.php.net/manual/en/class.phardata.php" target="_blank">PharData</a></span>&nbsp;class, much as PDO provides a unified interface for accessing different databases. Unlike PDO, which cannot convert between different databases, Phar also can convert between tar, zip and phar file formats with a single line of code. see&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/phar.converttoexecutable.php" target="_blank">Phar::convertToExecutable()</a></span>&nbsp;for one example.</p>
 <p class="para">What is phar? Phar archives are best characterized as a convenient way to group several files into a single file. As such, a phar archive provides a way to distribute a complete PHP application in a single file and run it from that file without the need to extract it to disk. Additionally, phar archives can be executed by PHP as easily as any other file, both on the commandline and from a web server. Phar is kind of like a thumb drive for PHP applications.</p>
 
@@ -1552,7 +1552,7 @@ HTML,
                 'title' => 'Compression and Archive Extensions - Rar',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 60,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Rar is a powerful and effective archiver created by Eugene Roshal. This extension gives you possibility to read Rar archives but doesn't support writing Rar archives, because this is not supported by the UnRar library and is directly prohibited by its license.</p>
 <p class="para">More information about Rar and UnRar can be found at&nbsp;<a class="link external" href="http://www.rarlabs.com/" target="_blank">»&nbsp;http://www.rarlabs.com/</a>.</p>
 
@@ -1575,7 +1575,7 @@ HTML,
                 'title' => 'Compression and Archive Extensions - Zip',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 61,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>This extension enables you to transparently read or write ZIP compressed archives and the files inside them.</p>
 
 <hr>
@@ -1595,7 +1595,7 @@ HTML,
                 'title' => 'Compression and Archive Extensions - Zlib',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 62,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This module enables you to transparently read and write gzip (.gz) compressed files, through versions of most of the&nbsp;<a class="link" href="https://www.php.net/manual/en/book.filesystem.php" target="_blank">filesystem</a>&nbsp;functions which work with gzip-compressed files (and uncompressed files, too, but not with sockets).</p>
 <blockquote class="blockquote">
     <p><strong class="note">Note</strong>:</p>
@@ -1620,7 +1620,7 @@ HTML,
                 'title' => 'Cryptography Extensions - CSPRNG',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 63,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The&nbsp;<a class="link external" href="https://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator" target="_blank">»&nbsp;cryptographically secure pseudo-random number generator</a>&nbsp;(CSPRNG) API provides an easy and reliable way to generate crypto-strong random integers and bytes for use within cryptographic contexts.</p>
 <p class="para">This exists as of PHP 7.0.0 but there is also a&nbsp;<a class="link external" href="https://github.com/paragonie/random_compat" target="_blank">»&nbsp;userland implementation</a>&nbsp;for PHP &gt;= 5.2.0.</p>
 
@@ -1639,7 +1639,7 @@ HTML,
                 'title' => 'Cryptography Extensions - Hash - HASH Message Digest Framework',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 64,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Message Digest (hash) engine. Allows direct or incremental processing of arbitrary length messages using a variety of hashing algorithms.</p>
 
 <hr>
@@ -1658,7 +1658,7 @@ HTML,
                 'title' => 'Cryptography Extensions - Mhash',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 65,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">These functions are intended to work with&nbsp;<a class="link external" href="http://mhash.sourceforge.net/" target="_blank">»&nbsp;mhash</a>. Mhash can be used to create checksums, message digests, message authentication codes, and more.</p>
 <p class="para">This is an interface to the mhash library. Mhash supports a wide variety of hash algorithms such as MD5, SHA1, GOST, and many others. For a complete list of supported hashes, refer to the&nbsp;<a class="link" href="https://www.php.net/manual/en/mhash.constants.php" target="_blank">constants page</a>. The general rule is that you can access the hash algorithm from PHP with&nbsp;<strong><code>MHASH_hashname</code></strong>. For example, to access TIGER you use the PHP constant&nbsp;<strong><code>MHASH_TIGER</code></strong>.</p>
 <blockquote class="blockquote">
@@ -1686,7 +1686,7 @@ HTML,
                 'title' => 'Cryptography Extensions - OpenSSL',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 66,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This extension binds functions of&nbsp;<a class="link external" href="http://www.openssl.org/" target="_blank">»&nbsp;OpenSSL</a>&nbsp;library for symmetric and asymmetric encryption and decryption, PBKDF2, PKCS7, PKCS12, X509 and other crypto operations. In addition to that it provides implementation of TLS streams.</p>
 <p class="para">OpenSSL offers many features that this module currently doesn't support. Some of these may be added in the future.</p>
 
@@ -1710,7 +1710,7 @@ HTML,
                 'title' => 'Cryptography Extensions - Password Hashing',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 67,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>The password hashing API provides an easy to use wrapper around&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.crypt.php" target="_blank">crypt()</a></span>&nbsp;and some other password hashing algorithms, to make it easy to create and manage passwords in a secure manner.</p>
 
 <hr>
@@ -1728,7 +1728,7 @@ HTML,
                 'title' => 'Cryptography Extensions - Sodium',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 68,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Sodium is a modern, easy-to-use software library for encryption, decryption, signatures, password hashing and more. Its goal is to provide all of the core operations needed to build higher-level cryptographic tools.</p>
 
 <hr>
@@ -1747,7 +1747,7 @@ HTML,
                 'title' => 'Database Extensions - Abstraction Layers - Database (dbm-style) Abstraction Layer',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 69,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">These functions build the foundation for accessing Berkeley DB style databases.</p>
 <p class="para">This is a general abstraction layer for several file-based databases. As such, functionality is limited to a common subset of features supported by modern databases such as&nbsp;<a class="link external" href="https://www.oracle.com/database/berkeley-db/db.html" target="_blank">»&nbsp;Oracle Berkeley DB</a>.</p>
 
@@ -1796,7 +1796,7 @@ HTML,
                 'title' => 'Database Extensions - Abstraction Layers - ODBC (Unified)',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 70,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">In addition to normal ODBC support, the Unified ODBC functions in PHP allow you to access several databases that have borrowed the semantics of the ODBC API to implement their own API. Instead of maintaining multiple database drivers that were all nearly identical, these drivers have been unified into a single set of ODBC functions.</p>
 <p class="para">The following databases are supported by the Unified ODBC functions:&nbsp;<a class="link external" href="http://www.adabas.com/" target="_blank">»&nbsp;Adabas D</a>,&nbsp;<a class="link external" href="http://www-306.ibm.com/software/data/db2/" target="_blank">»&nbsp;IBM DB2</a>,&nbsp;<a class="link external" href="http://www.iodbc.org/" target="_blank">»&nbsp;iODBC</a>,&nbsp;<a class="link external" href="http://www.solidtech.com/" target="_blank">»&nbsp;Solid</a>, and&nbsp;<a class="link external" href="http://www.sybase.com/" target="_blank">»&nbsp;Sybase SQL Anywhere</a>.</p>
 <blockquote class="blockquote">
@@ -1874,7 +1874,7 @@ HTML,
                 'title' => 'Database Extensions - Abstraction Layers - PHP Data Objects (PDO)',
                 'topic_id' => $topics['function-reference']->id,
                 'lesson_order' => 71,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The&nbsp;<code class="literal">PHP Data Objects</code>&nbsp;(<abbr>PDO</abbr>) extension defines a lightweight, consistent interface for accessing databases in PHP. Each database driver that implements the PDO interface can expose database-specific features as regular extension functions. Note that you cannot perform any database functions using the PDO extension by itself; you must use a&nbsp;<a class="link" href="https://www.php.net/manual/en/pdo.drivers.php" target="_blank">database-specific PDO driver</a>&nbsp;to access a database server.</p>
 <p class="para">PDO provides a&nbsp;<em class="emphasis">data-access</em>&nbsp;abstraction layer, which means that, regardless of which database you're using, you use the same functions to issue queries and fetch data. PDO does&nbsp;<em class="emphasis">not</em>&nbsp;provide a&nbsp;<em class="emphasis">database</em>&nbsp;abstraction; it doesn't rewrite SQL or emulate missing features. You should use a full-blown abstraction layer if you need that facility.</p>
 <p class="para">PDO ships with PHP.</p>
@@ -1964,7 +1964,7 @@ HTML,
                 'title' => 'Database Extensions - Vendor Specified Database Extensions - CUBRID',
                 'lesson_order' => 72,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">These functions allow you to access CUBRID database servers. More information about CUBRID can be found at&nbsp;<a class="link external" href="http://www.cubrid.org/" target="_blank">»&nbsp;CUBRID</a>.</p>
 <p class="para">Documentation for CUBRID can be found at&nbsp;<a class="link external" href="http://www.cubrid.org/documentation/" target="_blank">»&nbsp;CUBRID Documentation</a>.</p>/
 
@@ -1986,7 +1986,7 @@ HTML,
                 'title' => 'Database Extensions - Vendor Specified Database Extensions - IBM DB2 — IBM DB2, Cloudscape and Apache Derby',
                 'lesson_order' => 73,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>These functions enable you to access IBM DB2 Universal Database, IBM Cloudscape, and Apache Derby databases using the DB2 Call Level Interface (DB2 CLI).</p>
 
 <hr>
@@ -2004,7 +2004,7 @@ HTML,
                 'title' => 'Database Extensions - Vendor Specified Database Extensions - MongoDB Driver',
                 'lesson_order' => 74,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <div class="info">
     <div class="abstract">
         <p class="simpara">This extension is developed atop the&nbsp;<a class="link external" href="https://github.com/mongodb/mongo-c-driver" target="_blank">»&nbsp;libmongoc</a>&nbsp;and&nbsp;<a class="link external" href="https://github.com/mongodb/mongo-c-driver/tree/master/src/libbson" target="_blank">»&nbsp;libbson</a>&nbsp;libraries. It provides a minimal API for core driver functionality:&nbsp;<a class="link" href="https://www.php.net/manual/en/class.mongodb-driver-command.php" target="_blank">commands</a>,&nbsp;<a class="link" href="https://www.php.net/manual/en/class.mongodb-driver-query.php" target="_blank">queries</a>,&nbsp;<a class="link" href="https://www.php.net/manual/en/class.mongodb-driver-bulkwrite.php" target="_blank">writes</a>,&nbsp;<a class="link" href="https://www.php.net/manual/en/class.mongodb-driver-manager.php" target="_blank">connection management</a>, and&nbsp;<a class="link" href="https://www.php.net/manual/en/book.bson.php" target="_blank">BSON serialization</a>.</p>
@@ -2145,7 +2145,7 @@ HTML,
                 'title' => 'Database Extensions - Vendor Specified Database Extensions - MySQL - MySQL Drivers and Plugins',
                 'lesson_order' => 75,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">PHP offers several MySQL drivers and plugins for accessing and handling MySQL.</p>
 <p class="para">The differences and functionality of the MySQL extensions are described within the overview of this section.</p>
 
@@ -2247,7 +2247,7 @@ HTML,
                 'title' => 'Database Extensions - Vendor Specified Database Extensions - OCI8 - Oracle OCI8',
                 'lesson_order' => 76,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>These functions allow you to access Oracle Database. They support SQL and PL/SQL statements. Basic features include transaction control, binding of PHP variables to Oracle placeholders, and support for large object (LOB) types and collections. Oracle's scalability features such as Database Resident Connection Pooling (DRCP) and result caching are also supported.</p>
 
 <hr>
@@ -2274,7 +2274,7 @@ HTML,
                 'title' => 'Database Extensions - Vendor Specified Database Extensions - PostgreSQL',
                 'lesson_order' => 77,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>PostgreSQL database is an Open Source product and available without cost. Postgres, developed originally in the UC Berkeley Computer Science Department, pioneered many of the object-relational concepts now becoming available in some commercial databases. It provides SQL92/SQL99 language support, transactions, referential integrity, stored procedures and type extensibility. PostgreSQL is an open source descendant of this original Berkeley code.</p>
 
 <hr>
@@ -2296,7 +2296,7 @@ HTML,
                 'title' => 'Database Extensions - Vendor Specified Database Extensions - SQLite3',
                 'lesson_order' => 78,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Support for SQLite version 3 databases</p>
 
 <hr>
@@ -2316,7 +2316,7 @@ HTML,
                 'title' => 'Database Extensions - Vendor Specified Database Extensions - SQLSRV — Microsoft SQL Server Driver for PHP',
                 'lesson_order' => 79,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The SQLSRV extension allows you to access Microsoft SQL Server and SQL Azure databases. The 3.0 release of the driver supports SQL Server, beginning with SQL Server 2005, including SQL Server 2012 and SQL Server 2012 LocalDB. (For more information about LocalDB, see&nbsp;<a class="link external" href="http://msdn.microsoft.com/en-us/library/hh487161.aspx" target="_blank">»&nbsp;PHP Driver for SQL Server Support for LocalDB</a>&nbsp;and&nbsp;<a class="link external" href="http://msdn.microsoft.com/en-us/library/hh510202(SQL.110).aspx" target="_blank">»&nbsp;SQL Server 2012 Express LocalDB</a>.)</p>
 <p class="para">The SQLSRV extension is supported by Microsoft and available for download here:&nbsp;<a class="link external" href="http://msdn.microsoft.com/en-us/sqlserver/ff657782.aspx" target="_blank">»&nbsp;http://msdn.microsoft.com/en-us/sqlserver/ff657782.aspx</a>. SQL Server 2012 LocalDB can be downloaded here:&nbsp;<a class="link external" href="http://go.microsoft.com/fwlink/?LinkID=237665" target="_blank">»&nbsp;http://go.microsoft.com/fwlink/?LinkID=237665</a>.</p>
 
@@ -2335,7 +2335,7 @@ HTML,
                 'title' => 'Date and Time Related Extensions - Calendar',
                 'lesson_order' => 80,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>The calendar extension presents a series of functions to simplify converting between different calendar formats. The intermediary or standard it is based on is the Julian Day Count. The Julian Day Count is a count of days starting from January 1st, 4713 B.C. To convert between calendar systems, you must first convert to Julian Day Count, then to the calendar system of your choice. Julian Day Count is very different from the Julian Calendar! For more information on Julian Day Count, visit&nbsp;<a class="link external" href="http://www.hermetic.ch/cal_stud/jdn.htm" target="_blank">»&nbsp;http://www.hermetic.ch/cal_stud/jdn.htm</a>. For more information on calendar systems visit&nbsp;<a class="link external" href="http://www.fourmilab.ch/documents/calendar/" target="_blank">»&nbsp;http://www.fourmilab.ch/documents/calendar/</a>. Excerpts from this page are included in these instructions, and are in quotes.</p>
 
 <hr>
@@ -2353,7 +2353,7 @@ HTML,
                 'title' => 'Date and Time Related Extensions - Date and Time',
                 'lesson_order' => 81,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">These functions allow you to get the date and time from the server where your PHP scripts are running. You can use these functions to format the date and time in many different ways.</p>
 <p class="para">The date and time information is internally stored as a 64-bit number so all conceivably useful dates (including negative years) are supported. The range is from about 292 billion years in the past to the same in the future.</p>
 <blockquote class="blockquote">
@@ -2387,7 +2387,7 @@ HTML,
                 'title' => 'Date and Time Related Extensions - HRTime - High Resolution Timing',
                 'lesson_order' => 82,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The HRTime extension implements a high resolution StopWatch class. It uses the best possible APIs on different platforms which brings resolution up to nanoseconds. It also makes possible to implement a custom stopwatch using low level ticks delivered by the underlaying APIs.</p>
 <blockquote class="blockquote">
     <p><strong class="note">Note</strong>:&nbsp;<span class="simpara">As of PHP 7.3.0 the related function&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.hrtime.php" target="_blank">hrtime()</a></span>&nbsp;is part of the core.</span></p>
@@ -2410,7 +2410,7 @@ HTML,
                 'title' => 'File System Related Extensions - Direct IO',
                 'lesson_order' => 83,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>PHP supports the direct io functions as described in the Posix Standard (Section 6) for performing I/O functions at a lower level than the C-Language stream I/O functions (<span class="function"><a class="function" href="https://www.php.net/manual/en/function.fopen.php" target="_blank">fopen()</a></span>,&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.fread.php" target="_blank">fread()</a></span>,..). The use of the DIO functions should be considered only when direct control of a device is needed. In all other cases, the standard&nbsp;<a class="link" href="https://www.php.net/manual/en/book.filesystem.php" target="_blank">filesystem</a>&nbsp;functions are more than adequate.</p>
 
 <hr>
@@ -2428,7 +2428,7 @@ HTML,
                 'title' => 'File System Related Extensions - Directories',
                 'lesson_order' => 84,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>PHP provides a great way to read directory contents. You can list directory contents (files / subdirectories) using built-in functions in PHP.</p>
 
 <hr>
@@ -2447,7 +2447,7 @@ HTML,
                 'title' => 'File System Related Extensions - FileInfo - File Information',
                 'lesson_order' => 85,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>The functions in this module try to guess the content type and encoding of a file by looking for certain&nbsp;<em class="emphasis">magic</em>&nbsp;byte sequences at specific positions within the file. While this is not a bulletproof approach the heuristics used do a very good job.</p>
 
 <hr>
@@ -2466,7 +2466,7 @@ HTML,
                 'title' => 'File System Related Extensions - Filesystem',
                 'lesson_order' => 86,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>No external libraries are needed to build this extension, but if you want PHP to support LFS (large files) on Linux, then you need to have a recent glibc and you need compile PHP with the following compiler flags:&nbsp;<code class="literal">-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64</code>.</p>
 
 <hr>
@@ -2484,7 +2484,7 @@ HTML,
                 'title' => 'File System Related Extensions - Inotify',
                 'lesson_order' => 87,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The inotify extension exposes the inotify functions&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.inotify-init.php" target="_blank">inotify_init()</a></span>,&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.inotify-add-watch.php" target="_blank">inotify_add_watch()</a></span>&nbsp;and&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.inotify-rm-watch.php" target="_blank">inotify_rm_watch()</a></span>.</p>
 <p class="para">As the C&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.inotify-init.php" target="_blank">inotify_init()</a></span>&nbsp;function returns a file descriptor, PHP's&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.inotify-init.php" target="_blank">inotify_init()</a></span>&nbsp;returns a stream resource, usable with standard stream functions, like&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.stream-select.php" target="_blank">stream_select()</a></span>,&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.stream-set-blocking.php" target="_blank">stream_set_blocking()</a></span>&nbsp;and&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.fclose.php" target="_blank">fclose()</a></span>.&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.inotify-read.php" target="_blank">inotify_read()</a></span>&nbsp;replaces the C way of reading inotify events.</p>
 
@@ -2503,7 +2503,7 @@ HTML,
                 'title' => 'File System Related Extensions - xattr',
                 'lesson_order' => 88,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>The xattr extension allows for the manipulation of extended attributes on a filesystem.</p>
 
 <hr>
@@ -2521,7 +2521,7 @@ HTML,
                 'title' => 'File System Related Extensions - xdiff',
                 'lesson_order' => 89,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">xdiff extension enables you to create and apply patch files containing differences between different revisions of files.</p>
 <p class="para">This extension supports two modes of operation - on strings and on files, as well as two different patch formats - unified and binary. Unified patches are excellent for text files as they are human-readable and easy to review. For binary files like archives or images, binary patches will be adequate choice as they are binary safe and handle non-printable characters well.</p>
 <p class="para">Starting from version 1.5.0 there are two different sets of functions for generating binary patches. New functions -&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.xdiff-string-rabdiff.php" target="_blank">xdiff_string_rabdiff()</a></span>&nbsp;and&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.xdiff-file-rabdiff.php" target="_blank">xdiff_file_rabdiff()</a></span>&nbsp;generate output compatible with older functions but are typically faster and generate smaller results. For more details about methods of generating binary patches and differences between them, please check&nbsp;<a class="link external" href="http://www.xmailserver.org/xdiff-lib.html" target="_blank">»&nbsp;libxdiff</a>&nbsp;website.</p>
@@ -2542,7 +2542,7 @@ HTML,
                 'title' => 'Human Language and Character Encoding Support - Enhanct (Spelling Library)',
                 'lesson_order' => 90,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Enchant is the PHP binding for the&nbsp;<a class="link external" href="http://www.abisource.com/projects/enchant/" target="_blank">»&nbsp;Enchant library</a>. Enchant steps in to provide uniformity and conformity on top of all spelling libraries, and implement certain features that may be lacking in any individual provider library. Everything should "just work" for any and every definition of "just working."</p>
 <p class="para">Enchant supports the following backends:</p>
 <ul class="itemizedlist">
@@ -2584,7 +2584,7 @@ HTML,
                 'title' => 'Human Language and Character Encoding Support - Gender - Determine Gender of First Names',
                 'lesson_order' => 91,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Gender PHP extension is a port of the gender.c program originally written by Joerg Michael. The main purpose is to find out the gender of firstnames. The current database contains &gt;40000 firstnames from 54 countries.</p>
 
 <hr>
@@ -2602,7 +2602,7 @@ HTML,
                 'title' => 'Human Language and Character Encoding Support - Gettext',
                 'lesson_order' => 92,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>The gettext functions implement an NLS (Native Language Support) API which can be used to internationalize your PHP applications. Please see the gettext documentation for your system for a thorough explanation of these functions or view the docs at&nbsp;<a class="link external" href="http://www.gnu.org/software/gettext/manual/gettext.html" target="_blank">»&nbsp;http://www.gnu.org/software/gettext/manual/gettext.html</a>.</p>
 
 <hr>
@@ -2620,7 +2620,7 @@ HTML,
                 'title' => 'Human Language and Character Encoding Support - Iconv',
                 'lesson_order' => 93,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This module contains an interface to iconv character set conversion facility. With this module, you can turn a string represented by a local character set into the one represented by another character set, which may be the Unicode character set. Supported character sets depend on the iconv implementation of your system. Note that the iconv function on some systems may not work as you expect. In such case, it'd be a good idea to install the&nbsp;<a class="link external" href="http://www.gnu.org/software/libiconv/" target="_blank">»&nbsp;GNU libiconv</a>&nbsp;library. It will most likely end up with more consistent results.</p>
 <p class="para">This extension comes with various utility functions that help you to write multilingual scripts. Let's have a look at the following sections to explore the new features.</p>
 <hr>
@@ -2638,7 +2638,7 @@ HTML,
                 'title' => 'Human Language and Character Encoding Support - Intl - Internationalization Functions',
                 'lesson_order' => 94,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Internationalization extension (further is referred as Intl) is a wrapper for&nbsp;<a class="link external" href="http://www.icu-project.org/" target="_blank">»&nbsp;ICU</a>&nbsp;library, enabling PHP programmers to perform various locale-aware operations including but not limited to formatting, transliteration, encoding conversion, calendar operations,&nbsp;<a class="link external" href="http://www.unicode.org/reports/tr10/" target="_blank">»&nbsp;UCA</a>-conformant collation, locating text boundaries and working with locale identifiers, timezones and graphemes,</p>
 <p class="para">It tends to closely follow ICU APIs, so that people having experience working with ICU in either C/C++ or Java could easily use the PHP API. Also, this way ICU documentation would be useful to understand various ICU functions.</p>
 <p class="para">Intl consists of several modules, each of them exposes the corresponding ICU API:</p>
@@ -2693,7 +2693,7 @@ HTML,
                 'title' => 'Human Language and Character Encoding Support - Multibyte String',
                 'lesson_order' => 95,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">While there are many languages in which every necessary character can be represented by a one-to-one mapping to an 8-bit value, there are also several languages which require so many characters for written communication that they cannot be contained within the range a mere byte can code (A byte is made up of eight bits. Each bit can contain only two distinct values, one or zero. Because of this, a byte can only represent 256 unique values (two to the power of eight)). Multibyte character encoding schemes were developed to express more than 256 characters in the regular bytewise coding system.</p>
 <p class="para">When you manipulate (trim, split, splice, etc.) strings encoded in a multibyte encoding, you need to use special functions since two or more consecutive bytes may represent a single character in such encoding schemes. Otherwise, if you apply a non-multibyte-aware string function to the string, it probably fails to detect the beginning or ending of the multibyte character and ends up with a corrupted garbage string that most likely loses its original meaning.</p>
 <p class="para"><code class="literal">mbstring</code>&nbsp;provides multibyte specific string functions that help you deal with multibyte encodings in PHP. In addition to that,&nbsp;<code class="literal">mbstring</code>&nbsp;handles character encoding conversion between the possible encoding pairs.&nbsp;<code class="literal">mbstring</code>&nbsp;is designed to handle Unicode-based encodings such as UTF-8 and UCS-2 and many single-byte encodings for convenience.</p>
@@ -2719,7 +2719,7 @@ HTML,
                 'title' => 'Human Language and Character Encoding Support - Pspell',
                 'lesson_order' => 96,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>These functions allow you to check the spelling of a word and offer suggestions.</p>
 
 <hr>
@@ -2739,7 +2739,7 @@ HTML,
                 'title' => 'Human Language and Character Encoding Support - Recode - GNU Recode',
                 'lesson_order' => 97,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This module contains an interface to the GNU Recode library. The GNU Recode library converts files between various coded character sets and surface encodings. When this cannot be achieved exactly, it may get rid of the offending characters or fall back on approximations. The library recognises or produces nearly 150 different character sets and is able to convert files between almost any pair. Most&nbsp;<a class="link external" href="http://www.faqs.org/rfcs/rfc1345" target="_blank">»&nbsp;RFC 1345</a>&nbsp;character sets are supported.</p>
 <blockquote class="blockquote">
     <p><strong class="note">Note</strong>:&nbsp;<span class="simpara">This extension is unbundled and moved to&nbsp;<a class="link external" href="https://pecl.php.net/package/recode" target="_blank">»&nbsp;PECL</a>&nbsp;as of PHP 7.4.0. Consider to use the&nbsp;<a class="link" href="https://www.php.net/manual/en/book.mbstring.php" target="_blank">Multibyte String</a>&nbsp;or&nbsp;<a class="link" href="https://www.php.net/manual/en/book.iconv.php" target="_blank">iconv</a>&nbsp;extensions instead.</span></p>
@@ -2763,7 +2763,7 @@ HTML,
                 'title' => 'Image Processing and Generation - Exif - Exchangeable Image Information',
                 'lesson_order' => 98,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>With the exif extension you are able to work with image meta data. For example, you may use exif functions to read meta data of pictures taken from digital cameras by working with information stored in the headers. These are commonly found in&nbsp;<abbr title="Joint Photographic Experts Group">JPEG</abbr>&nbsp;and&nbsp;<abbr title="Tagged Image File Format">TIFF</abbr>&nbsp;images.</p>
 
 <hr>
@@ -2781,7 +2781,7 @@ HTML,
                 'title' => 'Image Processing and Generation - GD — Image Processing and GD',
                 'lesson_order' => 99,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">PHP is not limited to creating just HTML output. It can also be used to create and manipulate image files in a variety of different image formats, including&nbsp;<abbr title="Graphic Interchange Format">GIF</abbr>,&nbsp;<abbr title="Portable Network Graphics">PNG</abbr>,&nbsp;<abbr title="Joint Photographic Experts Group">JPEG</abbr>,&nbsp;<abbr title="Wireless Bitmap">WBMP</abbr>, and&nbsp;<abbr>XPM</abbr>. Even more conveniently, PHP can output image streams directly to a browser. You will need to compile PHP with the&nbsp;<abbr title="Graphics Draw">GD</abbr>&nbsp;library of image functions for this to work.&nbsp;<abbr title="Graphics Draw">GD</abbr>&nbsp;and PHP may also require other libraries, depending on which image formats you want to work with.</p>
 <p class="para">You can use the image functions in PHP to get the size of&nbsp;<abbr title="Joint Photographic Experts Group">JPEG</abbr>,&nbsp;<abbr title="Graphic Interchange Format">GIF</abbr>,&nbsp;<abbr title="Portable Network Graphics">PNG</abbr>,&nbsp;<abbr title="Shockwave Flash">SWF</abbr>,&nbsp;<abbr title="Tagged Image File Format">TIFF</abbr>&nbsp;and&nbsp;<abbr>JPEG2000</abbr>&nbsp;images.</p>
 <p class="para">With the&nbsp;<a class="link" href="https://www.php.net/manual/en/ref.exif.php" target="_blank">exif extension</a>, you are able to work with information stored in headers of&nbsp;<abbr title="Joint Photographic Experts Group">JPEG</abbr>&nbsp;and&nbsp;<abbr title="Tagged Image File Format">TIFF</abbr>&nbsp;images. This way you can read meta data generated by digital cameras. The exif functions do not require the&nbsp;<abbr title="Graphics Draw">GD</abbr>&nbsp;library.</p>
@@ -2877,7 +2877,7 @@ HTML,
                 'title' => 'Image Processing and Generation - Gmagick',
                 'lesson_order' => 100,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Gmagick is a php extension to create, modify and obtain meta information of images using the GraphicsMagick API.</p>
 <p class="para">GraphicsMagick prides itself as the swiss army knife of image processing. It works with over 88 major formats including important formats like DPX, GIF, JPEG, JPEG-2000, PNG, PDF, PNM, and TIFF.</p>
 <p class="para">Gmagick consists of a main Gmagick class, a GmagickDraw class which is in effect a drawing wand and a GmagickPixel class of which instances represent a single pixel of an image (color, opacity).</p>
@@ -2900,7 +2900,7 @@ HTML,
                 'title' => 'Image Processing and Generation - ImageMagick — Image Processing (ImageMagick)',
                 'lesson_order' => 101,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Imagick is a native php extension to create and modify images using the ImageMagick API.</p>
 <div id="imagick.aboutimagemagick" class="section">
     <p class="para">ImageMagick is a software suite to create, edit, and compose bitmap images. It can read, convert and write images in a variety of formats (over 100) including DPX, EXR, GIF, JPEG, JPEG-2000, PDF, PhotoCD, PNG, Postscript, SVG, and TIFF.</p>
@@ -2927,7 +2927,7 @@ HTML,
                 'title' => 'Mail Related Extensions - IMAP, POP3 and NNTP',
                 'lesson_order' => 102,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">These functions enable you to operate with the&nbsp;<abbr title="Internet Message Access Protocol">IMAP</abbr>&nbsp;protocol, as well as the&nbsp;<abbr title="Network News Transfer Protocol">NNTP</abbr>,&nbsp;<abbr title="Post Office Protocol version 3">POP3</abbr>&nbsp;and local mailbox access methods.</p>
 <p class="para">Be warned, however, that some IMAP functions will not work correctly with the POP protocol.</p>
 <div class="alert alert-danger">
@@ -2951,7 +2951,7 @@ HTML,
                 'title' => 'Mail Related Extensions - Mail',
                 'lesson_order' => 103,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>The&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.mail.php" target="_blank">mail()</a></span>&nbsp;function allows you to send mail.</p>
 
 <hr>
@@ -2969,7 +2969,7 @@ HTML,
                 'title' => 'Mail Related Extensions - Mailparse',
                 'lesson_order' => 104,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Mailparse is an extension for parsing and working with email messages. It can deal with&nbsp;<a class="link external" href="http://www.faqs.org/rfcs/rfc822" target="_blank">»&nbsp;RFC 822</a>&nbsp;and&nbsp;<a class="link external" href="http://www.faqs.org/rfcs/rfc2045" target="_blank">»&nbsp;RFC 2045</a>&nbsp;(<code class="literal">MIME</code>) compliant messages.</p>
 <p class="para">Mailparse is stream based, which means that it does not keep in-memory copies of the files it processes - so it is very resource efficient when dealing with large messages.</p>
 <blockquote class="blockquote">
@@ -2992,7 +2992,7 @@ HTML,
                 'title' => 'Mathematical Extensions - BC Math Arbitrary Precision Mathematics',
                 'lesson_order' => 105,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">For arbitrary precision mathematics PHP offers BCMath which supports numbers of any size and precision up to&nbsp;<code class="literal">2147483647</code>&nbsp;(or&nbsp;<code class="literal">0x7FFFFFFF</code>) decimal digits, if there is sufficient memory, represented as strings.</p>
 <p class="para">Valid (aka. well-formed) BCMath numbers are strings which match the regular expression&nbsp;<code class="literal">/^[+-]?[0-9]*(\.[0-9]*)?$/</code>.</p>
 <div class="alert alert-warning">
@@ -3033,7 +3033,7 @@ HTML,
                 'title' => 'Mathematical Extensions - GMP - GNU Multiple Precision',
                 'lesson_order' => 106,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">These functions allow for arbitrary-length integers to be worked with using the GNU&nbsp;<abbr title="Multiple Precision">MP</abbr>&nbsp;library.</p>
 <blockquote class="blockquote">
     <p><strong class="note">Note</strong>:</p>
@@ -3058,7 +3058,7 @@ HTML,
                 'title' => 'Mathematical Extensions - Math - Mathematical Functions',
                 'lesson_order' => 107,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">These math functions will only handle values within the range of the&nbsp;<span class="type">int</span>&nbsp;and&nbsp;<span class="type">float</span>&nbsp;types on your computer (this corresponds currently to the C types long resp. double). If you need to handle bigger numbers, take a look at the&nbsp;<a class="link" href="https://www.php.net/manual/en/book.bc.php" target="_blank">arbitrary precision math functions</a>.</p>
 <p class="simpara">See also the manual page on&nbsp;<a class="link" href="https://www.php.net/manual/en/language.operators.arithmetic.php" target="_blank">arithmetic operators</a>.</p>
 
@@ -3077,7 +3077,7 @@ HTML,
                 'title' => 'Mathematical Extensions - Trader',
                 'lesson_order' => 108,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The trader extension is a free open source stock library based on TA-Lib. It's dedicated to trading software developers requiring to perform technical analysis of financial market data. Alongside many indicators like ADX, MACD, RSI, Stochastic, TRIX the candlestick pattern recognition and several vector arithmetic and algebraic functions are present.</p>
 <p class="para">Calculations can be done in two modes - TA-Lib and Metastock. Changing it using&nbsp;<a class="link" href="https://www.php.net/manual/en/function.trader-set-compat.php" target="_blank">trader_set_compat()</a>&nbsp;will affect the way some trader functions work.</p>
 <p class="para">Some trader functions provide different results depending of the "starting point" of the data being involved. This is often referred as a function having memories. An example of such function is the Exponential Moving Average. It is possible to control the unstable period (the amount of data to strip off) using&nbsp;<a class="link" href="https://www.php.net/manual/en/function.trader-set-unstable-period.php" target="_blank">trader_set_unstable_period()</a>&nbsp;function.</p>
@@ -3098,7 +3098,7 @@ HTML,
                 'title' => 'Non-Text MIME Output - FDF - Forms Data Format',
                 'lesson_order' => 109,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">Forms Data Format (FDF) is a format for handling forms within PDF documents. You should read the documentation at&nbsp;<a class="link external" href="http://www.adobe.com/devnet/acrobat/fdftoolkit.html" target="_blank">»&nbsp;http://www.adobe.com/devnet/acrobat/fdftoolkit.html</a>&nbsp;for more information on what FDF is and how it is used in general.</p>
 <p class="simpara">The general idea of FDF is similar to HTML forms. The difference is basically the format how data is transmitted to the server when the submit button is pressed (this is actually the Form Data Format) and the format of the form itself (which is the Portable Document Format, PDF). Processing the FDF data is one of the features provided by the fdf functions. But there is more. One may as well take an existing PDF form and populated the input fields with data without modifying the form itself. In such a case one would create a FDF document (<span class="function"><a class="function" href="https://www.php.net/manual/en/function.fdf-create.php" target="_blank">fdf_create()</a></span>) set the values of each input field (<span class="function"><a class="function" href="https://www.php.net/manual/en/function.fdf-set-value.php" target="_blank">fdf_set_value()</a></span>) and associate it with a PDF form (<span class="function"><a class="function" href="https://www.php.net/manual/en/function.fdf-set-file.php" target="_blank">fdf_set_file()</a></span>). Finally it has to be sent to the browser with MimeType&nbsp;<code class="literal">application/vnd.fdf</code>. The Acrobat reader plugin of your browser recognizes the MimeType, reads the associated PDF form and fills in the data from the FDF document.</p>
 <p class="simpara">If you look at an FDF-document with a text editor you will find a catalogue object with the name&nbsp;<code class="literal">FDF</code>. Such an object may contain a number of entries like&nbsp;<code class="literal">Fields</code>,&nbsp;<code class="literal">F</code>,&nbsp;<code class="literal">Status</code>&nbsp;etc.. The most commonly used entries are&nbsp;<code class="literal">Fields</code>&nbsp;which points to a list of input fields, and&nbsp;<code class="literal">F</code>&nbsp;which contains the filename of the PDF-document this data belongs to. Those entries are referred to in the FDF documentation as /F-Key or /Status-Key. Modifying this entries is done by functions like&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.fdf-set-file.php" target="_blank">fdf_set_file()</a></span>&nbsp;and&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.fdf-set-status.php" target="_blank">fdf_set_status()</a></span>. Fields are modified with&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.fdf-set-value.php" target="_blank">fdf_set_value()</a></span>,&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.fdf-set-opt.php" target="_blank">fdf_set_opt()</a></span>&nbsp;etc..</p>
@@ -3119,7 +3119,7 @@ HTML,
                 'title' => 'Non-Text MIME Output - GnuPG - GNU Privacy Guard',
                 'lesson_order' => 110,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>This module allows you to interact with&nbsp;<a class="link external" href="http://www.gnupg.org/" target="_blank">»&nbsp;gnupg</a>.</p>
 
 <hr>
@@ -3138,7 +3138,7 @@ HTML,
                 'title' => 'Non-Text MIME Output - wkhtmltox',
                 'lesson_order' => 111,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>libwkhtmltox is an open source LGPLv3 library for rendering HTML into PDF and various image formats using the QtWebKit rendering engine.</p>
 
 <hr>
@@ -3157,7 +3157,7 @@ HTML,
                 'title' => 'Non-Text MIME Output - PS - Postscript Document Creation',
                 'lesson_order' => 112,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This module allows to create PostScript documents. It has many similarities with the pdf extension. Actually the API is almost identical and one can in many cases just replace the prefix of each function from pdf_ to ps_. This also works for functions which has no meaning in the PostScript document (like adding hyperlinks) but will have an effect if the document is converted to PDF.</p>
 <p class="para">Documents created by this extension are sometimes even superior to documents created with the pdf extension, because pslib's text rendering functions can handle kerning, hyphenation and ligatures which results in much better output of boxed text.</p>
 
@@ -3176,7 +3176,7 @@ HTML,
                 'title' => 'Non-Text MIME Output - RpmInfo',
                 'lesson_order' => 113,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This extension enables you to retrieve information from RPM files or from the installed RPMs database.</p>
 
 <hr>
@@ -3194,7 +3194,7 @@ HTML,
                 'title' => 'Non-Text MIME Output - XLSWriter',
                 'lesson_order' => 114,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">An efficient and fast xlsx file export extension.</p>
 
 <hr>
@@ -3213,7 +3213,7 @@ HTML,
                 'title' => 'Process Control Extensions - Eio',
                 'lesson_order' => 115,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This extension provides asyncronous POSIX I/O by means of&nbsp;<a class="link external" href="http://software.schmorp.de/pkg/libeio.html" target="_blank">»&nbsp;libeio</a>&nbsp;C library written by Marc Lehmann.</p>
 <blockquote class="blockquote">
     <p><strong class="note">Note</strong>:&nbsp;<span class="simpara">This extension is not available on Windows platforms.</span></p>
@@ -3240,7 +3240,7 @@ HTML,
                 'title' => 'Process Control Extensions - Ev',
                 'lesson_order' => 116,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This extension provides interface to&nbsp;<a class="link external" href="http://software.schmorp.de/pkg/libev.html" target="_blank">»&nbsp;libev</a>&nbsp;library - a high performance full-featured event loop written in C.</p>
 <blockquote class="blockquote">
     <p><strong class="note">Note</strong>:&nbsp;<span class="simpara">This extension is not available on Windows platforms.</span></p>
@@ -3282,7 +3282,7 @@ HTML,
                 'title' => 'Process Control Extensions - Expect',
                 'lesson_order' => 117,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>This extension allows to interact with processes through PTY. You may consider using the&nbsp;<a class="link" href="https://www.php.net/manual/en/wrappers.expect.php" target="_blank"><code class="literal">expect://</code>&nbsp;wrapper</a>&nbsp;with the&nbsp;<a class="link" href="https://www.php.net/manual/en/ref.filesystem.php" target="_blank">filesystem functions</a>&nbsp;which provide a simpler and more intuitive interface.</p>
 
 <hr>
@@ -3301,7 +3301,7 @@ HTML,
                 'title' => 'Process Control Extensions - PCNTL - Process Control',
                 'lesson_order' => 118,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Process Control support in PHP implements the Unix style of process creation, program execution, signal handling and process termination. Process Control should not be enabled within a web server environment and unexpected results may happen if any Process Control functions are used within a web server environment.</p>
 <p class="para">This documentation is intended to explain the general usage of each of the Process Control functions. For detailed information about Unix process control you are encouraged to consult your systems documentation including fork(2), waitpid(2) and signal(2) or a comprehensive reference such as Advanced Programming in the UNIX Environment by W. Richard Stevens (Addison-Wesley).</p>
 <p class="para">PCNTL now uses ticks as the signal handle callback mechanism, which is much faster than the previous mechanism. This change follows the same semantics as using "user ticks". You use the&nbsp;<span class="function"><strong>declare()</strong></span>&nbsp;statement to specify the locations in your program where callbacks are allowed to occur. This allows you to minimize the overhead of handling asynchronous events. In the past, compiling PHP with pcntl enabled would always incur this overhead, whether or not your script actually used pcntl.</p>
@@ -3325,7 +3325,7 @@ HTML,
                 'title' => 'Process Control Extensions - POSIX',
                 'lesson_order' => 119,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This module contains an interface to those functions defined in the IEEE 1003.1 (POSIX.1) standards document which are not accessible through other means.</p>
 <div class="warning"><strong class="warning">Warning</strong>
     <p class="para">Sensitive data can be retrieved with the POSIX functions, e.g.&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.posix-getpwnam.php" target="_blank">posix_getpwnam()</a></span>&nbsp;and friends.</p>
@@ -3349,7 +3349,7 @@ HTML,
                 'title' => 'Process Control Extensions - Program Execution - System Program Execution',
                 'lesson_order' => 120,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Those functions provide means to execute commands on the system itself, and means to secure such commands.</p>
 <blockquote class="blockquote">
     <p><strong class="note">Note</strong>:</p>
@@ -3371,7 +3371,7 @@ HTML,
                 'title' => 'Process Control Extensions - Parallel',
                 'lesson_order' => 121,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">parallel is a parallel concurrency extension for PHP 7.2+.</p>
 <p class="para">A brief description of the concepts core to parallel follows, more detailed information may be found within this section of the manual.</p>
 <div class="simplesect">
@@ -3445,7 +3445,7 @@ HTML,
                 'title' => 'Process Control Extensions - Semaphore - Shared Memory and IPC',
                 'lesson_order' => 122,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">These modules provide wrappers for the System V IPC family of functions. It includes semaphores, shared memory and inter-process messaging (IPC).</p>
 <p class="para">Semaphores may be used to provide exclusive access to resources on the current machine, or to limit the number of processes that may simultaneously use a resource.</p>
 <p class="para">This module provides also shared memory functions using System V shared memory. Shared memory may be used to provide access to global variables. Different httpd-daemons and even other programs (such as Perl, C, ...) are able to access this data to provide a global data-exchange. Remember, that shared memory is NOT safe against simultaneous access. Use semaphores for synchronization.</p>
@@ -3492,7 +3492,7 @@ HTML,
                 'title' => 'Process Control Extensions - Shared Memory',
                 'lesson_order' => 123,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Shmop is an easy to use set of functions that allows PHP to read, write, create and delete Unix shared memory segments.</p>
 
 <hr>
@@ -3512,7 +3512,7 @@ HTML,
                 'title' => 'Process Control Extensions - Sync',
                 'lesson_order' => 124,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The 'sync' extension introduces cross-platform synchonization objects into PHP. Named and unnamed Mutex, Semaphore, Event, Reader-Writer, and named Shared Memory objects provide OS-level synchronization on both POSIX (e.g. Linux) and Windows platforms.</p>
 <p class="para">Automatic cleanup of acquired synchronization objects takes place during extension teardown. This means that if PHP prematurely terminates a script (e.g. script execution time is exceeded), objects will not be left in an unknown state. The only exception to this is if PHP itself crashes (e.g. an internal buffer overflow).</p>
 <p class="para">Unnamed synchronization objects don't have a lot of use outside of a multithreaded scenario. Unnamed objects are more useful in conjunction with the pthreads PECL extension.</p>
@@ -3540,7 +3540,7 @@ HTML,
                 'title' => 'Other Basic Extensions - GeoIP - Geo IP Location',
                 'lesson_order' => 125,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The GeoIP extension allows you to find the location of an IP address. City, State, Country, Longitude, Latitude, and other information as all, such as ISP and connection type can be obtained with the help of GeoIP.</p>
 <div class="alert alert-danger">
     <strong class="warning">Warning</strong>
@@ -3562,7 +3562,7 @@ HTML,
                 'title' => 'Other Basic Extensions - FANN - Fast Artificial Neural Network',
                 'lesson_order' => 126,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>PHP binding for FANN (Fast Artificial Neural Network) Library which implements multilayer artificial neural networks with support for both fully connected and sparsely connected networks. It includes a framework for easy handling of training data sets. It is easy to use, versatile, well documented, and fast.</p>
 
 <hr>
@@ -3582,7 +3582,7 @@ HTML,
                 'title' => 'Other Basic Extensions - Igbinary',
                 'lesson_order' => 127,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Igbinary is a drop in replacement for the standard PHP serializer. Instead of the time and space consuming textual representation used by PHP's&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.serialize.php" target="_blank">serialize()</a></span>, igbinary stores PHP data structures in a compact binary form. Memory savings are significant when using memcached, APCu, or similar memory based storages for serialized data. The typical reduction in storage requirements are around 50%. The exact percentage depends on the data.</p>
 
 <hr>
@@ -3599,7 +3599,7 @@ HTML,
                 'title' => 'Other Basic Extensions - JSON - Javascript Oriented Notation',
                 'lesson_order' => 128,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This extension implements the&nbsp;<a class="link external" href="http://www.json.org/" target="_blank">»&nbsp;JavaScript Object Notation (JSON)</a>&nbsp;data-interchange format. PHP comes with a parser that is specifically written for PHP and licensed under the PHP license.</p>
 <blockquote class="blockquote">
     <p><strong class="note">Note</strong>:</p>
@@ -3623,7 +3623,7 @@ HTML,
                 'title' => 'Other Basic Extensions - Lua',
                 'lesson_order' => 129,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>"Lua is a powerful, fast, light-weight, embeddable scripting language." This extension embeds the lua interpreter and offers an OO-API to lua variables and functions.</p>
 
 <hr>
@@ -3641,7 +3641,7 @@ HTML,
                 'title' => 'Other Basic Extensions - LuaSandbox',
                 'lesson_order' => 130,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">LuaSandbox is an extension for PHP 7 and PHP 8 to allow safely running untrusted Lua 5.1 code from within PHP.</p>
 <p class="para">Differences compared to the&nbsp;<a class="link" href="https://www.php.net/manual/en/book.lua.php" target="_blank">Lua</a>&nbsp;extension:</p>
 <ul class="itemizedlist">
@@ -3683,7 +3683,7 @@ HTML,
                 'title' => 'Other Basic Extensions - Misc - Miscellaneous Functions',
                 'lesson_order' => 131,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">These functions were placed here because none of the other categories seemed to fit.</p>
 
 <hr>
@@ -3702,7 +3702,7 @@ HTML,
                 'title' => 'Other Basic Extensions - Seaslog',
                 'lesson_order' => 132,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The&nbsp;<abbr>Seaslog</abbr>&nbsp;is an effective,fast,stable log extension for PHP.</p>
 <p class="para">The log journal，which is usually the operate record of the system， software and the application record. Through the analysis of the log，it can facilitate users to understand the operation of the system， software and the application situation. If your application log is rich enough, it can also analyze the previous use’s operation behavior,type, regional distribution or other more information. The application log also points the multiple levels at the same time, you can easily get the application analysis of health status, timely find problems and quick positioning, and solve the problem, remedy the loss.</p>
 <p class="para">The error_log, syslog function which built in PHP is powerful and excellent performance, but due to various defects (error_log have no error level, no fixed format, syslog regardless of module, and mix with system log ), reducing a lot of flexibility , and can't meet the application requirements.</p>
@@ -3749,7 +3749,7 @@ HTML,
                 'title' => 'Other Basic Extensions - SPL - Standard PHP Library',
                 'lesson_order' => 133,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The Standard PHP Library (SPL) is a collection of interfaces and classes that are meant to solve common problems.</p>
 <p class="para">SPL provides a set of standard datastructure, a set of iterators to traverse over objects, a set of interfaces, a set of standard Exceptions, a number of classes to work with files and it provides a set of functions like&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.spl-autoload-register.php" target="_blank">spl_autoload_register()</a></span></p>
 
@@ -3774,7 +3774,7 @@ HTML,
                 'title' => 'Other Basic Extensions - Streams',
                 'lesson_order' => 134,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">Streams are the way of generalizing file, network, data compression, and other operations which share a common set of functions and uses. In its simplest definition, a&nbsp;<code class="literal">stream</code>&nbsp;is a&nbsp;<code class="literal">resource</code>&nbsp;object which exhibits streamable behavior. That is, it can be read from or written to in a linear fashion, and may be able to&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.fseek.php" target="_blank">fseek()</a></span>&nbsp;to an arbitrary location within the stream.</p>
 <p class="simpara">A&nbsp;<code class="literal">wrapper</code>&nbsp;is additional code which tells the stream how to handle specific protocols/encodings. For example, the&nbsp;<code class="literal">http</code>&nbsp;wrapper knows how to translate a URL into an&nbsp;<code class="literal">HTTP/1.0</code>&nbsp;request for a file on a remote server. There are many wrappers built into PHP by default (See&nbsp;<a class="xref" href="https://www.php.net/manual/en/wrappers.php" target="_blank">Supported Protocols and Wrappers</a>), and additional, custom wrappers may be added either within a PHP script using&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.stream-wrapper-register.php" target="_blank">stream_wrapper_register()</a></span>, or directly from an extension. Because any variety of wrapper may be added to PHP, there is no set limit on what can be done with them. To access the list of currently registered wrappers, use&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.stream-get-wrappers.php" target="_blank">stream_get_wrappers()</a></span>.</p>
 <p class="para">A stream is referenced as:&nbsp;<code class="parameter">scheme</code>://<code class="parameter">target</code></p>
@@ -3804,7 +3804,7 @@ HTML,
                 'title' => 'Other Basic Extensions - Swoole',
                 'lesson_order' => 135,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Swoole is a high-performance networking framework using an event-driven, asynchronous, non-blocking I/O model. It can be used to develop high-performance, scalable, concurrent TCP, UDP, Unix socket, HTTP, Websocket services. To get started, please check the&nbsp;<a class="link external" href="https://www.swoole.co.uk/docs/" target="_blank">»&nbsp;Swoole Docs</a>.</p>
 
 <hr>
@@ -3847,7 +3847,7 @@ HTML,
                 'title' => 'Other Basic Extensions - Tidy',
                 'lesson_order' => 136,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Tidy is a binding for the Tidy HTML clean and repair utility which allows you to not only clean and otherwise manipulate HTML, XHTML, and XML documents, but also traverse the document tree, including ones with embedded scripting languages such as PHP or ASP within them using object-oriented constructs.</p>
 
 <hr>
@@ -3868,7 +3868,7 @@ HTML,
                 'title' => 'Other Basic Extensions - Tokenizer',
                 'lesson_order' => 137,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The tokenizer functions provide an interface to the PHP tokenizer embedded in the Zend Engine. Using these functions you may write your own PHP source analyzing or modification tools without having to deal with the language specification at the lexical level.</p>
 <p class="para">See also the&nbsp;<a class="link" href="https://www.php.net/manual/en/tokens.php" target="_blank">appendix about tokens</a>.</p>
 
@@ -3889,7 +3889,7 @@ HTML,
                 'title' => 'Other Basic Extensions - URLs',
                 'lesson_order' => 138,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Dealing with URL strings: encoding, decoding and parsing.</p>
 
 <hr>
@@ -3907,7 +3907,7 @@ HTML,
                 'title' => 'Other Basic Extensions - V8js - V8 Javascript Enginer Integration',
                 'lesson_order' => 139,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>This extension embeds the&nbsp;<a class="link external" href="http://code.google.com/p/v8/" target="_blank">»&nbsp;V8 Javascript Engine</a> into PHP.</p>
 
 <hr>
@@ -3926,7 +3926,7 @@ HTML,
                 'title' => 'Other Basic Extensions - Yaml - YAML Data Serialization',
                 'lesson_order' => 140,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>This extension implements the&nbsp;<a class="link external" href="http://www.yaml.org/" target="_blank">»&nbsp;YAML Ain't Markup Language (YAML)</a>&nbsp;data serialization standard. Parsing and emiting are handled by the&nbsp;<a class="link external" href="http://pyyaml.org/wiki/LibYAML" target="_blank">»&nbsp;LibYAML library</a>.</p>
 
 <hr>
@@ -3946,7 +3946,7 @@ HTML,
                 'title' => 'Other Basic Extensions - Yaf - Yet Another Framework',
                 'lesson_order' => 141,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The&nbsp;<code class="literal">Yet Another Framework</code>&nbsp;(<abbr>Yaf</abbr>) extension is a PHP framework that is used to develop web applications.</p>
 <p class="para">A simple Yaf benchmark can be found at&nbsp;<a class="link external" href="http://www.laruence.com/2011/12/02/2333.html" target="_blank">»&nbsp;Yaf Performance</a>.</p>
 <p class="para">For a quick start guide, please refer to the&nbsp;<a class="link" href="https://www.php.net/manual/en/yaf.tutorials.php" target="_blank">Tutorials</a>&nbsp;section.</p>
@@ -4003,7 +4003,7 @@ HTML,
                 'title' => 'Other Basic Extensions - Yaconf',
                 'lesson_order' => 142,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para"><code class="literal">Yet Another Configurations Container</code>&nbsp;(<abbr>Yaconf</abbr>) is a configurations container, it parses INI files, and store the result in PHP when PHP is started, the result lives with the whole PHP lifecycle.</p>
 <p class="para">Yaconf stores all configurations as interned string or immutable array, which means they are not refcounted-able, thus when you retrieving configurations from yaconf, it could be considered as zero-copy, very fast.</p>
 <p class="para">Yaconf supports sections and sections inheritance in INI files. if PHP is built as non-ZTS build, Yaconf also supports automatically reloading after INI files are changed.</p>
@@ -4024,7 +4024,7 @@ HTML,
                 'title' => 'Other Basic Extensions - Taint',
                 'lesson_order' => 143,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Taint is an extension, which is used for detecting XSS codes(tainted string). And also can be used to spot sql injection vulnerabilities, and shell inject, etc.</p>
 <p class="para">When taint is enabled, if you pass a tainted string (comes from $_GET, $_POST or $_COOKIE) to some functions, taint will warn you about that.</p>
 <div id="example-3973" class="example">
@@ -4063,7 +4063,7 @@ HTML,
                 'title' => 'Other Basic Extensions - Data Structures',
                 'lesson_order' => 144,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Efficient data structures for PHP 7, provided as an alternative to the&nbsp;<span class="type">array</span>.</p>
 <p class="para">See&nbsp;<a class="link external" href="https://medium.com/p/9dda7af674cd" target="_blank">»&nbsp;this blog post</a>&nbsp;for benchmarks, discussion and frequently asked questions.</p>
 
@@ -4093,7 +4093,7 @@ HTML,
                 'title' => 'Other Services - cURL - Client URL Library',
                 'lesson_order' => 145,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>PHP supports libcurl, a library created by Daniel Stenberg, that allows you to connect and communicate to many different types of servers with many different types of protocols. libcurl currently supports the http, https, ftp, gopher, telnet, dict, file, and ldap protocols. libcurl also supports HTTPS certificates, HTTP POST, HTTP PUT, FTP uploading (this can also be done with PHP's ftp extension), HTTP form based upload, proxies, cookies, and user+password authentication.</p>
 
 <hr>
@@ -4117,7 +4117,7 @@ HTML,
                 'title' => 'Other Services - Event',
                 'lesson_order' => 146,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This is an extension to efficiently schedule I/O, time and signal based events using the best I/O notification mechanism available for specific platform. This is a port of libevent to the PHP infrastructure.</p>
 <blockquote class="blockquote">
     <p><strong class="note">Note</strong>:</p>
@@ -4160,7 +4160,7 @@ HTML,
                 'title' => 'Other Services - FTP',
                 'lesson_order' => 147,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>The functions in this extension implement client access to files servers speaking the File Transfer Protocol (FTP) as defined in&nbsp;<a class="link external" href="http://www.faqs.org/rfcs/rfc959" target="_blank">»&nbsp;http://www.faqs.org/rfcs/rfc959</a>. This extension is meant for detailed access to an FTP server providing a wide range of control to the executing script. If you only wish to read from or write to a file on an FTP server, consider using the&nbsp;<a class="link" href="https://www.php.net/manual/en/wrappers.ftp.php" target="_blank"><code class="literal">ftp://</code>&nbsp;wrapper</a>&nbsp;with the&nbsp;<a class="link" href="https://www.php.net/manual/en/ref.filesystem.php" target="_blank">filesystem functions</a>&nbsp;which provide a simpler and more intuitive interface.</p>
 
 <hr>
@@ -4180,7 +4180,7 @@ HTML,
                 'title' => 'Other Services - Gearman',
                 'lesson_order' => 148,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para"><a class="link external" href="https://gearman.org/" target="_blank">»&nbsp;Gearman</a>&nbsp;is a generic application framework for farming out work to multiple machines or processes. It allows applications to complete tasks in parallel, to load balance processing, and to call functions between languages. The framework can be used in a variety of applications, from high-availability web sites to the transport of database replication events.</p>
 <p class="para">This extension provides classes for writing Gearman clients and workers.</p>
 
@@ -4204,7 +4204,7 @@ HTML,
                 'title' => 'Other Services - LDAP - Lightweight Directory Access Protocol',
                 'lesson_order' => 149,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">LDAP is the Lightweight Directory Access Protocol, and is a protocol used to access "Directory Servers". The Directory is a special kind of database that holds information in a tree structure.</p>
 <p class="para">The concept is similar to your hard disk directory structure, except that in this context, the root directory is "The world" and the first level subdirectories are "countries". Lower levels of the directory structure contain entries for companies, organisations or places, while yet lower still we find directory entries for people, and perhaps equipment or documents.</p>
 <p class="para">To refer to a file in a subdirectory on your hard disk, you might use something like:</p>
@@ -4256,7 +4256,7 @@ HTML,
                 'title' => 'Other Services - Memcache',
                 'lesson_order' => 150,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Memcache module provides handy procedural and object-oriented interface to memcached, highly effective caching daemon, which was especially designed to decrease database load in dynamic web applications.</p>
 <p class="para">The Memcache module also provides a&nbsp;<a class="link" href="https://www.php.net/manual/en/ref.session.php" target="_blank">session</a>&nbsp;handler (<code class="literal">memcache</code>).</p>
 <p class="para">More information about memcached can be found at&nbsp;<a class="link external" href="http://www.memcached.org/" target="_blank">»&nbsp;http://www.memcached.org/</a>.</p>
@@ -4278,7 +4278,7 @@ HTML,
                 'title' => 'Other Services - Memcached',
                 'lesson_order' => 151,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para"><a class="link external" href="http://www.memcached.org/" target="_blank">»&nbsp;memcached</a>&nbsp;is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load.</p>
 <p class="para">This extension uses the libmemcached library to provide an API for communicating with memcached servers. It also provides a&nbsp;<a class="link" href="https://www.php.net/manual/en/ref.session.php" target="_blank">session</a>&nbsp;handler (<code class="literal">memcached</code>).</p>
 <p class="para">Information about libmemcached can be found at&nbsp;<a class="link external" href="http://libmemcached.org/libMemcached.html" target="_blank">»&nbsp;http://libmemcached.org/libMemcached.html</a>.</p>
@@ -4302,7 +4302,7 @@ HTML,
                 'title' => 'Other Services - mqseries',
                 'lesson_order' => 152,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="simpara">This extension aims to provide an interface for communicating with IBMs WebSphere MQ series Queue managers.</p>
 <p class="simpara">The interface mimics the C-API client interface of WebSphere MQ Series as close as possible. Using the same naming conventions and possibilities of the C-API. In order to understand the workings of this extension some level of understanding the C-API is required.</p>
 <p class="simpara">For MQ-options, MQ-structures, MQ-results etc. please read the WebSphere MQ Application Programming Guide and WebSphere MQ Application Programming Reference.</p>
@@ -4322,7 +4322,7 @@ HTML,
                 'title' => 'Other Services - Network',
                 'lesson_order' => 153,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Provides various networking functions.</p>
 <hr>
 <h5>This topic also includes:</h5>
@@ -4339,7 +4339,7 @@ HTML,
                 'title' => 'Other Services - RDP - RDPtool',
                 'lesson_order' => 154,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The PECL/rrd extension provides bindings to the RRDtool C library. RRDtool is the open source industry standard, high performance data logging and graphing system for time series data.</p>
 <p class="para">The RRDtool homepage is&nbsp;<a class="link external" href="https://www.mrtg.org/rrdtool/" target="_blank">»&nbsp;http://www.mrtg.org/rrdtool/</a>.</p>
 
@@ -4362,7 +4362,7 @@ HTML,
                 'title' => 'Other Services - SNMP',
                 'lesson_order' => 155,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The SNMP extension provides a very simple and easily usable toolset for managing remote devices via the Simple Network Management Protocol.</p>
 <p class="para">As it is a wrapper around the underlying Net-SNMP library, all basic concepts are the same and the PHP functions change their behaviour depending on the Net-SNMP configuration files and environment variables.</p>
 <p class="para">More information about Net-SNMP can be found at&nbsp;<a class="link external" href="http://www.net-snmp.org/" target="_blank">»&nbsp;http://www.net-snmp.org/</a></p>
@@ -4384,7 +4384,7 @@ HTML,
                 'title' => 'Other Services - Sockets',
                 'lesson_order' => 156,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The socket extension implements a low-level interface to the socket communication functions based on the popular BSD sockets, providing the possibility to act as a socket server as well as a client.</p>
 <p class="para">For a more generic client-side socket interface, see&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.stream-socket-client.php" target="_blank">stream_socket_client()</a></span>,&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.stream-socket-server.php" target="_blank">stream_socket_server()</a></span>,&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.fsockopen.php" target="_blank">fsockopen()</a></span>, and&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.pfsockopen.php" target="_blank">pfsockopen()</a></span>.</p>
 <p class="para">When using these functions, it is important to remember that while many of them have identical names to their C counterparts, they often have different declarations. Please be sure to read the descriptions to avoid confusion.</p>
@@ -4409,7 +4409,7 @@ HTML,
                 'title' => 'Other Services - SSH2 - Secure Shell2',
                 'lesson_order' => 157,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Bindings to the&nbsp;<a class="link external" href="http://libssh2.org/" target="_blank">»&nbsp;libssh2</a>&nbsp;library which provide access to resources (shell, remote exec, tunneling, file transfer) on a remote machine using a secure cryptographic transport.</p>
 
 <hr>
@@ -4427,7 +4427,7 @@ HTML,
                 'title' => 'Other Services - Stomp - Stomp Client',
                 'lesson_order' => 158,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>This extension allows php applications to communicate with any Stomp compliant Message Brokers through easy object-oriented and procedural interfaces.&nbsp;<a class="link external" href="https://stomp.github.io/" target="_blank">»&nbsp;Stomp official site</a></p>
 
 <hr>
@@ -4448,7 +4448,7 @@ HTML,
                 'title' => 'Other Services - SVM - Support Vector Machine',
                 'lesson_order' => 159,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>LibSVM is an efficient solver for SVM classification and regression problems. The svm extension wraps this in a PHP interface for easy use in PHP scripts.</p>
 
 <hr>
@@ -4467,7 +4467,7 @@ HTML,
                 'title' => 'Other Services - SVN - Subversion',
                 'lesson_order' => 160,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This extension implements PHP bindings for&nbsp;<a class="link external" href="http://subversion.apache.org/" target="_blank">»&nbsp;Subversion</a>&nbsp;(SVN), a version control system, allowing PHP scripts to communicate with SVN repositories and working copies without direct command line calls to the&nbsp;<var class="filename">svn</var>&nbsp;executable.</p>
 <div class="alert alert-danger">
     <strong class="warning">Warning</strong>
@@ -4489,7 +4489,7 @@ HTML,
                 'title' => 'Other Services - TCP - TCP Wrappers',
                 'lesson_order' => 161,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>The TCP wrappers provides a classical Unix mechanism which has been designed to check if the remote client is able to connect from the given IP address.</p>
 
 <hr>
@@ -4508,7 +4508,7 @@ HTML,
                 'title' => 'Other Services - Varnish',
                 'lesson_order' => 162,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>Varnish Cache is an open source, state of the art web application accelerator. The extension makes it possible to interact with a running varnish instance through TCP socket or shared memory.</p>
 
 <hr>
@@ -4529,7 +4529,7 @@ HTML,
                 'title' => 'Other Services - YAZ',
                 'lesson_order' => 163,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This extension offers a PHP interface to the&nbsp;<span class="productname">YAZ</span>&nbsp;toolkit that implements the&nbsp;<a class="link external" href="http://www.loc.gov/z3950/agency/" target="_blank">»&nbsp;Z39.50 Protocol for Information Retrieval</a>. With this extension you can easily implement a Z39.50 origin (client) that searches or scans Z39.50 targets (servers) in parallel.</p>
 <p class="para">The module hides most of the complexity of Z39.50 so it should be fairly easy to use. It supports persistent stateless connections very similar to those offered by the various RDB APIs that are available for PHP. This means that sessions are stateless but shared among users, thus saving the connect and initialize phase steps in most cases.</p>
 <p class="para"><span class="productname">YAZ</span>&nbsp;is available at&nbsp;<a class="link external" href="http://www.indexdata.dk/yaz/" target="_blank">»&nbsp;http://www.indexdata.dk/yaz/</a>. You can find news information, example scripts, etc. for this extension at&nbsp;<a class="link external" href="http://www.indexdata.dk/phpyaz/" target="_blank">»&nbsp;http://www.indexdata.dk/phpyaz/</a>.</p>
@@ -4554,7 +4554,7 @@ HTML,
                 'title' => 'Other Services - 0MQ messaging - ZMQ',
                 'lesson_order' => 164,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">"ØMQ is a software library that lets you quickly design and implement a fast message-based application." --0MQ Website</p>
 <p class="para">For more information about 0MQ, see&nbsp;<a class="link external" href="http://zeromq.org/" target="_blank">»&nbsp;http://zeromq.org/</a>.</p>
 
@@ -4576,7 +4576,7 @@ HTML,
                 'title' => 'Other Services - 0MQ messaging - ZooKeeper',
                 'lesson_order' => 165,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This extension uses libzookeeper library to provide API for communicating with ZooKeeper service.</p>
 <p class="para">ZooKeeper is an Apache project that enables centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services.</p>
 
@@ -4604,7 +4604,7 @@ HTML,
                 'title' => 'Search Engine Extensions - Solr - Apache Solr',
                 'lesson_order' => 166,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The Solr extension allows you to communicate effectively with the Apache Solr Server in PHP.</p>
 <p class="para">The Solr extension is an extremely fast, light-weight, feature-rich library that allows PHP developers to communicate effectively with Solr server instances.</p>
 <p class="para">Versions 1.x of The PECL Extension supports Apache Solr Server 1.3-3.x</p>
@@ -4650,7 +4650,7 @@ HTML,
                 'title' => 'Server Specific Extensions - Apache',
                 'lesson_order' => 167,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>These functions are only available when running PHP as an Apache module.</p>
 
 <hr>
@@ -4668,7 +4668,7 @@ HTML,
                 'title' => 'Server Specific Extensions - FastCGI Process Manager',
                 'lesson_order' => 168,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">FPM (FastCGI Process Manager) is a primary PHP FastCGI implementation containing some features (mostly) useful for heavy-loaded sites.</p>
 <p class="para">This SAPI is bundled with PHP.</p>
 
@@ -4687,7 +4687,7 @@ HTML,
                 'title' => 'Session Extensions - Sessions - Session Handling',
                 'lesson_order' => 169,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Session support in PHP consists of a way to preserve certain data across subsequent accesses.</p>
 <p class="para">A visitor accessing your web site is assigned a unique id, the so-called session id. This is either stored in a cookie on the user side or is propagated in the URL.</p>
 <p class="para">The session support allows you to store data between requests in the&nbsp;<var class="varname"><a class="classname" href="https://www.php.net/manual/en/reserved.variables.session.php" target="_blank">$_SESSION</a></var>&nbsp;superglobal array. When a visitor accesses your site, PHP will check automatically (if&nbsp;<a class="link" href="https://www.php.net/manual/en/session.configuration.php#ini.session.auto-start" target="_blank">session.auto_start</a>&nbsp;is set to 1) or on your request (explicitly through&nbsp;<span class="function"><a class="function" href="https://www.php.net/manual/en/function.session-start.php" target="_blank">session_start()</a></span>) whether a specific session id has been sent with the request. If this is the case, the prior saved environment is recreated.</p>
@@ -4728,7 +4728,7 @@ HTML,
                 'title' => 'Text Processing - CommonMark',
                 'lesson_order' => 170,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This extension provides access to the reference implementation of CommonMark, a rationalized version of Markdown syntax with a specification.</p>
 <p class="formalpara">&nbsp;</p>
 <h5 class="title">Parsing:</h5>
@@ -4791,7 +4791,7 @@ HTML,
                 'title' => 'Text Processing - Parle - Parsing and Lexing',
                 'lesson_order' => 171,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The parle extension provides general purpose lexing and parsing facilities. The implementation is based on&nbsp;<a class="link external" href="http://www.benhanson.net/" target="_blank">»&nbsp;Ben Hanson</a>'s libraries and requires a&nbsp;<a class="link external" href="http://en.cppreference.com/w/cpp/compiler_support" target="_blank">»&nbsp;C++14</a>&nbsp;capable compiler. The lexer is based on the regex matching, the parser is LALR(1). Lexers and parsers are generated on the fly and can be used immediately after they've been finalized. Parle deals with parsing and lexing, the appropriate data structures representation and processing are the implementer's task. Serialization and code generation are not supported by the extension, yet.</p>
 <p class="para">Lexer analysis is a process of splitting a character sequence into a list of lexemes. The lexeme list can be then used for the syntax analysis against a formal grammar. These operations are also known as lexing and parsing. This documentation doesn't aim to provide an exhaustive information on lexing and parsing. Good information in this regard is available on the numerous resources on the net. Several usage examples are included, to show the functionality. The extension is useful for PHP programmers both willing to learn or to utilize parsing and lexing. State machines and grammar parsing don't have to be implemented manually, these complex tasks are taken away by parle. Thanks to that, the development can be focused on the actual problem solving.</p>
 <p class="para">The common use case for parle is, when a data format is too complex to be handled by the regex matching with PCRE. The practical application is herewith wide. Be it a specific data format, a behavior modification of existing functions, even an own programming language and beyond. The helper methods such as&nbsp;<span class="methodname"><a class="methodname" href="https://www.php.net/manual/en/parle-lexer.dump.php" target="_blank">Parle\Lexer::dump()</a></span>&nbsp;to inspect the generated state machine, or&nbsp;<span class="methodname"><a class="methodname" href="https://www.php.net/manual/en/parle-parser.dump.php" target="_blank">Parle\Parser::dump()</a></span>&nbsp;to inspect the generated grammar, are useful. The method&nbsp;<span class="methodname"><a class="methodname" href="https://www.php.net/manual/en/parle-parser.trace.php" target="_blank">Parle\Parser::trace()</a></span>&nbsp;can also be used to track the parsing operation.</p>
@@ -4821,7 +4821,7 @@ HTML,
                 'title' => 'Text Processing - PCRE - Regualr Expressions (Perl-Compatible)',
                 'lesson_order' => 172,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The syntax for patterns used in these functions closely resembles Perl. The expression must be enclosed in the delimiters, a forward slash (/), for example. Delimiters can be any non-alphanumeric, non-whitespace ASCII character except the backslash (\) and the null byte. If the delimiter character has to be used in the expression itself, it needs to be escaped by backslash. Perl-style (), {}, [], and &lt;&gt; matching delimiters may also be used. See&nbsp;<a class="link" href="https://www.php.net/manual/en/reference.pcre.pattern.syntax.php" target="_blank">Pattern Syntax</a>&nbsp;for detailed explanation.</p>
 <p class="para">The ending delimiter may be followed by various modifiers that affect the matching. See&nbsp;<a class="link" href="https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php" target="_blank">Pattern Modifiers</a>.</p>
 <blockquote class="note">
@@ -4850,7 +4850,7 @@ HTML,
                 'title' => 'Text Processing - ssdeep - ssdeep Fuzzy Hashing',
                 'lesson_order' => 173,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">ssdeep is a utility for creating and comparing fuzzy hashes.</p>
 <p class="para">Fuzzy hashing can match signatures which have "...sequences of identical bytes in the same order, although bytes in between these sequences may be different in both content and length". (<a class="link external" href="http://ssdeep.sourceforge.net/" target="_blank">»&nbsp; ssdeep project page</a>)</p>
 <p class="para">This extension provides functions for creating and comparing fuzzy hashes.</p>
@@ -4870,7 +4870,7 @@ HTML,
                 'title' => 'Text Processing - Strings',
                 'lesson_order' => 174,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">These functions all manipulate strings in various ways. Some more specialized sections can be found in the regular expression and&nbsp;<a class="link" href="https://www.php.net/manual/en/book.url.php" target="_blank">URL handling</a>&nbsp;sections.</p>
 <p class="para">For information on how strings behave, especially with regard to usage of single quotes, double quotes, and escape sequences, see the&nbsp;<a class="link" href="https://www.php.net/manual/en/language.types.string.php" target="_blank">Strings</a>&nbsp;entry in the&nbsp;<a class="link" href="https://www.php.net/manual/en/language.types.php" target="_blank">Types</a>&nbsp;section of the manual.</p>
 
@@ -4890,7 +4890,7 @@ HTML,
                 'title' => 'Variables and Types Related Extensions - Arrays',
                 'lesson_order' => 175,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">These functions allow you to interact with and manipulate arrays in various ways. Arrays are essential for storing, managing, and operating on sets of variables.</p>
 <p class="para">Simple and multi-dimensional arrays are supported, and may be either user created or created by another function. There are specific database handling functions for populating arrays from database queries, and several functions return arrays.</p>
 <p class="para">Please see the&nbsp;<a class="link" href="https://www.php.net/manual/en/language.types.array.php" target="_blank">Arrays</a>&nbsp;section of the manual for a detailed explanation of how arrays are implemented and used in PHP. See also&nbsp;<a class="link" href="https://www.php.net/manual/en/language.operators.array.php" target="_blank">Array operators</a>&nbsp;for other ways how to manipulate the arrays.</p>
@@ -4911,7 +4911,7 @@ HTML,
                 'title' => 'Variables and Types Related Extensions - Classes/Object Information',
                 'lesson_order' => 176,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">These functions allow you to obtain information about classes and instance objects. You can obtain the name of the class to which an object belongs, as well as its member properties and methods. Using these functions, you can find out not only the class membership of an object, but also its parentage (i.e. what class is the object class extending).</p>
 <p class="para">Please see the&nbsp;<a class="link" href="https://www.php.net/manual/en/language.types.object.php" target="_blank">Objects</a>&nbsp;section of the manual for a detailed explanation of how classes and objects are implemented and used in PHP.</p>
 
@@ -4931,7 +4931,7 @@ HTML,
                 'title' => 'Variables and Types Related Extensions - Filter - Data Filtering',
                 'lesson_order' => 177,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This extension filters data by either validating or sanitizing it. This is especially useful when the data source contains unknown (or foreign) data, like user supplied input. For example, this data may come from an HTML form.</p>
 <p class="para">There are two main types of filtering:&nbsp;<em class="emphasis">validation</em>&nbsp;and&nbsp;<em class="emphasis">sanitization</em>.</p>
 <p class="para"><a class="link" href="https://www.php.net/manual/en/filter.filters.validate.php" target="_blank">Validation</a>&nbsp;is used to validate or check if the data meets certain qualifications. For example, passing in&nbsp;<strong><code>FILTER_VALIDATE_EMAIL</code></strong>&nbsp;will determine if the data is a valid email address, but will not change the data itself.</p>
@@ -4955,7 +4955,7 @@ HTML,
                 'title' => 'Variables and Types Related Extensions - Function Handling',
                 'lesson_order' => 178,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>These functions all handle various operations involved in working with functions.</p>
 
 <hr>
@@ -4973,7 +4973,7 @@ HTML,
                 'title' => 'Variables and Types Related Extensions - Reflection',
                 'lesson_order' => 179,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">PHP comes with a complete reflection API that adds the ability to introspect classes, interfaces, functions, methods and extensions. Additionally, the reflection API offers ways to retrieve doc comments for functions, classes and methods.</p>
 <p class="para">Please note that certain parts of the internal&nbsp;<abbr title="Application Programming Interface">API</abbr>&nbsp;are missing the necessary code to work with the Reflection extension. E.g., an internal PHP class might be missing reflection data for properties. These few cases are considered bugs, however, so they should be discovered and fixed.</p>
 
@@ -5017,7 +5017,7 @@ HTML,
                 'title' => 'Web Services - OAuth',
                 'lesson_order' => 180,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>This extension provides OAuth 1.0a consumer and provider bindings. OAuth is an authorization protocol built on top of HTTP which allows applications to securely access data without having to store usernames and passwords.</p>
 
 <hr>
@@ -5039,7 +5039,7 @@ HTML,
                 'title' => 'Web Services - SOAP',
                 'lesson_order' => 181,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>The SOAP extension can be used to write SOAP Servers and Clients. It supports subsets of&nbsp;<a class="link external" href="http://www.w3.org/TR/soap11/" target="_blank">»&nbsp;SOAP 1.1</a>,&nbsp;<a class="link external" href="http://www.w3.org/TR/soap12/" target="_blank">»&nbsp;SOAP 1.2</a>&nbsp;and&nbsp;<a class="link external" href="http://www.w3.org/TR/wsdl" target="_blank">»&nbsp;WSDL 1.1</a>&nbsp;specifications.</p>
 
 <hr>
@@ -5063,7 +5063,7 @@ HTML,
                 'title' => 'Web Services - Yar - Yet Another RPC Framework',
                 'lesson_order' => 182,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">Yar is a RPC framework which aims to provide a simple and easy way to do communication between PHP applications It has the ability to concurrently call multiple remote services</p>
 
 <hr>
@@ -5086,7 +5086,7 @@ HTML,
                 'title' => 'Windows Only Extensions - COM - COM and .NET',
                 'lesson_order' => 183,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">COM is an acronym for&nbsp;<code class="literal">Component Object Model</code>; it is an object orientated layer (and associated services) on top of DCE RPC (an open standard) and defines a common calling convention that enables code written in any language to call and interoperate with code written in any other language (provided those languages are COM aware). Not only can the code be written in any language, but it need not even be part of the same executable; the code can be loaded from a DLL, be found in another process running on the same machine, or, with DCOM (Distributed COM), be found in another process on a remote machine, all without your code even needing to know where a component resides.</p>
 <p class="para">There is a subset of COM known as OLE Automation which comprises a set of COM interfaces that allow loose binding to COM objects, so that they can be introspected and called at run-time without compile-time knowledge of how the object works. The PHP COM extension utilizes the OLE Automation interfaces to allow you to create and call compatible objects from your scripts. Technically speaking, this should really be called the "<code class="literal">OLE Automation Extension for PHP</code>", since not all COM objects are OLE compatible.</p>
 <p class="para">Now, why would or should you use COM? COM is one of the main ways to glue applications and components together on the Windows platform; using COM you can launch Microsoft Word, fill in a document template and save the result as a Word document and send it to a visitor of your web site. You can also use COM to perform administrative tasks for your network and to configure your IIS; these are just the most common uses; you can do much more with COM.</p>
@@ -5114,7 +5114,7 @@ HTML,
                 'title' => 'Windows Only Extensions - win32service',
                 'lesson_order' => 184,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>The win32service extension is a Windows specific extension that allows PHP to communicate with the Service Control Manager to start, stop, register and unregister services, and even allows your PHP scripts to run as a service.</p>
 
 <hr>
@@ -5134,7 +5134,7 @@ HTML,
                 'title' => 'XML Manipulation - DOM - Document Object Model',
                 'lesson_order' => 185,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <div id="intro.dom" class="preface">
     <p class="para">The DOM extension allows you to operate on XML documents through the DOM API with PHP.</p>
     <blockquote class="blockquote">
@@ -5180,7 +5180,7 @@ HTML,
                 'title' => 'XML Manipulation - libxml',
                 'lesson_order' => 186,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <div id="intro.libxml" class="preface">
     <p class="para">These functions/constants are available as of PHP 5.1.0, and the following core extensions rely on this libxml extension:&nbsp;<a class="link" href="https://www.php.net/manual/en/book.dom.php" target="_blank">DOM</a>,&nbsp;<a class="link" href="https://www.php.net/manual/en/book.libxml.php" target="_blank">libxml</a>,&nbsp;<a class="link" href="https://www.php.net/manual/en/book.simplexml.php" target="_blank">SimpleXML</a>,&nbsp;<a class="link" href="https://www.php.net/manual/en/book.soap.php" target="_blank">SOAP</a>,&nbsp;<a class="link" href="https://www.php.net/manual/en/book.wddx.php" target="_blank">WDDX</a>,&nbsp;<a class="link" href="https://www.php.net/manual/en/book.xsl.php" target="_blank">XSL</a>,&nbsp;<a class="link" href="https://www.php.net/manual/en/book.xml.php" target="_blank">XML</a>,&nbsp;<a class="link" href="https://www.php.net/manual/en/book.xmlreader.php" target="_blank">XMLReader</a>,&nbsp;<a class="link" href="https://www.php.net/manual/en/book.xmlrpc.php" target="_blank">XMLRPC</a>&nbsp;and&nbsp;<a class="link" href="https://www.php.net/manual/en/book.xmlwriter.php" target="_blank">XMLWriter</a>.</p>
 </div>
@@ -5201,7 +5201,7 @@ HTML,
                 'title' => 'XML Manipulation - SimpleXML',
                 'lesson_order' => 187,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>The SimpleXML extension provides a very simple and easily usable toolset to convert XML to an object that can be processed with normal property selectors and array iterators.</p>
 
 <hr>
@@ -5222,7 +5222,7 @@ HTML,
                 'title' => 'XML Manipulation - XMLDiff — XML diff and merge',
                 'lesson_order' => 188,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>The extension is able to produce diffs of two XML documents and then to apply the difference to the source document. The diff is a XML document containing copy/insert/delete instruction nodes in human readable format. DOMDocument objects, local files and strings in memory can be processed.</p>
 
 <hr>
@@ -5242,7 +5242,7 @@ HTML,
                 'title' => 'XML Manipulation - XML Parser',
                 'lesson_order' => 189,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">XML (eXtensible Markup Language) is a data format for structured document interchange on the Web. It is a standard defined by The World Wide Web consortium (W3C). Information about XML and related technologies can be found at&nbsp;<a class="link external" href="http://www.w3.org/XML/" target="_blank">»&nbsp;http://www.w3.org/XML/</a>.</p>
 <p class="para">This PHP extension implements support for James Clark's&nbsp;<span class="productname">expat</span>&nbsp;in PHP. This toolkit lets you parse, but not validate, XML documents. It supports three source&nbsp;<a class="link" href="https://www.php.net/manual/en/xml.encoding.php" target="_blank">character encodings</a>&nbsp;also provided by PHP:&nbsp;<code class="literal">US-ASCII</code>,&nbsp;<code class="literal">ISO-8859-1</code>&nbsp;and&nbsp;<code class="literal">UTF-8</code>.&nbsp;<code class="literal">UTF-16</code>&nbsp;is not supported.</p>
 <p class="para">This extension lets you&nbsp;<a class="link" href="https://www.php.net/manual/en/function.xml-parser-create.php" target="_blank">create XML parsers</a>&nbsp;and then define&nbsp;<em class="emphasis">handlers</em>&nbsp;for different XML events. Each XML parser also has a few&nbsp;<a class="link" href="https://www.php.net/manual/en/function.xml-parser-set-option.php" target="_blank">parameters</a> you can adjust.</p>
@@ -5268,7 +5268,7 @@ HTML,
                 'title' => 'XML Manipulation - XMLReader',
                 'lesson_order' => 190,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">The XMLReader extension is an XML Pull parser. The reader acts as a cursor going forward on the document stream and stopping at each node on the way.</p>
 <p class="para">It is important to note that internally, libxml uses the UTF-8 encoding and as such, the encoding of the retrieved contents will always be in UTF-8 encoding.</p>
 
@@ -5286,7 +5286,7 @@ HTML,
                 'title' => 'XML Manipulation - XMLWriter',
                 'lesson_order' => 191,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p class="para">This is the XMLWriter extension. It wraps the libxml xmlWriter API.</p>
 <p class="para">This extension represents a writer that provides a non-cached, forward-only means of generating streams or files containing XML data.</p>
 <p class="para">This extension can be used in an object-oriented style or a procedural one. Every method documented describes the alternative procedural call.</p>
@@ -5307,7 +5307,7 @@ HTML,
                 'title' => 'XML Manipulation - XSL',
                 'lesson_order' => 192,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>The XSL extension implements the XSL standard, performing&nbsp;<a class="link external" href="http://www.w3.org/TR/xslt" target="_blank">»&nbsp;XSLT transformations</a>&nbsp;using the&nbsp;<a class="link external" href="http://xmlsoft.org/XSLT/" target="_blank">»&nbsp;libxslt library</a></p>
 
 <hr>
@@ -5326,7 +5326,7 @@ HTML,
                 'title' => 'GUI Extensions - UI',
                 'lesson_order' => 193,
                 'topic_id' => $topics['function-reference']->id,
-                'content' => <<<'HTML'
+                'full_content' => <<<'HTML'
 <p>This extension wraps libui to provide an OO API for the cross platform development of native look-and-feel user interfaces .</p>
 
 <hr>
