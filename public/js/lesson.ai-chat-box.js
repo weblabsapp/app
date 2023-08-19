@@ -26,16 +26,16 @@ Message = function (arg) {
 
 window.message_side = 'left';
 
-sendMessage = function (question, code, courseTag) {
+sendMessage = function (questionId, questionText, code, courseTag) {
     var $messages, message1, message2;
-    if (question.trim() === '') {
+    if (questionId.trim() === '' || questionText.trim() === '') {
         return;
     }
 
     // Draw user message
     $messages = $('.chat_window').find('.messages');
     message1 = new Message({
-        text: question,
+        text: questionText,
         message_side: 'right',
         ai_response: false
     });
@@ -54,9 +54,9 @@ sendMessage = function (question, code, courseTag) {
 
     $.ajax({
         type: 'POST',
-        url: 'https://api.weblabs.local/assistant/send?course_tag='+courseTag,
+        url: 'https://api.' + location.hostname + '/assistant/send?course_tag='+courseTag,
         dataType: 'json',
-        data: JSON.stringify({question: question, code: code}),
+        data: JSON.stringify({question_id: questionId, code: code}),
         success: function (response, call = false) {
             if (call !== true) {
                 return;
@@ -95,11 +95,19 @@ $(function () {
 
         $(document).find('.lesson-ai-question').prop('disabled', true);
 
-        let question = $(this).data('text');
-        let code = editor.getValue();
-        let courseTag = $(this).data('course-tag');
+        let questionId = $(this).data('question-id'),
+            questionText = $(this).data('text'),
+            courseTag = $(this).data('course-tag'),
+            embedUserCode = $(this).data('embed-user-code'),
+            code;
+
+        if (embedUserCode === 1) {
+            code = editor.getValue();
+        } else {
+            code = '';
+        }
 
         $('#chat-windows-explain').hide();
-        sendMessage(question, code, courseTag);
+        sendMessage(questionId, questionText, code, courseTag);
     });
 });

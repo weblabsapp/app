@@ -1,19 +1,19 @@
-.chat_window {
+#lesson-ai-questions-panel .chat_window {
   width: 100%;
   height: 100%;
   background-color: #fff;
 }
-.chat_window .top_menu {
+#lesson-ai-questions-panel .chat_window .top_menu {
   background-color: #fff;
   width: 100%;
   padding: 20px 0 15px;
   box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
 }
-.chat_window .top_menu .buttons {
+#lesson-ai-questions-panel .chat_window .top_menu .buttons {
   margin: 3px 0 0 20px;
   position: absolute;
 }
-.chat_window .top_menu .buttons .button {
+#lesson-ai-questions-panel .chat_window .top_menu .buttons .button {
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -21,21 +21,21 @@
   margin-right: 10px;
   position: relative;
 }
-.chat_window .top_menu .buttons .button.close {
+#lesson-ai-questions-panel .chat_window .top_menu .buttons .button.close {
   background-color: #f5886e;
 }
-.chat_window .top_menu .buttons .button.minimize {
+#lesson-ai-questions-panel .chat_window .top_menu .buttons .button.minimize {
   background-color: #fdbf68;
 }
-.chat_window .top_menu .buttons .button.maximize {
+#lesson-ai-questions-panel .chat_window .top_menu .buttons .button.maximize {
   background-color: #a3d063;
 }
-.chat_window .top_menu .title {
+#lesson-ai-questions-panel .chat_window .top_menu .title {
   text-align: center;
   color: #bcbdc0;
   font-size: 20px;
 }
-.chat_window .messages {
+#lesson-ai-questions-panel .chat_window .messages {
   position: relative;
   list-style: none;
   padding: 20px 10px 0 10px;
@@ -43,56 +43,56 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
-.chat_window .messages .message {
+#lesson-ai-questions-panel .chat_window .messages .message {
   clear: both;
   overflow: hidden;
   margin-bottom: 20px;
   transition: all 0.5s linear;
   opacity: 0;
 }
-.chat_window .messages .message.left .avatar {
+#lesson-ai-questions-panel .chat_window .messages .message.left .avatar {
   background-color: #f5886e;
   float: left;
 }
-.chat_window .messages .message.left .text_wrapper {
+#lesson-ai-questions-panel .chat_window .messages .message.left .text_wrapper {
   background-color: #e9ecef;
   margin-left: 20px;
 }
-.chat_window .messages .message.left .text_wrapper::after,
-.chat_window .messages .message.left .text_wrapper::before {
+#lesson-ai-questions-panel .chat_window .messages .message.left .text_wrapper::after,
+#lesson-ai-questions-panel .chat_window .messages .message.left .text_wrapper::before {
   right: 100%;
   border-right-color: #e9ecef;
 }
-.chat_window .messages .message.left .text {
+#lesson-ai-questions-panel .chat_window .messages .message.left .text {
   color: #000000;
 }
-.chat_window .messages .message.right .avatar {
+#lesson-ai-questions-panel .chat_window .messages .message.right .avatar {
   background-color: #fdbf68;
   float: right;
 }
-.chat_window .messages .message.right .text_wrapper {
+#lesson-ai-questions-panel .chat_window .messages .message.right .text_wrapper {
   background-color: #343a40;
   margin-right: 20px;
   float: right;
 }
-.chat_window .messages .message.right .text_wrapper::after,
-.chat_window .messages .message.right .text_wrapper::before {
+#lesson-ai-questions-panel .chat_window .messages .message.right .text_wrapper::after,
+#lesson-ai-questions-panel .chat_window .messages .message.right .text_wrapper::before {
   left: 100%;
   border-left-color: #343a40;
 }
-.chat_window .messages .message.right .text {
+#lesson-ai-questions-panel .chat_window .messages .message.right .text {
   color: #ffffff;
 }
-.chat_window .messages .message.appeared {
+#lesson-ai-questions-panel .chat_window .messages .message.appeared {
   opacity: 1;
 }
-.chat_window .messages .message .avatar {
+#lesson-ai-questions-panel .chat_window .messages .message .avatar {
   width: 60px;
   height: 60px;
   border-radius: 50%;
   display: inline-block;
 }
-.chat_window .messages .message .text_wrapper {
+#lesson-ai-questions-panel .chat_window .messages .message .text_wrapper {
   display: inline-block;
   padding: 20px;
   border-radius: 6px;
@@ -100,8 +100,8 @@
   min-width: 100px;
   position: relative;
 }
-.chat_window .messages .message .text_wrapper::after,
-.chat_window .messages .message .text_wrapper:before {
+#lesson-ai-questions-panel .chat_window .messages .message .text_wrapper::after,
+#lesson-ai-questions-panel .chat_window .messages .message .text_wrapper:before {
   top: 18px;
   border: solid transparent;
   content: " ";
@@ -110,26 +110,30 @@
   position: absolute;
   pointer-events: none;
 }
-.chat_window .messages .message .text_wrapper::after {
+#lesson-ai-questions-panel .chat_window .messages .message .text_wrapper::after {
   border-width: 13px;
   margin-top: 0px;
 }
-.chat_window .messages .message .text_wrapper::before {
+#lesson-ai-questions-panel .chat_window .messages .message .text_wrapper::before {
   border-width: 15px;
   margin-top: -2px;
 }
-.chat_window .messages .message .text_wrapper .text {
+#lesson-ai-questions-panel .chat_window .messages .message .text_wrapper .text {
   font-size: 18px;
   font-weight: 300;
 }
-.chat_window .bottom_wrapper {
+#lesson-ai-questions-panel .chat_window .message_template {
+  display: none;
+}
+#lesson-ai-questions-panel .bottom_wrapper {
   position: relative;
   width: 100%;
-  background-color: #fff;
-  padding: 20px 20px;
+  padding: 0;
   bottom: 0;
+  border-top: 1px solid #dee2e6;
+  background: #e9ecef;
 }
-.chat_window .bottom_wrapper .message_input_wrapper {
+#lesson-ai-questions-panel .bottom_wrapper .message_input_wrapper {
   display: inline-block;
   height: 50px;
   border-radius: 25px;
@@ -138,7 +142,7 @@
   position: relative;
   padding: 0 20px;
 }
-.chat_window .bottom_wrapper .message_input_wrapper .message_input {
+#lesson-ai-questions-panel .bottom_wrapper .message_input_wrapper .message_input {
   border: none;
   height: 100%;
   box-sizing: border-box;
@@ -147,7 +151,7 @@
   outline-width: 0;
   color: gray;
 }
-.chat_window .bottom_wrapper .send_message {
+#lesson-ai-questions-panel .bottom_wrapper .send_message {
   width: 140px;
   height: 50px;
   display: inline-block;
@@ -160,16 +164,49 @@
   text-align: center;
   float: right;
 }
-.chat_window .bottom_wrapper .send_message:hover {
+#lesson-ai-questions-panel .bottom_wrapper .send_message:hover {
   color: #a3d063;
   background-color: #fff;
 }
-.chat_window .bottom_wrapper .send_message .text {
+#lesson-ai-questions-panel .bottom_wrapper .send_message .text {
   font-size: 18px;
   font-weight: 300;
   display: inline-block;
   line-height: 48px;
 }
-.chat_window .message_template {
-  display: none;
+#lesson-ai-questions-panel .bottom_wrapper button {
+  font-size: 16px;
+}
+#lesson-ai-available-questions-tag {
+  display: flex;
+  align-items: center;
+  background: #17a2b8;
+  color: white;
+  width: 270px;
+  height: 100%;
+  margin-bottom: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-clip-path: url(#clipper);
+  clip-path: url(#clipper);
+  padding: 0 0 0 20px;
+}
+#lesson-ai-available-questions-tag span {
+  max-width: 80%;
+}
+#lesson-ai-questions-tooltip-new-feature {
+  animation-name: blinker;
+  animation-duration: 1s;
+  animation-iteration-count: 10;
+}
+@keyframes blinker {
+  from {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
 }
