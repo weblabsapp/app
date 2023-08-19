@@ -19,5 +19,12 @@ class LessonAiQuestion extends Model
     use HasFactory,
         UuidPrimary;
 
+    protected $table = 'lessons_ai_questions';
+
     protected $fillable = ['lesson_id', 'text'];
+
+    public function lesson()
+    {
+        return $this->belongsTo(Lesson::class, 'lesson_id', 'id');
+    }
 }

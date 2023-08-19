@@ -131,7 +131,10 @@ class Lesson extends Resource
             HasOne::make('Tutorial Video', 'video', LessonVideo::class),
 
             HasMany::make('Checklist Summary', 'checklist', Checklist::class)
-                ->showOnDetail()
+                ->showOnDetail(),
+
+            HasMany::make('AI Questions', 'AIQuestion', LessonAiQuestion::class)
+
         ];
     }
 

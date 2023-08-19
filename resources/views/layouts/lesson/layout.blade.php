@@ -3,6 +3,10 @@
 @section('head')
     <!-- CSS -->
 
+    <!-- Chat Box Css -->
+    <link rel="stylesheet" href="{{ asset('css/lesson.ai-chat-box.min.css') }}"/>
+
+
     <!-- Calculated Styles -->
     <link rel="stylesheet" href="{{ asset('css/style.min.css') }}"/>
 

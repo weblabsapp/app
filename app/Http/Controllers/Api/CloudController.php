@@ -132,7 +132,7 @@ class CloudController extends ApiController
 
                 $files[] = [
                     'file_name' => end($fileName),
-                    'file_size' => round($object['Size'] / 1024, 3) . ' KB',
+                    'file_size' => round($object['Size'] / 1024, 2) . ' KB',
                     'download_link' => $downloadLink,
                     'last_modified' => $object['LastModified']->getTimestamp(),
                 ];

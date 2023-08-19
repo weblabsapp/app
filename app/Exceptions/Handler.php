@@ -84,8 +84,14 @@ class Handler extends ExceptionHandler
                 $description = $exception->getMessage();
             }
 
-            if (env('APP_ENV') != 'prod' && empty($description)) {
-                $description = $exception->getMessage();
+            if (env('APP_ENV') != 'prod') {
+                if ($exception->getPrevious()) {
+                    $description = $exception->getPrevious()->getMessage();
+                } elseif (empty($description)) {
+                    $description = $exception->getMessage();
+                } else {
+                    $description = get_class($exception);
+                }
             }
 
             // Save request session before killing the app

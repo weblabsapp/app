@@ -29,9 +29,9 @@ window.addEventListener("load", (e) => {
     });
 });
 
-window.addEventListener("resize", function (e) {
-    resizeButtons(window.outerWidth);
-});
+// window.addEventListener("resize", function (e) {
+//     resizeButtons(window.outerWidth);
+// });
 
 window.resizeButtons = (windowWidth) => {
     let sizes = ['btn-sm', 'btn-md', 'btn-lg'];
@@ -49,7 +49,7 @@ window.resizeButtons = (windowWidth) => {
     }
 }
 
-resizeButtons(window.outerWidth);
+// resizeButtons(window.outerWidth);
 
 /**
  * Map object entries against a custom callback

@@ -26,9 +26,9 @@
                             <caption>Your lesson files (<span class="files-count"></span>)</caption>
                             <thead>
                             <tr>
-                                <th scope="col">File name</th>
-                                <th scope="col">File size</th>
-                                <th scope="col">Last modified</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Size</th>
+                                <th scope="col">Modified at</th>
                                 <th scope="col" class="text-center">Actions</th>
                             </tr>
                             </thead>
@@ -78,9 +78,9 @@
                             <caption>Your lesson files (<span class="files-count"></span>)</caption>
                             <thead>
                             <tr>
-                                <th scope="col">File name</th>
-                                <th scope="col">File size</th>
-                                <th scope="col">Last modified</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Size</th>
+                                <th scope="col">Modified at</th>
                                 <th scope="col" class="text-center">Actions</th>
                             </tr>
                             </thead>

@@ -25,6 +25,7 @@
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.0",
         "league/flysystem-aws-s3-v3": "^1.0",
+        "orhanerday/open-ai": "^4.8",
         "predis/predis": "^1.1",
         "qcod/laravel-imageup": "^1.2",
         "renoki-co/laravel-php-k8s": "^3.4",

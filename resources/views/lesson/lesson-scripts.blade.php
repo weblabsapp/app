@@ -13,6 +13,7 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script type="text/javascript" src="{{ asset('js/macro.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/lesson.ai-chat-box.min.js') }}"></script>
 
     <script>
         window.addEventListener('load', (event) => {

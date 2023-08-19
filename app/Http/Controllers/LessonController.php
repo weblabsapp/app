@@ -10,6 +10,7 @@ use App\Repositories\LessonProgressRepository;
 use App\Repositories\LessonRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class LessonController extends Controller
 {
@@ -59,6 +60,13 @@ class LessonController extends Controller
         $lesson->setRelation('progress', $progress);
 
         $course = $request->attributes->get('course');
+        $account = Auth::user();
+
+        if ($account->avatar) {
+            $avatar = Storage::disk('s3assets')->url($account->avatar);
+        } else {
+            $avatar = sprintf(asset('images/%s-avatar.png'), $account->gender ?? 'unknown');
+        }
 
         return view('lesson', [
             'courseTag' => $courseTag,
@@ -67,6 +75,7 @@ class LessonController extends Controller
             'lesson' => $lesson,
             'lessonTag' => $lessonTag,
             'nextAndPreviousLessons' => $nextAndPreviousLessons,
+            'accountAvatar' => $avatar
         ]);
     }
 

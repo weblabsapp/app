@@ -61,5 +61,6 @@
     "invalid website url": "Invalid Website URL.",
     "invalid social username": "Invalid social username.",
     "username share info": "You should set a user name to be able to share your profile with public.",
-    "duplicate email": "There is already an account associated with this email address \":email_address\"."
+    "duplicate email": "There is already an account associated with this email address \":email_address\".",
+    "assistant api error": "There is an error with our AI assistance system. Please try again later."
 }
