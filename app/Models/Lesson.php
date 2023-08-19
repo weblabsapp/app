@@ -113,4 +113,9 @@ class Lesson extends Model
     {
         return $this->hasOne(LessonVideo::class, 'lesson_id', 'id');
     }
+
+    public function AIQuestion()
+    {
+        return $this->hasMany(LessonAiQuestion::class, 'lesson_id', 'id');
+    }
 }

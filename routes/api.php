@@ -3,7 +3,9 @@
 use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\CloudController;
 use App\Http\Controllers\Api\EmailSubscriptionController;
+use App\Http\Controllers\Api\EnrollController;
 use App\Http\Controllers\Api\LessonController;
+use App\Http\Controllers\Api\OpenAIController;
 use App\Http\Controllers\Api\SandboxController;
 use App\Http\Controllers\Api\TranslationsController;
 use Illuminate\Support\Facades\Route;
@@ -82,7 +84,7 @@ Route::post('/course/{courseTag}/lesson/{lessonTag}/complete', [LessonController
     ->middleware(['auth', 'throttle:5,1', 'resolve_entities'])
     ->name('markLessonAsCompleted');
 
-Route::delete('/course/{courseTag}/disenroll', [\App\Http\Controllers\Api\EnrollController::class, 'disEnroll'])
+Route::delete('/course/{courseTag}/disenroll', [EnrollController::class, 'disEnroll'])
     ->middleware(['auth', 'throttle:1,1', 'resolve_entities'])
     ->name('disEnrollCourse');
 
@@ -97,3 +99,7 @@ Route::post('/account/social-profiles', [AccountController::class, 'updateSocial
 Route::post('/account/avatar', [AccountController::class, 'updateAvatar'])
     ->middleware(['auth', 'throttle:5,1', 'can:update-avatar'])
     ->name('updateAvatar');
+
+Route::post('/assistant/send', [OpenAIController::class, 'send'])
+    ->middleware(['auth', 'throttle:1,1'])
+    ->name('askAIAssistant');

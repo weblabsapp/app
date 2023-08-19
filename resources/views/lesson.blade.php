@@ -19,7 +19,7 @@
         <div class="row mr-0 ml-0">
             @include('lesson.lesson-editor', ['courseTag' => $courseTag, 'courseLogo' => $courseLogo])
             <div class="col-md-6 pr-0 pl-0">
-                @include('lesson.lesson-info', ['courseTag' => $courseTag, 'lesson' => $lesson])
+                @include('lesson.lesson-right-panel', ['courseTag' => $courseTag, 'lesson' => $lesson])
             </div>
         </div>
 

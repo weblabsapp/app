@@ -75,9 +75,9 @@ abstract class AbstractException extends \Exception
      * @return mixed
      * @throws AbstractException
      */
-    public static function throw(string $description = null, array $replacements = [])
+    public static function throw(string $description = null, array $replacements = [], \Throwable $originalException = null)
     {
-        throw new static(static::MESSAGE, static::STATUS_CODE, null, $description, $replacements);
+        throw new static(static::MESSAGE, static::STATUS_CODE, $originalException, $description, $replacements);
     }
 
     /**
