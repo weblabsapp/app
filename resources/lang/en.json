@@ -65,5 +65,6 @@
     "assistant api error": "There is an error with our AI assistance system. Please try again later.",
     "lesson ai question not found": "The AI question you asked for does not exist.",
     "ai limited access note": "For now, we provide only pre-defined AI questions to avoid overflow and misusing of this feature.",
-    "ai new feature tooltip note": "New feature! <strong>BETA</strong>"
+    "ai new feature tooltip note": "New feature! <strong>BETA</strong>",
+    "lesson disabled functions": "Some functions have been disabled for security concerns"
 }

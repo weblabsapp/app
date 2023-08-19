@@ -75,7 +75,8 @@ class LessonController extends Controller
             'lesson' => $lesson,
             'lessonTag' => $lessonTag,
             'nextAndPreviousLessons' => $nextAndPreviousLessons,
-            'accountAvatar' => $avatar
+            'accountAvatar' => $avatar,
+            'languageVersion' => $course->language_version
         ]);
     }
 

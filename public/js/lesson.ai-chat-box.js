@@ -75,9 +75,13 @@ sendMessage = function (questionId, questionText, code, courseTag) {
             if (call !== true) {
                 return;
             }
-            showToast({message: xhr.responseJSON.content.description, status: TOAST_STATUS.DANGER});
 
             $('.chat_window').find('.messages .message:last').remove();
+
+            return {
+                message: translate(...getErrorFromResponse(xhr)),
+                status: TOAST_STATUS.DANGER
+            }
         },
         complete: function (response, status) {
             if (status === "abort") {

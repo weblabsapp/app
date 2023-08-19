@@ -21,7 +21,7 @@
 
             let editor = ace.edit("editor");
 
-            editor.session.setValue(['<\?php', '\necho "Hello World!";', ''].join('\n'));
+            editor.session.setValue('{!! str_replace(["\r", "\n", "\r\n"], "\\n", $lesson->first_code) !!}');
             editor.setFontSize(18);
             editor.setTheme("ace/theme/xcode");
             editor.session.setMode("ace/mode/{{ $courseTag }}");

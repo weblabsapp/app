@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $title
  * @property string $description
  * @property string $tag
+ * @property string $language_version
  * @property string $logo
  * @property bool $is_active
  * @property Carbon $created_at
@@ -35,6 +36,7 @@ class Course extends Model
         'title',
         'description',
         'tag',
+        'language_version',
         'logo',
         'is_active'
     ];
