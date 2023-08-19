@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\CloudController;
 use App\Http\Controllers\Api\EmailSubscriptionController;
 use App\Http\Controllers\Api\EnrollController;
 use App\Http\Controllers\Api\LessonController;
-use App\Http\Controllers\Api\OpenAIController;
+use App\Http\Controllers\Api\AssistantAIController;
 use App\Http\Controllers\Api\SandboxController;
 use App\Http\Controllers\Api\TranslationsController;
 use Illuminate\Support\Facades\Route;
@@ -100,6 +100,6 @@ Route::post('/account/avatar', [AccountController::class, 'updateAvatar'])
     ->middleware(['auth', 'throttle:5,1', 'can:update-avatar'])
     ->name('updateAvatar');
 
-Route::post('/assistant/send', [OpenAIController::class, 'send'])
+Route::post('/assistant/send', [AssistantAIController::class, 'send'])
     ->middleware(['auth', 'throttle:1,1'])
     ->name('askAIAssistant');

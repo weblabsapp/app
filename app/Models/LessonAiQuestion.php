@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Activatable;
 use App\Models\Traits\UuidPrimary;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $id
  * @property string $lesson_id
  * @property string $text
+ * @property string $assistant_extra_text
+ * @property boolean $embed_user_code
+ * @property boolean $is_active
  * @property string $created_at
  * @property string $updated_at
  * @property string $deleted_at
@@ -17,11 +21,18 @@ use Illuminate\Database\Eloquent\Model;
 class LessonAiQuestion extends Model
 {
     use HasFactory,
-        UuidPrimary;
+        UuidPrimary,
+        Activatable;
 
     protected $table = 'lessons_ai_questions';
 
-    protected $fillable = ['lesson_id', 'text'];
+    protected $fillable = [
+        'lesson_id',
+        'text',
+        'assistant_extra_text',
+        'is_active',
+        'embed_user_code'
+    ];
 
     public function lesson()
     {

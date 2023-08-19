@@ -123,6 +123,56 @@ footer {
     padding-bottom: 15px;
 }
 
+/**
+Scroll bar design
+ */
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #cccccc #e6e6e6;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #e6e6e6;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #cccccc;
+    border-radius: 10px;
+    border: 3px solid #cccccc;
+}
+::-webkit-scrollbar-thumb:hover {
+    background:#7d7d7d;
+}
+//::-webkit-scrollbar {
+//    width: 8px;
+//}
+//::-webkit-scrollbar-button {
+//    width: 8px;
+//    height:5px;
+//}
+//::-webkit-scrollbar-track {
+//    background:#eee;
+//    border: thin solid lightgray;
+//    box-shadow: 0px 0px 3px #dfdfdf inset;
+//    border-radius:10px;
+//}
+//::-webkit-scrollbar-thumb {
+//    background:#999;
+//    border: thin solid gray;
+//    border-radius:10px;
+//}
+//::-webkit-scrollbar-thumb:hover {
+//    background:#7d7d7d;
+//}
+
 @media screen and (min-width: 576px) {
     .sticky {
         position: absolute;

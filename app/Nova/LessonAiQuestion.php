@@ -2,8 +2,10 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\LessonAiQuestionFilter;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -44,6 +46,9 @@ class LessonAiQuestion extends Resource
         return [
             ID::make(),
             Text::make('AI Question', 'text'),
+            Text::make('Assistant Extra Text', 'assistant_extra_text'),
+            Boolean::make('Is Active', 'is_active'),
+            Boolean::make('Embed User Code?', 'embed_user_code'),
             BelongsTo::make('Lesson', 'lesson')
         ];
     }
@@ -67,7 +72,9 @@ class LessonAiQuestion extends Resource
      */
     public function filters(NovaRequest $request)
     {
-        return [];
+        return [
+            new LessonAiQuestionFilter()
+        ];
     }
 
     /**
