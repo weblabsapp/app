@@ -19,6 +19,7 @@ use Whitecube\NovaFlexibleContent\Value\FlexibleCast;
  * @property integer $lesson_order
  * @property string $explore_content
  * @property string $full_content
+ * @property string $first_code
  * @property Model $command_options
  * @property string $macros
  * @property array $checklist
@@ -44,6 +45,7 @@ class Lesson extends Model
         'tag',
         'explore_content',
         'full_content',
+        'first_code',
         'is_active',
         'command_options',
         'complete_summaries',

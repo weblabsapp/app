@@ -3,34 +3,41 @@
         <div class="card-header">
             <p class="position-absolute" style="line-height: 2.2">
                 <img src="{{ Storage::disk('s3assets')->url($courseLogo) }}" width="32"/>
-                <strong>{{ $lesson->title }} (<span id="loaded-file-name">Untitled</span>)</strong>
+                <strong>{{ $lesson->title }} (<span id="loaded-file-name">Untitled</span>)</strong> - {{ sprintf('%s %s', strtoupper($courseTag), $languageVersion) }}
             </p>
             @include('lesson.lesson-action-buttons')
         </div>
     </div>
     <div id="editor" class="col-md-12" style="height: 300px; border: 1px solid grey"></div>
-    <div class="language-options form-check-inline">
-        @foreach($lesson->command_options as $option)
-            <div class="form-check">
-                @switch($option->type)
-                    @case('bool')
-                        <input class="form-check-input language-option" type="checkbox" name="{{ $option->key }}"
-                               value="{{ $option->value }}"
-                               id="{{ $option->key }}-option" {{ $option->value ? "checked" : "" }}>
-                        <label class="form-check-label" for="{{ $option->key }}-option">
-                            {{ $option->label ?? $option->key }}
-                        </label>
-                        @break
-                    @case('text')
-                        <input class="form-check-input language-option" type="text" name="{{ $option->key }}"
-                               value="{{ $option->value }}" id="{{ $option->key }}-option">
-                        <label class="form-check-label" for="{{ $option->key }}-option">
-                            {{ $option->label ?? $option->key }}
-                        </label>
-                        @break
-                @endswitch
-            </div>
-        @endforeach
+    <div class="row m-0 d-flex language-options form-check-inline" style="align-items: start;">
+        <div class="col-md-11 p-0">
+            @foreach($lesson->command_options as $option)
+                <div class="form-check d-inline-block">
+                    @switch($option->type)
+                        @case('bool')
+                            <input class="form-check-input language-option" type="checkbox" name="{{ $option->key }}"
+                                   value="{{ $option->value }}"
+                                   id="{{ $option->key }}-option" {{ $option->value ? "checked" : "" }}>
+                            <label class="form-check-label" for="{{ $option->key }}-option">
+                                {{ $option->label ?? $option->key }}
+                            </label>
+                            @break
+                        @case('text')
+                            <input class="form-check-input language-option" type="text" name="{{ $option->key }}"
+                                   value="{{ $option->value }}" id="{{ $option->key }}-option">
+                            <label class="form-check-label" for="{{ $option->key }}-option">
+                                {{ $option->label ?? $option->key }}
+                            </label>
+                            @break
+                    @endswitch
+                </div>
+            @endforeach
+        </div>
+        <div class="col-md-1 text-right">
+            <a href="javascript:;" rel="tooltip" data-placement="top" title="{{ __('lesson disabled functions') }}">
+                <i class="fa fa-info-circle" style="font-size: 24px;"></i>
+            </a>
+        </div>
     </div>
     <div class="col-md-12 pr-0 pl-0 mt-3">
         <div class="card" id="output">

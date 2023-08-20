@@ -113,6 +113,9 @@ class Lesson extends Resource
                     'toolbar' => 'undo redo | blockquote link | bold italic forecolor | codesample | preview | table tabledelete | backcolor alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | code',
                 ])->onlyOnForms(),
 
+            Textarea::make('Starting Code', 'first_code')
+                ->onlyOnForms(),
+
             Flexible::make('Command Options', 'command_options')
                 ->addLayout('Option', 'option', [
                     Text::make('Label', 'label'),

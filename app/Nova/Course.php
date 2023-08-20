@@ -60,6 +60,8 @@ class Course extends Resource
                 ->showOnPreview()
                 ->readonly(),
 
+            Text::make('language_version'),
+
             Text::make('description')
                 ->readonly()
                 ->onlyOnDetail()
