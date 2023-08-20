@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\LessonProgressObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -33,6 +34,13 @@ class LessonProgress extends Model
     protected $casts = [
         'checklist_completeness' => 'array'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::observe(LessonProgressObserver::class);
+    }
 
     public function lesson()
     {

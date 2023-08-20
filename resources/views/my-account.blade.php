@@ -366,81 +366,89 @@
                                         width="32"
                                     />
                                 </a>
+                                @php($activePane = 'active')
                                 @if(!empty($pendingLessons[$enrollment->course->id]))
                                     <li class="nav-item">
-                                        <a class="nav-link text-secondary" href="#{{ $enrollment->course->tag }}-lessons-pending-tab" role="tab" data-toggle="tab">
+                                        <a class="nav-link text-secondary {{ $activePane }}" href="#{{ $enrollment->course->tag }}-lessons-pending-tab" role="tab" data-toggle="tab" aria-selected="true">
                                             <span class="d-none d-lg-block">Pending</span>
                                             <span class="d-sm-block d-md-none"><i class="fa fa-clock"></i></span>
                                         </a>
                                     </li>
+                                    @php($activePane = '')
                                 @endif
                                 @if(!empty($inProgressLessons[$enrollment->course->id]))
-                                <li class="nav-item">
-                                    <a class="nav-link active text-dark" href="#{{ $enrollment->course->tag }}-lessons-in-progress-tab" role="tab" data-toggle="tab">
-                                        <span class="d-none d-lg-block">In Progress</span>
-                                        <span class="d-sm-block d-md-none"><i
-                                                    class="fa fa-person-running"></i></span>
-                                    </a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark {{ $activePane }}" href="#{{ $enrollment->course->tag }}-lessons-in-progress-tab" role="tab" data-toggle="tab" aria-selected="true">
+                                            <span class="d-none d-lg-block">In Progress</span>
+                                            <span class="d-sm-block d-md-none"><i
+                                                        class="fa fa-person-running"></i></span>
+                                        </a>
+                                    </li>
+                                    @php($activePane = '')
                                 @endif
                                 @if(!empty($completedLessons[$enrollment->course->id]))
-                                <li class="nav-item">
-                                    <a class="nav-link text-secondary" href="#{{ $enrollment->course->tag }}-lessons-completed-tab" role="tab" data-toggle="tab">
-                                        <span class="d-none d-lg-block">Completed</span>
-                                        <span class="d-sm-block d-md-none"><i class="fa fa-check"></i></span>
-                                    </a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-secondary {{ $activePane }}" href="#{{ $enrollment->course->tag }}-lessons-completed-tab" role="tab" data-toggle="tab" aria-selected="true">
+                                            <span class="d-none d-lg-block">Completed</span>
+                                            <span class="d-sm-block d-md-none"><i class="fa fa-check"></i></span>
+                                        </a>
+                                    </li>
+                                    @php($activePane = '')
                                 @endif
                             </ul>
                         </div>
                         <div class="card-body tab-content clearfix">
+                            @php($activePane = 'active')
                             @if(!empty($pendingLessons[$enrollment->course->id]))
                                 <div
-                                        class="tab-pane fade"
+                                        class="tab-pane {{ $activePane }}"
                                         id="{{ $enrollment->course->tag }}-lessons-pending-tab"
                                         role="tabpanel"
                                         aria-labelledby="{{ $enrollment->course->tag }}-lessons-pending-tab"
                                 >
                                     @foreach($pendingLessons[$enrollment->course->id] as $pendingLesson)
-                                        <small>{{ $pendingLesson->lesson->title }}</small>
+                                        <span style="font-size: 14px;">{{ $pendingLesson->title }}</span>
                                         <div class="progress mb-3" style="height: 5px">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 89%"
-                                                 aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 0;"
+                                                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     @endforeach
                                 </div>
+                                @php($activePane = 'fade')
                             @endif
                             @if(!empty($inProgressLessons[$enrollment->course->id]))
-                            <div
-                                    class="tab-pane active"
-                                    id="{{ $enrollment->course->tag }}-lessons-in-progress-tab"
-                                    role="tabpanel"
-                                    aria-labelledby="{{ $enrollment->course->tag }}-lessons-in-progress-tab"
-                            >
-                                @foreach($inProgressLessons[$enrollment->course->id] as $inProgressLesson)
-                                <small>{{ $inProgressLesson->lesson->title }}</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%"
-                                         aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div
+                                        class="tab-pane {{ $activePane }}"
+                                        id="{{ $enrollment->course->tag }}-lessons-in-progress-tab"
+                                        role="tabpanel"
+                                        aria-labelledby="{{ $enrollment->course->tag }}-lessons-in-progress-tab"
+                                >
+                                    @foreach($inProgressLessons[$enrollment->course->id] as $inProgressLesson)
+                                    <span style="font-size: 14px;">{{ $inProgressLesson->lesson->title }}</span>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        @php($InProgressBarWidth = round(count($inProgressLesson->checklist_completeness) / $inProgressLesson->lesson->checklist()->count() * 100))
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ $InProgressBarWidth }}%"
+                                             aria-valuenow="{{ $InProgressBarWidth }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    @endforeach
                                 </div>
-                                @endforeach
-                            </div>
+                                @php($activePane = 'fade')
                             @endif
                             @if(!empty($completedLessons[$enrollment->course->id]))
-                            <div
-                                class="tab-pane fade"
-                                id="{{ $enrollment->course->tag }}-lessons-completed-tab"
-                                role="tabpanel"
-                                aria-labelledby="{{ $enrollment->course->tag }}-lessons-completed-tab"
-                            >
-                                @foreach($completedLessons[$enrollment->course->id] as $completedLesson)
-                                <small>{{ $completedLesson->lesson->title }}</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 100%"
-                                         aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div
+                                    class="tab-pane {{ $activePane }}"
+                                    id="{{ $enrollment->course->tag }}-lessons-completed-tab"
+                                    role="tabpanel"
+                                    aria-labelledby="{{ $enrollment->course->tag }}-lessons-completed-tab"
+                                >
+                                    @foreach($completedLessons[$enrollment->course->id] as $completedLesson)
+                                    <span style="font-size: 14px;">{{ $completedLesson->lesson->title }}</span>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
+                                             aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    @endforeach
                                 </div>
-                                @endforeach
-                            </div>
                             @endif
                         </div>
                     </div>
